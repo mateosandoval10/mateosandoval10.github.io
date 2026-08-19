@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research Tooling — Mateo Sandoval</title>
+<meta name="description" content="Two research tools in development: an SEC EDGAR institutional-flow tracker and an AI equity research agent built on OpenBB. Honest in-development status, no mock output.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+<main id="main">
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">Two tools under construction</div>
+  <h1>Research<br><span class="grad">tooling.</span></h1>
+  <p class="lede">Both are being built now. <b>Neither is finished.</b> This page specifies what each one does
+  and where it actually stands. There is no output on it, because there is no output yet — and a mock-up of a
+  result is worse than an empty state.</p>
+  <div class="pills">
+    <a class="pill" href="#edgar">EDGAR flow tracker</a>
+    <a class="pill" href="#agent">Equity research agent</a>
+    <span class="pill warn">Status: in development</span>
+  </div>
+</div></header>
+
+<div class="statband"><div class="wrap"><div class="stats c4">
+  <div class="stat"><div class="v">3</div><div class="k">SEC filing types parsed</div></div>
+  <div class="stat"><div class="v">45</div><div class="k">Days of 13F reporting lag</div></div>
+  <div class="stat"><div class="v">2</div><div class="k">Business days for Form 4</div></div>
+  <div class="stat"><div class="v">0</div><div class="k">Results claimed so far</div></div>
+</div></div></div>
+
+<section id="edgar"><div class="wrap reveal">
+  <div class="kicker">Project one</div>
+  <h2>SEC EDGAR institutional-flow tracker</h2>
+  <p class="sub">A rigorous, free alternative to the retail flow products, built on the SEC's own public
+  filings rather than on a vendor's interpretation of them.</p>
+  <div class="defs">
+    <div class="defrow"><div class="l">Sources</div><div class="r"><b>13F-HR</b> quarterly institutional holdings · <b>Form 4</b> insider transactions · <b>13D/G</b> activist and &gt;5% stakes, from the SEC EDGAR public API under its rate-limit and User-Agent policy</div></div>
+    <div class="defrow"><div class="l">Computation</div><div class="r">Position deltas quarter over quarter — new positions, exits, meaningful adds and trims, concentration changes — per filer and per security</div></div>
+    <div class="defrow"><div class="l">Aggregation</div><div class="r">Per-ticker flow view: <b>who accumulated, who distributed</b>, and how large the move was relative to that filer's own book and to the security's float</div></div>
+    <div class="defrow"><div class="l">Timing discipline</div><div class="r">13F data is filed up to <b>45 days after quarter end</b> — lagged and backward-looking. The tool states this prominently and <b>never presents a 13F signal as actionable real-time flow</b>. Form 4 lands within two business days, so the two are treated as different instruments with different half-lives, and the tool explains why</div></div>
+    <div class="defrow"><div class="l">Differentiator</div><div class="r"><b>Calibration.</b> Where possible it measures whether these signals have any forward-looking value at all, and reports the answer <b>even when the answer is "no measurable edge."</b> A negative result with sound methodology is worth more than a dashboard implying an edge it has not demonstrated</div></div>
+    <div class="defrow"><div class="l">Output</div><div class="r">Structured CLI report plus a simple local dashboard</div></div>
+    <div class="defrow"><div class="l">Status</div><div class="r"><b>In development.</b> Repository scaffolded; no working end-to-end run yet, so no live link, no screenshot and no results claim on this page</div></div>
+  </div>
+</div></section>
+
+<section id="agent"><div class="wrap reveal">
+  <div class="kicker">Project two</div>
+  <h2>AI equity research agent</h2>
+  <p class="sub">Input a ticker, output a structured investment memo. OpenBB provides the data layer; an agent
+  layer orchestrates retrieval, analysis and synthesis.</p>
+  <div class="chiplabel">Inputs gathered per ticker</div>
+  <div class="chips">
+    <span class="chip">Fundamentals &amp; valuation</span><span class="chip">Peer comparables</span>
+    <span class="chip">Earnings history</span><span class="chip">Estimate revisions</span>
+    <span class="chip">10-K / 10-Q / 8-K content</span><span class="chip">Risk-factor deltas QoQ</span>
+    <span class="chip">News sentiment</span><span class="chip">Macro &amp; factor exposures</span>
+    <span class="chip">Volatility · beta · drawdown</span><span class="chip">Correlation structure</span>
+  </div>
+  <div class="chiplabel">Memo structure</div>
+  <div class="chips">
+    <span class="chip">Thesis</span><span class="chip">Key drivers</span><span class="chip">Valuation view</span>
+    <span class="chip">Risk factors</span><span class="chip"><b>What would falsify it</b></span>
+    <span class="chip"><b>Explicit confidence statement</b></span>
+  </div>
+  <div class="defs">
+    <div class="defrow"><div class="l">Requirement one</div><div class="r"><b>Every claim is traceable to its source</b> — the filing, the datapoint, the date. A memo that cannot be audited is worthless to an institution</div></div>
+    <div class="defrow"><div class="l">Requirement two</div><div class="r"><b>The agent must be able to say it doesn't know.</b> Missing or stale data is handled explicitly rather than left for a language model to fill in. A hallucinated financial figure would be the single most damaging thing this portfolio could contain</div></div>
+    <div class="defrow"><div class="l">Stack</div><div class="r">Python · OpenBB data layer · Claude API reasoning layer</div></div>
+    <div class="defrow"><div class="l">Status</div><div class="r"><b>In development.</b> Repository scaffolded; no example memo published yet, because none has been generated end to end and verified</div></div>
+  </div>
+</div></section>
+
+<section id="why" class="last"><div class="wrap reveal">
+  <div class="kicker">On empty states</div>
+  <h2>Why this page looks like this</h2>
+  <p class="sub">An unfinished project shown honestly is a smaller claim than a finished one, and a far smaller
+  claim than a mock-up. It is also the only version of this page that survives someone clicking the link.
+  The same rule governs the whole site: nothing here is a rendering of output that does not exist, and every
+  empty state stays empty until there is something real to put in it.</p>
+  <div class="slot"><b>What lands here when they ship</b><br>A report generated from live SEC filings, with
+  the calibration result attached — including if it is null. And a complete example memo with its citations
+  intact, generated end to end, not excerpted.</div>
+</div></section>
+
+</main>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="index.html">← home</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+</body>
+</html>

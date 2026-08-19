@@ -1,0 +1,16 @@
+# Workstream B raw handoff (~18 MB of PNG originals, plus B's own draft page and
+# its manifest). The site serves the derived WebP set in assets/pp/ instead.
+# Kept on disk so the WebP can be regenerated; never published to GitHub Pages —
+# in particular handoff-page-draft.html must not become a reachable URL.
+assets/profit-pilot/
+
+# Source PNGs for the strategy charts — the site serves assets/*.webp.
+assets/*.png
+
+.DS_Store
+
+# Internal working files — never published.
+CLAUDE.md
+PORTFOLIO_CARD.md
+.claude/
+serve.py
