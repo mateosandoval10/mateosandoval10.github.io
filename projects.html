@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Research Tooling — Mateo Sandoval</title>
-<meta name="description" content="Two research tools in development: an SEC EDGAR institutional-flow tracker and an AI equity research agent built on OpenBB. Honest in-development status, no mock output.">
+<meta name="description" content="Research tooling: an SEC EDGAR institutional-flow tracker with a published negative calibration result, an equity research agent with a deterministic citation audit, and four open-source pull requests awaiting review.">
 <meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||'dark';d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
@@ -28,78 +28,119 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <main id="main">
 
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">Two tools under construction</div>
-  <h1>Research<br><span class="grad">tooling.</span></h1>
-  <p class="lede">Both are being built now. <b>Neither is finished.</b> This page specifies what each one does
-  and where it actually stands. There is no output on it, because there is no output yet — and a mock-up of a
-  result is worse than an empty state.</p>
+  <div class="eyebrow">Research tooling · Python</div>
+  <h1>Tools built to<br><span class="grad">test their own claims.</span></h1>
+  <p class="lede">Two research tools and a set of open-source contributions. The common thread is that each
+  one is built to produce a checkable answer — including when the answer is that there is nothing there.</p>
   <div class="pills">
     <a class="pill" href="#edgar">EDGAR flow tracker</a>
     <a class="pill" href="#agent">Equity research agent</a>
-    <span class="pill warn">Status: in development</span>
+    <a class="pill" href="#oss">Open-source pull requests</a>
   </div>
 </div></header>
 
-<div class="statband"><div class="wrap"><div class="stats c4">
-  <div class="stat"><div class="v">3</div><div class="k">SEC filing types parsed</div></div>
-  <div class="stat"><div class="v">45</div><div class="k">Days of 13F reporting lag</div></div>
-  <div class="stat"><div class="v">2</div><div class="k">Business days for Form 4</div></div>
-  <div class="stat"><div class="v">0</div><div class="k">Results claimed so far</div></div>
-</div></div></div>
-
 <section id="edgar"><div class="wrap reveal">
   <div class="kicker">Project one</div>
-  <h2>SEC EDGAR institutional-flow tracker</h2>
-  <p class="sub">A rigorous, free alternative to the retail flow products, built on the SEC's own public
-  filings rather than on a vendor's interpretation of them.</p>
+  <h2>SEC EDGAR institutional<br>and insider flow tracker</h2>
+  <p class="sub">Rebuilds institutional and insider position flow from raw SEC filings, then tests whether any
+  of it predicts returns. The calibration study was built to be able to fail, and it did.</p>
+  <div class="minis">
+    <div><div class="v">177k</div><div class="k">13F filings parsed</div></div>
+    <div><div class="v">1.2M</div><div class="k">Form 4 filings</div></div>
+    <div><div class="v">27</div><div class="k">Quarters</div></div>
+    <div><div class="v">6.4M</div><div class="k">Holdings rows</div></div>
+    <div><div class="v">2.8M</div><div class="k">Insider transactions</div></div>
+    <div><div class="v">98%</div><div class="k">Position value mapped</div></div>
+  </div>
+  <div class="shot">
+    <img src="assets/edgar-calibration.webp" width="2000" height="1415" loading="lazy" decoding="async" alt="Command-line output of the EDGAR flow calibration study, showing naive versus clustered inference across eighteen tests">
+    <div class="cap"><b>Calibration study output.</b> Forward abnormal returns measured from the filing date,
+    standard errors clustered by quarter, intervals bootstrapped over quarters.</div>
+  </div>
+  <div class="rejected"><b>THE RESULT IS A NULL, AND IT IS PUBLISHED AS ONE.</b> Under the naive assumption
+  that events are independent, <b>16 of 18 tests look significant</b>. Every 13F in a quarter becomes public
+  within three days of the same deadline, so those events are not independent. Under inference clustered by
+  quarter, <b>2 remain</b> — and none survives a multiple-testing adjustment. Median t-statistic inflation
+  from the naive method is <b>6×</b>, and <b>67×</b> in the worst case. The published answer is
+  <b>no detectable effect</b>.</div>
   <div class="defs">
-    <div class="defrow"><div class="l">Sources</div><div class="r"><b>13F-HR</b> quarterly institutional holdings · <b>Form 4</b> insider transactions · <b>13D/G</b> activist and &gt;5% stakes, from the SEC EDGAR public API under its rate-limit and User-Agent policy</div></div>
-    <div class="defrow"><div class="l">Computation</div><div class="r">Position deltas quarter over quarter — new positions, exits, meaningful adds and trims, concentration changes — per filer and per security</div></div>
-    <div class="defrow"><div class="l">Aggregation</div><div class="r">Per-ticker flow view: <b>who accumulated, who distributed</b>, and how large the move was relative to that filer's own book and to the security's float</div></div>
-    <div class="defrow"><div class="l">Timing discipline</div><div class="r">13F data is filed up to <b>45 days after quarter end</b> — lagged and backward-looking. The tool states this prominently and <b>never presents a 13F signal as actionable real-time flow</b>. Form 4 lands within two business days, so the two are treated as different instruments with different half-lives, and the tool explains why</div></div>
-    <div class="defrow"><div class="l">Differentiator</div><div class="r"><b>Calibration.</b> Where possible it measures whether these signals have any forward-looking value at all, and reports the answer <b>even when the answer is "no measurable edge."</b> A negative result with sound methodology is worth more than a dashboard implying an edge it has not demonstrated</div></div>
-    <div class="defrow"><div class="l">Output</div><div class="r">Structured CLI report plus a simple local dashboard</div></div>
-    <div class="defrow"><div class="l">Status</div><div class="r"><b>In development.</b> Repository scaffolded; no working end-to-end run yet, so no live link, no screenshot and no results claim on this page</div></div>
+    <div class="defrow"><div class="l">Sources</div><div class="r">Rate-limited EDGAR client; XML parsers for 13F-HR, Form 3/4/5 and Schedule 13D/G. Quarter-over-quarter position deltas per filer, aggregated across filers per security</div></div>
+    <div class="defrow"><div class="l">CUSIP crosswalk</div><div class="r">Built from the SEC's own fails-to-deliver files — covers <b>98% of position value with no licensed data</b></div></div>
+    <div class="defrow"><div class="l">Data-quality controls</div><div class="r">Detects the 2023 change in 13F value units and the large filers still ignoring it three years later; collapses duplicate rows; keeps puts and bond principal out of share counts; computes aggregates on a <b>matched sample of filers</b>, so a filing-entity reorganisation is not published as a billion-share liquidation</div></div>
+    <div class="defrow"><div class="l">Attribution</div><div class="r">Every aggregate names its dominant filer, because one mis-keyed row moves a total by billions</div></div>
+    <div class="defrow"><div class="l">Timing discipline</div><div class="r">13F holdings are filed up to 45 days after quarter end. The tool states the age of the data in the output itself and never presents a 13F signal as real-time flow. Form 4 lands within two business days and is treated separately</div></div>
+    <div class="defrow"><div class="l">Stack</div><div class="r">Python 3.11+, SQLite, pandas / NumPy / SciPy. No paid data sources</div></div>
+    <div class="defrow"><div class="l">Status</div><div class="r">Working local tool with a CLI and a self-contained dashboard. <b>No public deployment</b>; repository pending approval to publish</div></div>
   </div>
 </div></section>
 
 <section id="agent"><div class="wrap reveal">
   <div class="kicker">Project two</div>
-  <h2>AI equity research agent</h2>
-  <p class="sub">Input a ticker, output a structured investment memo. OpenBB provides the data layer; an agent
-  layer orchestrates retrieval, analysis and synthesis.</p>
-  <div class="chiplabel">Inputs gathered per ticker</div>
-  <div class="chips">
-    <span class="chip">Fundamentals &amp; valuation</span><span class="chip">Peer comparables</span>
-    <span class="chip">Earnings history</span><span class="chip">Estimate revisions</span>
-    <span class="chip">10-K / 10-Q / 8-K content</span><span class="chip">Risk-factor deltas QoQ</span>
-    <span class="chip">News sentiment</span><span class="chip">Macro &amp; factor exposures</span>
-    <span class="chip">Volatility · beta · drawdown</span><span class="chip">Correlation structure</span>
+  <h2>Equity research agent</h2>
+  <p class="sub">Ticker in, investment memo out — where every figure is traceable to its filing, and a
+  deterministic audit rejects the memo if it is not.</p>
+  <div class="minis">
+    <div><div class="v">126</div><div class="k">Datapoints per run</div></div>
+    <div><div class="v">11</div><div class="k">Collectors, 11 sections</div></div>
+    <div><div class="v">106</div><div class="k">Unit tests</div></div>
+    <div><div class="v">51</div><div class="k">Citations, example memo</div></div>
+    <div><div class="v">10s</div><div class="k">Evidence collection</div></div>
+    <div><div class="v">0</div><div class="k">Uncited figures permitted</div></div>
   </div>
-  <div class="chiplabel">Memo structure</div>
-  <div class="chips">
-    <span class="chip">Thesis</span><span class="chip">Key drivers</span><span class="chip">Valuation view</span>
-    <span class="chip">Risk factors</span><span class="chip"><b>What would falsify it</b></span>
-    <span class="chip"><b>Explicit confidence statement</b></span>
+  <div class="shot">
+    <img src="assets/agent-audit.webp" width="1400" height="1250" loading="lazy" decoding="async" alt="The citation audit driven through ten failure modes with pass, warn and fail verdicts for each">
+    <div class="cap"><b>The citation audit, driven through ten failure modes.</b> Each case is also an
+    assertion in the test suite, so the demonstration cannot drift from the code.</div>
   </div>
+  <div class="confirmed"><b>THE MODEL NEVER RETRIEVES ANYTHING.</b> It has no tools and no search. It
+  receives a fixed evidence book of ID-addressed datapoints, each carrying its source, URL and as-of date,
+  and must cite the ID behind every figure it states. After generation a deterministic audit — plain Python,
+  no model in the loop — re-reads the memo, extracts every numeric token and checks it against the
+  datapoints actually cited. That catches the failure that matters: <b>a plausible number attached to a real
+  source</b>.</div>
   <div class="defs">
-    <div class="defrow"><div class="l">Requirement one</div><div class="r"><b>Every claim is traceable to its source</b> — the filing, the datapoint, the date. A memo that cannot be audited is worthless to an institution</div></div>
-    <div class="defrow"><div class="l">Requirement two</div><div class="r"><b>The agent must be able to say it doesn't know.</b> Missing or stale data is handled explicitly rather than left for a language model to fill in. A hallucinated financial figure would be the single most damaging thing this portfolio could contain</div></div>
-    <div class="defrow"><div class="l">Stack</div><div class="r">Python · OpenBB data layer · Claude API reasoning layer</div></div>
-    <div class="defrow"><div class="l">Status</div><div class="r"><b>In development.</b> Repository scaffolded; no example memo published yet, because none has been generated end to end and verified</div></div>
+    <div class="defrow"><div class="l">Saying "I don't know"</div><div class="r">Provider failures become declared gaps with remedies rather than silent omissions. Nulls are never stored as placeholders. Data past its freshness policy is flagged. The memo carries a mandatory data-gaps section and a <code>not_established</code> field for claims the evidence cannot support</div></div>
+    <div class="defrow"><div class="l">Reads the filings</div><div class="r">Pulls the last two 10-K/10-Q documents and diffs Item 1A paragraph by paragraph. On the example run: <b>9 paragraphs added, 14 not restated, 3 materially reworded</b> — including new disclosure on component supply and on securing compute capacity</div></div>
+    <div class="defrow"><div class="l">Falsifiable artifacts</div><div class="r">The repository ships the memo that passed, <b>the same memo with three figures altered and every citation left untouched</b> (the audit returns three errors, one per altered figure, while untouched figures in the same sentences still pass), and a run against a foreign private issuer that returned 80 datapoints across 7 of 11 sections and declared 11 gaps with reasons</div></div>
+    <div class="defrow"><div class="l">Found by its own tests</div><div class="r">Four tests exist because of real bugs — including Treasury yields entering the evidence book as "0.0472%" because the provider reports decimal fractions. That is exactly the silent, internally-consistent error class the design exists to prevent</div></div>
+    <div class="defrow"><div class="l">What it is not</div><div class="r">No valuation modelling of its own — no DCF, no scenario analysis. Peer sets are supplied, not screened. Earnings surprises and estimate revisions sit behind a paid provider and are <b>declared missing rather than approximated</b>. Factor exposure stops at market beta. Coverage is US-centric. <b>The audit checks grounding, not reasoning</b> — a memo can pass every check and still reach a poor conclusion</div></div>
+    <div class="defrow"><div class="l">Status</div><div class="r">The evidence pipeline and citation audit run on public sources with <b>no API key</b>. The synthesis step calls the Claude API and <b>has not been run end to end</b>. Repository local only, pending approval</div></div>
+    <div class="defrow"><div class="l">Stack</div><div class="r">Python 3.12 · OpenBB Platform 4.7 (SEC EDGAR, yfinance, Federal Reserve, OECD) · Claude API · pytest</div></div>
   </div>
 </div></section>
 
-<section id="why" class="last"><div class="wrap reveal">
-  <div class="kicker">On empty states</div>
-  <h2>Why this page looks like this</h2>
-  <p class="sub">An unfinished project shown honestly is a smaller claim than a finished one, and a far smaller
-  claim than a mock-up. It is also the only version of this page that survives someone clicking the link.
-  The same rule governs the whole site: nothing here is a rendering of output that does not exist, and every
-  empty state stays empty until there is something real to put in it.</p>
-  <div class="slot"><b>What lands here when they ship</b><br>A report generated from live SEC filings, with
-  the calibration result attached — including if it is null. And a complete example memo with its citations
-  intact, generated end to end, not excerpted.</div>
+<section id="oss" class="last"><div class="wrap reveal">
+  <div class="kicker">Open source</div>
+  <h2>Four pull requests,<br>none merged yet</h2>
+  <p class="sub">Four bug fixes submitted to open-source financial libraries, found by reading the parsers
+  rather than by working the issue list. All four are open and awaiting maintainer review.</p>
+  <div class="minis c4">
+    <div><div class="v">0</div><div class="k">Merged</div></div>
+    <div><div class="v">4</div><div class="k">Open, awaiting review</div></div>
+    <div><div class="v">17</div><div class="k">Regression tests added</div></div>
+    <div><div class="v">4</div><div class="k">Upstream projects</div></div>
+  </div>
+  <div class="note stop"><b>Status, stated precisely.</b> Zero pull requests have been merged. Until a
+  maintainer merges one, this is <b>submitted work, not a contribution record</b>, and it is described that
+  way deliberately. If a request is closed without merging, this section will say so.</div>
+  <div class="tablewrap"><table>
+    <caption>Submitted 2026-08-18. Status as of publication.</caption>
+    <thead><tr><th>Project</th><th>Stars</th><th>Defect</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td class="txt">OpenBB</td><td>72k</td><td class="txt">Form 4 parser overwrote its footnote lookup table with one row's text, so every later transaction in a filing inherited the first row's footnote</td><td class="txt">Open · <a href="https://github.com/OpenBB-finance/OpenBB/pull/7642" rel="noopener">#7642</a></td></tr>
+      <tr><td class="txt">microsoft/qlib</td><td>47.7k</td><td class="txt">Backtest exchange divided by the proportional fee rate, so any zero-cost run crashed on the first partially-funded buy order</td><td class="txt">Open · <a href="https://github.com/microsoft/qlib/pull/2324" rel="noopener">#2324</a></td></tr>
+      <tr><td class="txt">ffn</td><td class="mut">—</td><td class="txt">Sharpe ratios silently not annualized for business-day, weekly and quarterly series — 0.0237 reported against a correct 0.3764</td><td class="txt">Open · <a href="https://github.com/pmorissette/ffn/pull/322" rel="noopener">#322</a></td></tr>
+      <tr><td class="txt">yfinance</td><td class="mut">—</td><td class="txt">Submitted fix</td><td class="txt">Open · <a href="https://github.com/ranaroussi/yfinance/pull/2949" rel="noopener">#2949</a></td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub"><b>Why the footnote bug matters.</b> A Form 4 is what an insider must file within two
+  business days of trading their own company's stock. A scheduled Rule 10b5-1 sale, a tax withholding and a
+  discretionary open-market sale are distinguished by exactly that footnote text — so misattributing it
+  changes how a trade reads. The defect had been in shipped code since April 2025.</p>
+  <p class="sub">Each fix ships with regression tests that were verified to fail on the unpatched code and
+  pass on the fix, so the tests demonstrably target the defect. The tractable issues on these projects
+  already carry several competing unmerged pull requests each; reading the parser instead is why this work
+  can be explained end to end.</p>
 </div></section>
 
 </main>

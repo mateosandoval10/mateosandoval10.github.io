@@ -159,11 +159,11 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <div class="wtext">
         <div class="wnum">04</div>
         <h2>EDGAR institutional flow</h2>
-        <div class="wkind">Python · SEC filings · in development</div>
+        <div class="wkind">Python · SEC filings · calibration study</div>
         <p>Reads institutional filings from SEC EDGAR and reconstructs position flow: which filers
         accumulated or distributed a security, at what scale relative to their book, over which quarter. It
         separates 13F holdings, filed up to 45 days after quarter end, from Form 4 insider transactions, filed
-        within two business days, and states on every view how stale the data it is showing actually is.</p>
+        within two business days, and states on every view how stale the data it is showing actually is. A calibration study tests whether any of it predicts returns; under inference clustered by quarter the answer is <b>no detectable effect</b>, and that is the published result.</p>
         <div class="wfacts">
           <div><div class="v">8,165</div><div class="k">13F filings parsed</div></div>
           <div><div class="v">8,053</div><div class="k">Distinct filers</div></div>
