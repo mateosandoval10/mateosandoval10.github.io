@@ -75,9 +75,17 @@ Design principles
   safe, and it is why the clamp book is one of the few places in this codebase where I would defend every
   line.</p>
 
+  <div class="confirmed"><b>THE EVENT LINEAGE IS THE WHOLE AUDITABILITY ARGUMENT.</b> The console does not
+  merely report that WRAB is clamping exposure to ×0.29 — it lists <b>the 187 individual events that set that
+  value</b>, each reason-coded (<code>catalyst_event_heat</code>, <code>poc_support_lower</code>,
+  <code>poc_prefade_upper</code>) and timestamped to the second. A risk control that can only tell you its
+  output is a number you have to trust. One that can replay the events which produced it is a number you can
+  check — and that is the difference between a system a firm could run and a system a person could only
+  believe in.</div>
+
   <div class="shot">
     <img src="assets/pp/risk-spine-console.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Risk Spine Console showing six status dials, a binding-constraint explainer, a clamp-stack waterfall, and the ladder of eight risk governors with their multipliers and states">
-    <div class="cap"><b>Risk Spine Console.</b> The clamp-stack waterfall showing how each governor composes into the final multiplier, and the binding-constraint explainer — "risk is capped at ×0.75 by drawdown circuit breaker because intraday DD tier 1." <b>Demo mode</b> — rendered with the frontend's bundled sample dataset; the interface is real, the figures shown are illustrative. A live capture of this surface is the next one queued.</div>
+    <div class="cap"><b>Risk Spine Console — Governor Ladder.</b> All eight governors with their clamp multipliers and binding state; WRAB expanded to its inputs and, beneath it, <b>“Events that set it (187)”</b> — the individual reason-coded events that produced the current ×0.29 clamp, each with its timestamp. <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> — live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
 </div></section>
 

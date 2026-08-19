@@ -53,8 +53,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div class="card accent">
       <div class="tag">Layer three</div>
       <h3>Out-of-sample gating</h3>
-      <p>Challenger parameter sets are scored on data outside the window they were fitted on, and the
-      overwhelming majority are declined there. Only survivors advance — and they advance to a fractional
+      <p>Challenger parameter sets are scored on data outside the window they were fitted on, and clearing
+      that gate is a requirement rather than a formality. Only survivors advance — and they advance to a fractional
       canary, never straight to full size. A significance threshold, a cooldown window and a per-day
       promotion cap sit behind that.</p>
     </div>
@@ -77,6 +77,20 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     and a fail-closed kill switch halts trading on any mismatch between what the engine believes it holds and
     what the broker reports.</p>
   </div>
+
+  <div class="shot">
+    <img src="assets/pp/self-improvement-loop.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages, the tunable knob count, and a notice explaining that the loop is dormant awaiting real performance data">
+    <div class="cap"><b>Self-Improvement Control Room.</b> The loop currently reads <b>dormant</b> — 0
+    promotions, 1 of 4 stages reached. <b>Live production console.</b> Account balances and position values
+    redacted; the account is a paper account.</div>
+  </div>
+
+  <div class="confirmed"><b>WHAT THE DORMANT STATE ACTUALLY DEMONSTRATES.</b> The surface explains itself on
+  screen: <i>"The self-improvement loop only acts once Calibration has measured real expectancy from live
+  (post-market-open) bars. Until the engine processes real fills, these readouts stay empty rather than
+  showing zeros as if a tuning cycle had run. No synthetic verdicts are shown."</i> That is the behaviour I
+  would want from a self-modifying system — <b>it refuses to render progress it has not made</b>. An empty
+  readout that says why it is empty is worth more than a populated one you cannot source.</div>
 
   <p class="sub" style="margin-top:26px">Underneath all five sits an append-only decision ledger recording
   every cycle's verdict, so the exact parameter state of the system at any past moment can be reconstructed.

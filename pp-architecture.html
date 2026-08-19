@@ -45,7 +45,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div class="card">
       <div class="tag">Property two</div>
       <h3>Hot-reloadable configuration</h3>
-      <p>Roughly 1,015 configuration values reload without a restart through a config → override →
+      <p>The running system reports <b>2,128 hot-reloadable parameters</b> — they reload without a restart through a config → override →
       <code>_on_reload</code> spine. Without it, an automated calibration loop cannot tune a system that is
       currently running.</p>
     </div>
@@ -80,7 +80,7 @@ class EventEnvelope:
       <tr><td class="txt">Engine</td><td class="txt">Python — 39 locked modules, 339,913 lines across 1,127 files, 220 test suites</td></tr>
       <tr><td class="txt">Risk spine</td><td class="txt">Eight governors composed into a single exposure multiplier with binding-constraint attribution</td></tr>
       <tr><td class="txt">Strategy layer</td><td class="txt">Six independent sleeves, each with its own cadence, universe and risk budget</td></tr>
-      <tr><td class="txt">Research loop</td><td class="txt">Champion–challenger and shadow search over ~1,270 tunable leaves, statistically gated</td></tr>
+      <tr><td class="txt">Research loop</td><td class="txt">Champion–challenger and shadow search over 2,128 tunable knobs (36 denylisted), statistically gated</td></tr>
       <tr><td class="txt">Operator API</td><td class="txt">FastAPI — snapshot and history endpoints, <code>/v1/stream</code> WebSocket, bearer auth, bounded and audited config overrides</td></tr>
       <tr><td class="txt">Console</td><td class="txt">React + TypeScript + Vite + Tailwind — 37 registered operator routes</td></tr>
       <tr><td class="txt">Intelligence</td><td class="txt">Catalyst mapping, regime detection, EDGAR extraction, MLES ensemble selection, uncertainty calibration</td></tr>
@@ -94,11 +94,11 @@ class EventEnvelope:
 <section id="loop" class="last"><div class="wrap reveal">
   <div class="kicker">Research loop</div>
   <h2>The system tunes itself — under gates</h2>
-  <p class="sub">With ~1,270 tunable parameters, the default outcome of an unconstrained search is an overfit,
+  <p class="sub">With 2,128 tunable parameters, the default outcome of an unconstrained search is an overfit,
   not a discovery. So the interesting engineering here is not the search. It's the gates.</p>
   <div class="flow">
     <div class="step"><div class="num">01</div><div class="nm">Propose</div><p>Shadow search generates challenger parameter sets against the running champion.</p></div>
-    <div class="step"><div class="num">02</div><div class="nm">Evaluate out-of-sample</div><p>Challengers are scored on data outside the fitting window. Most are declined here — that rejection rate is the feature.</p></div>
+    <div class="step"><div class="num">02</div><div class="nm">Evaluate out-of-sample</div><p>Challengers are scored on data outside the window they were fitted on. Clearing that gate is a <b>requirement</b>, not a formality — it is the stage designed to reject overfits.</p></div>
     <div class="step"><div class="num">03</div><div class="nm">Canary</div><p>Survivors deploy at fractional allocation first, never straight to full size.</p></div>
     <div class="step"><div class="num">04</div><div class="nm">Gated promotion</div><p>Promotion requires a significance threshold, a cooldown window, and a per-day promotion cap.</p></div>
   </div>
@@ -107,7 +107,7 @@ class EventEnvelope:
   self-modifying system without an audit trail is one you can never debug after the fact.</p>
   <div class="shot">
     <img src="assets/pp/self-improvement-loop.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages of the research loop">
-    <div class="cap"><b>Self-Improvement Control Room.</b> The loop end to end — propose, evaluate out-of-sample, canary, promote. <b>Demo mode</b> — the candidate counts and outcomes shown are the frontend's bundled sample dataset, not a record of real promotions.</div>
+    <div class="cap"><b>Self-Improvement Control Room.</b> The loop end to end — propose, evaluate out-of-sample, canary, promote — with the tunable-knob count and the safety controls that can freeze it. <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> — live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
 </div></section>
 
