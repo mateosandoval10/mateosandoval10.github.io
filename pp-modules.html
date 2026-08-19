@@ -7,7 +7,7 @@
 <meta name="description" content="The full Profit Pilot module directory: 39 locked modules with catalogued and implemented micro counts, filterable by category and expandable to their built capabilities.">
 <meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="styles.css">
-<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
 </head>
 <body>
@@ -96,6 +96,7 @@ if ('IntersectionObserver' in window) {
   var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 } else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(e){e.classList.add('in')})},1500);
 </script>
 <script>
 const MODULES = [["WRAB","Risk",229,173,36867],["Allocator","Risk",190,65,38096],["Shield","Risk",146,132,38773],["Calibration","Research",102,59,83337],["MLES","Intelligence",98,38,8609],["Recovery Parachute","Risk",98,98,1794],["Telemetry Logging Replay","Ops",96,4,582],["Moonshot","Strategy",72,46,9087],["Arbitrage","Strategy",70,41,7640],["Regime Detector","Intelligence",66,43,2050],["Stealth Obfuscation","Execution",60,16,5007],["Self Improvement","Research",51,29,3383],["Ops Heartbeat Operational Sentinel","Ops",35,5,501],["Crypto","Strategy",31,16,5248],["Loss Day Fingerprint","Research",29,29,5853],["Omega Ops","Ops",28,5,1057],["Day Trading","Strategy",23,18,6708],["Adaptive Fill Router","Execution",21,6,687],["Catalyst Map Reliability Weights","Intelligence",19,9,5846],["Liquidity Forecaster","Risk",19,16,3386],["Core","Strategy",18,16,1923],["Inside Mode","Strategy",18,10,2932],["Sim Replay","Research",18,11,2043],["Reporting Compliance Autopilot","Ops",17,4,370],["Uncertainty Calibration Layer","Intelligence",17,6,320],["Session Reports","Ops",16,3,274],["Edgar Extractor","Intelligence",13,9,3410],["Equity Bands Anti-Overshoot","Risk",13,13,1023],["Global Health Score","Ops",12,10,2640],["Catalyst Calendar","Intelligence",11,4,5846],["Daily Reports","Ops",10,3,313],["Steady-State Cool-Off Governor","Risk",10,10,899],["Drawdown Circuit Breaker","Risk",9,9,1269],["Ghost Synthetic Scenario Engine","Research",9,2,977],["Mode Switch Orchestrator","Strategy",8,8,1334],["AFR","Execution",7,7,687],["CVaR Position Sizer","Risk",6,4,675],["Catalyst Map","Intelligence",6,5,5846],["Performance Attribution Engine","Research",5,2,1527]];

@@ -7,7 +7,7 @@
 <meta name="description" content="A validation pipeline for intraday futures research: within-session bar-permutation placebo testing across 300 worlds, 10,000-path bootstrap confidence intervals, a frozen-config out-of-sample protocol with a sealed data vault, and per-component risk-adjusted audits.">
 <meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="styles.css">
-<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
 </head>
 <body>
@@ -343,6 +343,7 @@ if ('IntersectionObserver' in window) {
   var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 } else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(e){e.classList.add('in')})},1500);
 </script>
 </body>
 </html>
