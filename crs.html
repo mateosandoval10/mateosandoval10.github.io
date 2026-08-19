@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Channel Reversion System — Mateo Sandoval</title>
+<meta name="description" content="Channel Reversion System: Donchian-channel mean reversion traded only with the prevailing trend. 27-year results across two bear markets, two rejected experiments, and limitations.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html" aria-current="page">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+
+<div class="subnav"><div class="wrap"><a class="home" href="strategies.html">&larr; strategies</a><a href="cbs.html">CBS</a><a href="vtte.html">VTTE</a><a href="crs.html" aria-current="page">CRS</a><a href="qv2.html">QV v2</a></div></div>
+<main id="main">
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">CRS &middot; NASDAQ:QQQ &middot; daily &middot; Mar 1999 &ndash; Aug 2026 &middot; cross-validated on SPY</div>
+  <h1>Channel<br><span class="grad">Reversion System.</span></h1>
+  <p class="lede">Mean reversion traded <b>with</b> the prevailing trend, never against it. A 27-year window including the dot-com collapse and the 2008 crisis, with a mid-teens worst drawdown while sitting in cash roughly 80% of the time. Published open-source on TradingView.</p>
+</div></header>
+
+<div class="statband"><div class="wrap"><div class="stats"><div class="stat"><div class="v">2.28</div><div class="k">Profit factor</div></div><div class="stat"><div class="v">64%</div><div class="k">Win rate</div></div><div class="stat"><div class="v">15.2%</div><div class="k">Max DD, 27 yrs</div></div><div class="stat"><div class="v">~80%</div><div class="k">Time in cash</div></div><div class="stat"><div class="v">58</div><div class="k">Trades</div></div><div class="stat"><div class="v">2</div><div class="k">Bear markets survived</div></div></div></div></div>
+
+<section style="padding-top:18px"><div class="wrap reveal">
+  <h2>Thesis</h2>
+  <p class="sub">Inside an established uptrend, pullbacks to the bottom of the recent trading range are
+  statistically bought. CRS trades exactly that and nothing else: a 50-day Donchian channel maps the active range,
+  the lower quarter is the accumulation zone, and entries only exist while price holds its 200-day SMA — mean
+  reversion is traded <b>with</b> the prevailing trend, never against it. Fading downtrends is how reversion
+  accounts die.</p>
+  <p class="sub">This is deliberately the low-octane piece of the library. It is flat roughly 80% of the time.
+  The metric that matters is quality per unit of exposure, not raw beta — a 64% hit rate with a 15% worst
+  drawdown while spending four-fifths of its life in cash is a capital-efficiency profile, and it survives on
+  SPY with zero re-tuning.</p>
+</div></section>
+
+<section><div class="wrap reveal">
+  <h2>Results</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Symbol</th><th>Net return</th><th>Profit factor</th><th>Win rate</th><th>Max DD</th><th>Trades</th><th>Largest win / loss</th></tr>
+    <tr><td>QQQ 1999–2026</td><td class="pos">+104%</td><td class="pos">2.28</td><td>63.8%</td><td class="pos">15.2%</td><td>58</td><td>+$999 / −$1,021</td></tr>
+    <tr><td>SPY (frozen params)</td><td class="pos">+67%</td><td>1.80</td><td>62.3%</td><td class="pos">8.5%</td><td>69</td><td>+$777 / −$758</td></tr>
+  </table></div>
+  <p class="sub" style="margin-top:10px">The QQQ window now verified spans <b>March 1999 to August 2026</b> — the
+  full period includes the dot-com collapse and the 2008 crisis, and the worst drawdown across those 27 years is
+  15.2%. Stated plainly: CRS does <b>not</b> beat buy-and-hold on raw return —
+  a system that is long 20% of the time cannot outrun a secular bull and this page will not pretend otherwise.
+  What transfers across both symbols untouched is the <i>character</i>: high hit rate, symmetric small
+  win/loss sizes, single-digit-to-teens drawdown. That is the shape you want in a sleeve that recycles cash
+  into other systems the rest of the time.</p>
+
+  <h3>Failed experiments (kept in the record)</h3>
+  <div class="rejected"><b>REJECTED — "let winners ride" trail exit.</b> Replacing the channel-midline profit
+  target with a 2.5-ATR chandelier trail: same net return (+100%), profit factor down 2.28 → 1.79, win rate
+  64% → 47%, drawdown up 15% → 19%. In a mean-reversion system the target <i>is</i> the edge — the reversion to
+  the middle of the range is the statistically reliable move; everything after it is noise you pay for.</div>
+  <div class="rejected"><b>REJECTED — leveraged wrapper (TQQQ).</b> Running the identical signals on the 3x ETF:
+  profit factor collapsed to 1.43 and max drawdown tripled to 43%. Triple leverage triples the noise around the
+  structural stop and blows positions out of otherwise-valid reversion trades. Leverage belongs in systems
+  designed for it (see VTTE), not bolted onto this one.</div>
+</div></section>
+
+<section><div class="wrap reveal">
+  <h2>Technicals</h2>
+  <div class="two">
+    <div class="card"><h3>Structure</h3><p style="font-size:14px;color:var(--dim)">Donchian(50) on prior-bar
+    highs/lows (no same-bar self-reference). Entry zone = lower 25% of the channel. Target = channel midline.</p></div>
+    <div class="card"><h3>Regime</h3><p style="font-size:14px;color:var(--dim)">Entries require close &gt; SMA(200).
+    A close below the SMA while positioned is an immediate regime exit — trend gone, thesis gone.</p></div>
+    <div class="card"><h3>Risk</h3><p style="font-size:14px;color:var(--dim)">Hard stop one ATR(14) below the
+    channel floor: if the range itself fails, the location thesis is falsified and the trade is wrong by
+    definition.</p></div>
+    <div class="card"><h3>Surface area</h3><p style="font-size:14px;color:var(--dim)">One entry condition, three
+    exits, five inputs. Small tunable surface by design — fewer knobs, less curve to fit.</p></div>
+  </div>
+</div></section>
+
+<section class="last"><div class="wrap reveal">
+  <h2>Source (core logic)</h2>
+  <pre>upperD  = ta.highest(high, chanLen)[1]
+lowerD  = ta.lowest(low,  chanLen)[1]
+midD    = (upperD + lowerD) / 2.0
+zoneTop = lowerD + (upperD - lowerD) * zonePct / 100.0
+trendOK = close &gt; ta.sma(close, smaLen)
+
+buySig = not inPos and trendOK and close &lt;= zoneTop
+if buySig
+    strategy.entry("Long", strategy.long)
+
+if inPos
+    if close &gt;= midD
+        strategy.close("Long", comment="target: channel mid")
+    else if close &lt; lowerD - ta.atr(atrLen) * atrMult
+        strategy.close("Long", comment="stop: channel failed")
+    else if close &lt; smaT
+        strategy.close("Long", comment="exit: trend break")</pre>
+</div></section>
+
+<div class="note"><b>Limitations.</b> In-sample. The QQQ/SPY pair shares one market regime era; a genuine
+robustness claim needs non-US indices and a bear-market-heavy split. Planned: EFA/EEM cross-check and a
+2000–2010 subperiod study, plus pairing analysis with VTTE (their exposure windows are largely complementary).</div>
+
+</main>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="strategies.html">← strategy library</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+</body>
+</html>

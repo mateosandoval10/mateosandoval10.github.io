@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vol-Target Trend Engine — Mateo Sandoval</title>
+<meta name="description" content="Vol-Target Trend Engine: a 200-day regime gate with volatility-targeted exposure on a 3x ETF. Results against buy-and-hold and the S&P 500, one rejected variant, and limitations.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html" aria-current="page">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+
+<div class="subnav"><div class="wrap"><a class="home" href="strategies.html">&larr; strategies</a><a href="cbs.html">CBS</a><a href="vtte.html" aria-current="page">VTTE</a><a href="crs.html">CRS</a><a href="qv2.html">QV v2</a></div></div>
+<main id="main">
+
+<header class="hero"><div class="wrap">
+  <div class="eyebrow">VTTE &middot; NASDAQ:TQQQ &middot; daily &middot; Feb 2010 &ndash; Aug 2026</div>
+  <h1>Vol-Target<br><span class="grad">Trend Engine.</span></h1>
+  <p class="lede">Gate the holding to the uptrend regime and let realised volatility set the position size. <b>There is no entry signal to overfit</b> &mdash; the system holds one decision variable: how much exposure does current volatility justify? Published open-source on TradingView.</p>
+</div></header>
+
+<div class="statband"><div class="wrap"><div class="stats"><div class="stat"><div class="v">+3,862%</div><div class="k">Net return</div></div><div class="stat"><div class="v">3.33</div><div class="k">Profit factor</div></div><div class="stat"><div class="v">41.9%</div><div class="k">Max drawdown</div></div><div class="stat"><div class="v">~26%</div><div class="k">CAGR vs SPX ~13%</div></div><div class="stat"><div class="v">155</div><div class="k">Rebalance events</div></div><div class="stat"><div class="v">5</div><div class="k">Inputs total</div></div></div></div></div>
+
+<section style="padding-top:18px"><div class="wrap reveal">
+  <h2>Thesis</h2>
+  <p class="sub" style="margin-bottom:10px">Leveraged index ETFs compound spectacularly in calm uptrends and destroy
+  capital in volatile downtrends — volatility decay on a 3x product is quadratic in realized vol. So don't predict
+  anything. Gate the holding to the uptrend regime, and let realized volatility itself set the position size.
+  This is the same architecture as institutional vol-control indices, expressed in ~60 lines of Pine.</p>
+  <p class="sub">There is no entry signal to overfit. The system holds one decision variable: <i>how much exposure
+  does current volatility justify?</i></p>
+
+  <div class="diagram"><svg viewBox="0 0 900 210" xmlns="http://www.w3.org/2000/svg" font-family="var(--mono)">
+    <rect x="20" y="30" width="200" height="64" rx="10" fill="var(--card2)" stroke="var(--teal)"/>
+    <text x="120" y="57" fill="var(--text)" font-size="14" text-anchor="middle">REGIME GATE</text>
+    <text x="120" y="78" fill="var(--dim)" font-size="11.5" text-anchor="middle">close &gt; SMA(200) ?</text>
+    <rect x="20" y="130" width="200" height="52" rx="10" fill="var(--card2)" stroke="var(--red)"/>
+    <text x="120" y="152" fill="var(--red)" font-size="12.5" text-anchor="middle">NO → 100% cash</text>
+    <text x="120" y="170" fill="var(--dim)" font-size="10.5" text-anchor="middle">(kills the left tail)</text>
+    <rect x="330" y="30" width="240" height="64" rx="10" fill="var(--card2)" stroke="var(--teal)"/>
+    <text x="450" y="57" fill="var(--text)" font-size="14" text-anchor="middle">VOL TARGETING</text>
+    <text x="450" y="78" fill="var(--dim)" font-size="11.5" text-anchor="middle">exp = min(1, 45% / realVol20)</text>
+    <rect x="680" y="30" width="200" height="64" rx="10" fill="var(--card2)" stroke="var(--amber)"/>
+    <text x="780" y="57" fill="var(--text)" font-size="14" text-anchor="middle">WEEKLY REBALANCE</text>
+    <text x="780" y="78" fill="var(--dim)" font-size="11.5" text-anchor="middle">±10% band · de-risk @1.5x</text>
+    <line x1="220" y1="62" x2="330" y2="62" stroke="var(--teal)" stroke-width="1.5" marker-end="url(#a)"/>
+    <line x1="570" y1="62" x2="680" y2="62" stroke="var(--teal)" stroke-width="1.5" marker-end="url(#a)"/>
+    <line x1="120" y1="94" x2="120" y2="130" stroke="var(--red)" stroke-width="1.5"/>
+    <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--teal)"/></marker></defs>
+  </svg></div>
+</div></section>
+
+<section><div class="wrap reveal">
+  <h2>Results — TQQQ daily, 16.5 years</h2>
+  <div class="tablewrap"><table>
+    <tr><th></th><th>VTTE</th><th>TQQQ buy &amp; hold</th><th>S&amp;P 500</th></tr>
+    <tr><td class="txt">Net return</td><td class="pos">+3,862% (+$48.7k still open)</td><td>+20,107%</td><td>~+630%</td></tr>
+    <tr><td class="txt">CAGR</td><td class="pos">~26%</td><td>~38%</td><td>~13%</td></tr>
+    <tr><td class="txt">Max drawdown</td><td>41.9%</td><td class="neg">&gt;80% (2022)</td><td>~34% (2020)</td></tr>
+    <tr><td class="txt">Profit factor</td><td class="pos">3.33</td><td class="mut">—</td><td class="mut">—</td></tr>
+    <tr><td class="txt">Rebalance events</td><td>155 (67.7% profitable)</td><td class="mut">—</td><td class="mut">—</td></tr>
+    <tr><td class="txt">Largest win / loss</td><td>+$35,229 / −$17,251</td><td class="mut">—</td><td class="mut">—</td></tr>
+    <tr><td class="txt">Commission paid</td><td>$4,105</td><td class="mut">—</td><td class="mut">—</td></tr>
+  </table></div>
+  <p class="sub" style="margin-top:14px">The honest comparison: raw buy-and-hold TQQQ earns more — if the holder
+  survives two &gt;80% drawdowns without capitulating, which essentially nobody does. VTTE keeps most of the
+  compounding at roughly half the worst drawdown, and its exposure drops mechanically before crises mature
+  because volatility clusters. Against SPX, the engine compounds at roughly double the rate.</p>
+
+  <h3>Failed experiment (kept in the record)</h3>
+  <div class="rejected"><b>REJECTED — fast de-risking variant.</b> Replaced the 20-day vol estimate with
+  max(5-day, 20-day) and allowed de-risking any day of the week ("fast to cut, slow to add"). Result:
+  turnover more than doubled (155 → 376 events), the system repeatedly sold volatility spikes at their lows and
+  re-bought higher a week later. Net return fell from +3,862% to +2,158%, profit factor 3.33 → 1.98, and max
+  drawdown got <i>worse</i> (41.9% → 49.6%). Slow rebalancing is a feature: reaction speed costs more than it saves.</div>
+</div></section>
+
+<section><div class="wrap reveal">
+  <h2>Parameters</h2>
+  <div class="tablewrap"><table>
+    <tr><th>Input</th><th>Default</th><th>Role</th></tr>
+    <tr><td>Realized vol lookback</td><td>20 d</td><td class="txt">annualized stdev of daily returns</td></tr>
+    <tr><td>Target annualized vol</td><td>45%</td><td class="txt">exposure = min(100%, target / realized)</td></tr>
+    <tr><td>Regime SMA</td><td>200 d</td><td class="txt">long only above; flat below</td></tr>
+    <tr><td>Rebalance band</td><td>10%</td><td class="txt">trade only when drift exceeds band (cost control)</td></tr>
+    <tr><td>Fast de-risk</td><td>on</td><td class="txt">immediate trim if held exposure &gt; 1.5× target</td></tr>
+  </table></div>
+  <p class="sub" style="margin-top:12px">Five inputs. Nothing predicts direction; every parameter has an economic
+  interpretation rather than a fitted one.</p>
+</div></section>
+
+<section class="last"><div class="wrap reveal">
+  <h2>Source</h2>
+  <pre>//@version=6
+strategy("Vol-Target Trend Engine", shorttitle="VTTE", overlay=true,
+     initial_capital=10000, commission_type=strategy.commission.percent,
+     commission_value=0.05, slippage=1, pyramiding=500,
+     process_orders_on_close=true, calc_on_every_tick=false)
+
+volLen    = input.int(20,    "Realized vol lookback (days)",  minval=5)
+targetVol = input.float(45.0,"Target annualized vol (%)",     minval=5,  step=1.0)
+smaLen    = input.int(200,   "Regime SMA length",             minval=50)
+band      = input.float(10.0,"Rebalance band (% of target)",  minval=1,  step=1.0)
+fastDrisk = input.bool(true, "Immediate de-risk at 1.5x over target")
+
+retD    = close / close[1] - 1.0
+realVol = ta.stdev(retD, volLen) * math.sqrt(252) * 100.0
+smaReg  = ta.sma(close, smaLen)
+regime  = close &gt; smaReg
+
+frac      = math.min(1.0, targetVol / math.max(realVol, 1.0))
+targetQty = regime ? strategy.equity * frac / close : 0.0
+posQty    = strategy.position_size
+delta     = targetQty - posQty
+
+weekTurn   = timeframe.change("1W")
+regimeFlip = regime != regime[1]
+overExp    = fastDrisk and posQty &gt; 0 and targetQty &gt; 0 and posQty &gt; targetQty * 1.5
+
+if weekTurn or regimeFlip or overExp
+    if not regime and posQty &gt; 0
+        strategy.close_all(comment="regime off")
+    else if regime and math.abs(delta) &gt; targetQty * band / 100.0
+        if delta &gt; 0
+            strategy.order("Add",  strategy.long,  qty=delta,  comment="scale up")
+        else
+            strategy.order("Trim", strategy.short, qty=-delta, comment="de-risk")</pre>
+  <p class="sub">Full script (with regime visuals and live status table) available on request / in my TradingView library.</p>
+</div></section>
+
+<div class="note"><b>Limitations.</b> Single instrument, single history, in-sample. TQQQ's own listed history
+begins in 2010 — a mostly secular-bull window; the regime gate is what carries the 2020 and 2022 stress periods,
+but the configuration has not been split-sample validated yet (subperiod windowing for this engine is queued behind plan-level deep-backtesting limits; the CBS page shows the template this system will follow). Next: replicate on UPRO/SSO and split-sample the vol target.</div>
+
+</main>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="strategies.html">← strategy library</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+</body>
+</html>
