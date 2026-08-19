@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Console — Profit Pilot — Mateo Sandoval</title>
 <meta name="description" content="Mission Control — the Profit Pilot operator console: 37 routes covering risk attribution, capital allocation, the research loop, replay, stress scenarios and post-mortem tooling.">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="styles.css">
-<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
 </head>
 <body>
@@ -17,6 +17,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="navwrap">
     <nav>
       <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
       <a href="strategies.html">Strategies</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>

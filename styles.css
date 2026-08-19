@@ -2,37 +2,38 @@
    No external fonts, no CDN, no build step. Light + dark. */
 
 :root{
-  --bg:#ffffff; --bg2:#f7f9fc;
-  --panel:rgba(15,20,32,.022); --panel2:rgba(15,20,32,.045);
-  --card:#ffffff; --card2:#f4f7fa;
-  --line:rgba(15,20,32,.10); --line2:rgba(15,20,32,.20);
-  --text:#0e1420; --dim:#4e5871; --dimmer:#646d80;
-  --accent:#0a7a55; --accent2:#0b675c;
-  --teal:#0d7d70; --blue:#2258c8; --violet:#6338c4; --red:#c0392f; --amber:#8a5a00;
-  --grad:linear-gradient(100deg,#0a7a55,#2258c8);
+  --bg:#ffffff; --bg2:#fafbfc;
+  --panel:#fafbfc; --panel2:#f4f6f9;
+  --card:#ffffff; --card2:#fafbfc;
+  --line:#e3e7ee; --line2:#c9d1dd;
+  --text:#0b0e14; --dim:#4a5262; --dimmer:#666e80;
+  --accent:#14315c; --accent2:#1d4a86;
+  --teal:#14315c; --blue:#14315c; --violet:#14315c; --red:#8c2f26; --amber:#7a5a12;
+  --grad:none;
   --ink:#ffffff;
-  --glow1:rgba(10,122,85,.055); --glow2:rgba(34,88,200,.045);
-  --pre:#f5f8fb; --preText:#1f2838;
-  --shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.05);
-  --shadowUp:0 10px 30px rgba(16,24,40,.10);
+  --glow1:transparent; --glow2:transparent;
+  --pre:#f7f9fb; --preText:#111621;
+  --shadow:none;
+  --shadowUp:none;
+  --serif:Charter,"Bitstream Charter",Georgia,"Times New Roman",serif;
   --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
   --wrap:1180px;
 }
 html[data-theme="dark"]{
-  --bg:#06080c; --bg2:#0a0d13;
-  --panel:rgba(255,255,255,.028); --panel2:rgba(255,255,255,.055);
-  --card:#0e121b; --card2:#121722;
-  --line:rgba(255,255,255,.085); --line2:rgba(255,255,255,.16);
-  --text:#e8ecf2; --dim:#8b97a8; --dimmer:#79839a;
-  --accent:#4ade9a; --accent2:#5eead4;
-  --teal:#2dd4bf; --blue:#60a5fa; --violet:#a78bfa; --red:#f87171; --amber:#fbbf24;
-  --grad:linear-gradient(100deg,#4ade9a,#60a5fa);
-  --ink:#04231a;
-  --glow1:rgba(74,222,154,.09); --glow2:rgba(96,165,250,.07);
-  --pre:#080b11; --preText:#c6cddd;
-  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
-  --shadowUp:0 12px 40px rgba(0,0,0,.45);
+  --bg:#0d1117; --bg2:#11161f;
+  --panel:#11161f; --panel2:#161c27;
+  --card:#11161f; --card2:#161c27;
+  --line:#232a36; --line2:#39424f;
+  --text:#eef1f5; --dim:#9aa3b2; --dimmer:#7c8595;
+  --accent:#9db8dd; --accent2:#b6cbe8;
+  --teal:#9db8dd; --blue:#9db8dd; --violet:#9db8dd; --red:#d98b82; --amber:#d4b678;
+  --grad:none;
+  --ink:#0d1117;
+  --glow1:transparent; --glow2:transparent;
+  --pre:#0a0e14; --preText:#d7dde7;
+  --shadow:none;
+  --shadowUp:none;
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
@@ -79,9 +80,9 @@ html[data-theme="dark"] .themebtn .ico-light{display:none}
 .hero{padding:84px 0 52px;border-bottom:1px solid var(--line)}
 .hero.tight{padding:60px 0 40px}
 .eyebrow,.kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-h1{font-size:clamp(38px,6vw,68px);line-height:1.06;letter-spacing:-.034em;font-weight:760}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,6vw,68px);line-height:1.06;letter-spacing:-.018em;font-weight:600}
 h1 em{font-style:normal;color:var(--dimmer)}
-h1 .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+h1 .grad{color:var(--accent)}
 .lede{font-size:clamp(16.5px,2vw,20px);color:var(--dim);max-width:770px;margin-top:22px;line-height:1.58}
 .lede b{color:var(--text)}
 .pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
@@ -111,8 +112,8 @@ a.pill:hover{color:var(--text);border-color:var(--dim);text-decoration:none}
 /* ---------- sections ---------- */
 section{padding:70px 0;border-bottom:1px solid var(--line)}
 section.last,section:last-of-type{border-bottom:none}
-h2{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.026em;font-weight:700;line-height:1.14}
-h3{font-size:17.5px;font-weight:650;margin-bottom:9px;letter-spacing:-.012em}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.4vw,36px);letter-spacing:-.014em;font-weight:600;line-height:1.14}
+h3{font-family:var(--serif);font-weight:600;font-size:17.5px;font-weight:600;margin-bottom:9px;letter-spacing:-.012em}
 h4{font-size:15px;font-weight:650;margin:20px 0 6px}
 p{margin-bottom:14px}
 p:last-child{margin-bottom:0}
@@ -257,7 +258,7 @@ pre code{background:none;border:none;padding:0}
 .crumb{font-family:var(--mono);font-size:12.5px;color:var(--dimmer);padding-top:26px}
 .crumb a{color:var(--dim)}
 .pagehead{padding:22px 0 46px;border-bottom:1px solid var(--line)}
-.pagehead h1{font-size:clamp(32px,4.6vw,52px)}
+.pagehead h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.6vw,52px)}
 .pagehead .sym{font-family:var(--mono);color:var(--accent);margin-top:12px;font-size:13.5px;line-height:1.6}
 .status{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11.5px;
   letter-spacing:.08em;text-transform:uppercase;color:var(--dim);border:1px solid var(--line2);
@@ -305,7 +306,7 @@ footer a{color:var(--dim)}
 .feature{background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 5%,transparent),transparent 70%);
   border-bottom:1px solid var(--line)}
 .feature .wrap{padding-top:16px;padding-bottom:8px}
-.feature h2{font-size:clamp(32px,5vw,54px);letter-spacing:-.032em}
+.feature h2{font-family:var(--serif);font-weight:600;font-size:clamp(32px,5vw,54px);letter-spacing:-.032em}
 .feature .lede{margin-top:20px}
 .feature .badge{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--ink);background:var(--accent);
@@ -376,10 +377,10 @@ footer a{color:var(--dim)}
 .cap-chip{font-size:12.5px;color:var(--dim);background:var(--panel2);
   border:1px solid var(--line);border-radius:7px;padding:6px 11px}
 .moddet .loc{font-family:var(--mono);font-size:11.5px;color:var(--dimmer);margin-top:13px}
-pre .k{color:#c792ea}pre .s{color:#a5e8a0}pre .c{color:#5b6b80;font-style:italic}
+pre .k{color:#c792ea}pre .s{color:#a5e8a0}pre .c{color:#6b7d94;font-style:italic}
 pre .d{color:#ffcb6b}pre .n{color:#f78c6c}
 [data-theme="light"] pre .k{color:#8250df}[data-theme="light"] pre .s{color:#0a7d33}
-[data-theme="light"] pre .c{color:#6e7781}[data-theme="light"] pre .d{color:#9a6700}
+[data-theme="light"] pre .c{color:#68707a}[data-theme="light"] pre .d{color:#9a6700}
 [data-theme="light"] pre .n{color:#953800}
 
 /* ---------- Profit Pilot sub-site: lateral sub-nav + status band ---------- */
@@ -408,7 +409,7 @@ pre .d{color:#ffcb6b}pre .n{color:#f78c6c}
 .deep:first-of-type{border-top:none;padding-top:0;margin-top:26px}
 .deep .dhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
 .deep .dnum{font-family:var(--mono);font-size:12px;color:var(--dimmer);letter-spacing:.1em}
-.deep h3{font-size:25px;font-weight:700;letter-spacing:-.02em;margin:0}
+.deep h3{font-family:var(--serif);font-weight:600;font-size:25px;font-weight:700;letter-spacing:-.02em;margin:0}
 .deep .dtag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
   color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
   border-radius:100px;padding:3px 11px}

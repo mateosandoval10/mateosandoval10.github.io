@@ -1,82 +1,58 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mateo Sandoval</title>
 <meta name="description" content="Mateo Sandoval — quantitative trading systems. Profit Pilot, an event-driven trading platform; three published systematic strategies; an SEC EDGAR institutional-flow tracker.">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="styles.css">
-<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
 <style>
-  /* ---------- landing page ---------- */
-  .hero{padding:96px 0 60px;position:relative;overflow:hidden}
-  .hero::before{content:"";position:absolute;inset:-40% -20% auto -20%;height:120%;
-    background:radial-gradient(58% 46% at 22% 0%,var(--glow1),transparent 70%),
-               radial-gradient(50% 42% at 82% 8%,var(--glow2),transparent 70%);
-    pointer-events:none}
-  .hero .wrap{position:relative}
-  .hname{font-size:clamp(44px,7.4vw,88px);font-weight:780;letter-spacing:-.042em;line-height:1.02}
-  .hrule{width:56px;height:3px;background:var(--grad);border-radius:2px;margin:26px 0 22px}
-  .idline{font-size:clamp(16px,1.9vw,18.5px);color:var(--dim);max-width:60ch;line-height:1.62}
+  /* landing — institutional */
+  .hero{padding:84px 0 46px}
+  .hname{font-family:var(--serif);font-size:clamp(38px,5.6vw,62px);font-weight:600;
+         letter-spacing:-.015em;line-height:1.06}
+  .hrule{width:44px;height:2px;background:var(--accent);margin:22px 0 20px}
+  .idline{font-size:17px;color:var(--dim);max-width:58ch;line-height:1.66}
   .idline b{color:var(--text);font-weight:600}
-  .herometa{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
-  .herometa span{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
-    color:var(--dim);border:1px solid var(--line2);border-radius:100px;padding:6px 13px}
+  .herometa{display:flex;flex-wrap:wrap;gap:20px;margin-top:22px;
+            font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+            text-transform:uppercase;color:var(--dimmer)}
 
-  .worklist{padding:14px 0 70px}
-  .wcard{display:block;text-decoration:none;color:inherit;position:relative;
-    border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card);
-    margin-bottom:26px;transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .28s,box-shadow .28s}
-  .wcard:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:var(--shadowUp)}
-  .wgrid{display:grid;grid-template-columns:1.02fr 1.28fr;align-items:stretch}
-  .wcard:nth-child(even) .wgrid{grid-template-columns:1.28fr 1.02fr}
-  .wcard:nth-child(even) .wtext{order:2}
-  .wtext{padding:40px 40px 34px;display:flex;flex-direction:column;justify-content:center}
-  .wnum{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ac);margin-bottom:14px}
-  .wcard h2{font-size:clamp(25px,2.9vw,34px);font-weight:700;letter-spacing:-.024em;line-height:1.12}
-  .wkind{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
-    color:var(--dimmer);margin:9px 0 16px}
-  .wtext p{color:var(--dim);font-size:15.4px;line-height:1.62;margin-bottom:20px}
-  .wfacts{display:flex;flex-wrap:wrap;gap:26px;margin-bottom:22px}
-  .wfacts .v{font-family:var(--mono);font-size:18px;font-weight:620;color:var(--text);
-    font-variant-numeric:tabular-nums;line-height:1.1}
-  .wfacts .k{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
-    color:var(--dimmer);margin-top:5px}
-  .wgo{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--ac);margin-top:auto}
-  .wgo .arw{transition:transform .28s cubic-bezier(.2,.7,.3,1)}
-  .wcard:hover .wgo .arw{transform:translateX(6px)}
-
-  .wshot{position:relative;overflow:hidden;min-height:300px;background:var(--bg2);
-    border-left:1px solid var(--line)}
-  .wcard:nth-child(even) .wshot{border-left:none;border-right:1px solid var(--line)}
-  .wshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,center top);
-    transition:transform .5s cubic-bezier(.2,.7,.3,1)}
-  .wcard:hover .wshot img{transform:scale(1.035)}
-  .wshot::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(90deg,var(--card) 0%,transparent 22%,transparent 100%);pointer-events:none}
-  .wcard:nth-child(even) .wshot::after{background:linear-gradient(270deg,var(--card) 0%,transparent 22%,transparent 100%)}
-  .wtag{position:absolute;left:18px;bottom:16px;z-index:2;font-family:var(--mono);font-size:10.5px;
-    letter-spacing:.07em;text-transform:uppercase;color:var(--dim);
-    background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(8px);
-    border:1px solid var(--line);border-radius:7px;padding:6px 10px}
-  .wcard:nth-child(even) .wtag{left:auto;right:18px}
-
-  .contact{padding:8px 0 12px}
-  @media(max-width:900px){
-    .wgrid,.wcard:nth-child(even) .wgrid{grid-template-columns:1fr}
-    .wcard:nth-child(even) .wtext{order:0}
-    .wshot{min-height:216px;border-left:none;border-top:1px solid var(--line)}
-    .wcard:nth-child(even) .wshot{border-right:none}
-    .wshot::after,.wcard:nth-child(even) .wshot::after{background:none}
-    .wtext{padding:30px 26px 26px}
-    .hero{padding:64px 0 44px}
-  }
-  @media(prefers-reduced-motion:reduce){
-    .wcard,.wshot img,.wgo .arw{transition:none}
-    .wcard:hover{transform:none}
-    .wcard:hover .wshot img{transform:none}
+  .worklist{padding:8px 0 56px}
+  .wcard{display:block;text-decoration:none;color:inherit;
+         border-top:1px solid var(--line);padding:36px 0}
+  .worklist .wcard:last-of-type{border-bottom:1px solid var(--line)}
+  .wgrid{display:grid;grid-template-columns:1fr 232px;gap:40px;align-items:start}
+  .wnum{font-family:var(--mono);font-size:11px;letter-spacing:.16em;color:var(--dimmer);margin-bottom:11px}
+  .wcard h2{font-family:var(--serif);font-size:clamp(23px,2.5vw,29px);font-weight:600;
+            letter-spacing:-.012em;line-height:1.16;color:var(--text)}
+  .wkind{font-family:var(--mono);font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+         color:var(--dimmer);margin:8px 0 15px}
+  .wtext p{color:var(--dim);font-size:15.5px;line-height:1.66;margin-bottom:18px;max-width:62ch}
+  .wfacts{display:flex;flex-wrap:wrap;gap:28px;margin-bottom:18px;
+          border-top:1px solid var(--line);padding-top:15px;max-width:62ch}
+  .wfacts .v{font-family:var(--mono);font-size:16.5px;font-weight:600;color:var(--text);
+             font-variant-numeric:tabular-nums;line-height:1.1}
+  .wfacts .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;
+             color:var(--dimmer);margin-top:5px}
+  .wgo{display:inline-block;font-size:15px;font-weight:560;color:var(--accent);
+       border-bottom:1px solid var(--accent);padding-bottom:1px}
+  .wcard:hover .wgo{color:var(--accent2);border-bottom-color:var(--accent2)}
+  .wcard.nofig .wgrid{grid-template-columns:1fr}
+  .wshot{margin:0}
+  .wshot img{width:100%;height:150px;object-fit:cover;object-position:var(--op,center top);
+             border:1px solid var(--line);display:block}
+  .wshot figcaption{font-family:var(--mono);font-size:10px;letter-spacing:.06em;
+                    text-transform:uppercase;color:var(--dimmer);margin-top:8px;line-height:1.5}
+  .contact{padding:6px 0 14px}
+  @media(max-width:820px){
+    .wgrid{grid-template-columns:1fr;gap:22px}
+    .wshot{order:-1}
+    .wshot img{height:170px}
+    .hero{padding:56px 0 36px}
   }
 </style>
 </head>
@@ -87,6 +63,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="navwrap">
     <nav>
       <a href="profit-pilot.html">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
       <a href="strategies.html">Strategies</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
@@ -99,8 +76,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <header class="hero"><div class="wrap">
   <h1 class="hname">Mateo Sandoval</h1>
   <div class="hrule"></div>
-  <p class="idline">Finance and Economics at Gonzaga University, minors in Management Information Systems
-  and Business Analytics. I build <b>quantitative trading systems</b> and the infrastructure that tests them.</p>
+  <p class="idline">Finance and Economics at Gonzaga University, minors in Management Information Systems and
+  Business Analytics. <b>Quantitative trading systems</b>, and the infrastructure built to test them.</p>
   <div class="herometa">
     <span>Spokane, WA</span>
     <span>Class of 2028</span>
@@ -127,10 +104,29 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         </div>
         <span class="wgo">Architecture, risk spine and modules <span class="arw">→</span></span>
       </div>
-      <div class="wshot">
-        <img src="assets/pp/risk-spine-console.webp" width="2600" height="1417" loading="eager" decoding="async"
-             alt="Profit Pilot risk spine console showing eight governors, clamp-stack waterfall and event lineage">
-        <span class="wtag">Live operator console</span>
+      <figure class="wshot"><img src="assets/pp/risk-spine-console.webp" width="2600" height="1417" loading="eager" decoding="async"
+             alt="Profit Pilot risk spine console showing eight governors, clamp-stack waterfall and event lineage"><figcaption>Live operator console</figcaption></figure>
+    </div>
+  </a>
+
+  <a class="wcard reveal nofig" href="research.html">
+    <div class="wgrid">
+      <div class="wtext">
+        <div class="wnum">02</div>
+        <h2>Research methodology</h2>
+        <div class="wkind">Validation pipeline · Python · intraday NQ futures</div>
+        <p>A validation pipeline built to reject its own results. Within-session bar permutation builds
+        structure-free placebo markets; 10,000-path day bootstraps put confidence intervals on Sharpe and
+        drawdown; configurations are frozen against a sealed data vault with a pre-registered success
+        criterion. Across 60,480 parameter configurations, the correlation between backtest performance and
+        out-of-sample performance measured +0.087.</p>
+        <div class="wfacts">
+          <div><div class="v">60,480</div><div class="k">Configs tested</div></div>
+          <div><div class="v">+0.087</div><div class="k">Backtest → OOS corr.</div></div>
+          <div><div class="v">300</div><div class="k">Placebo worlds</div></div>
+          <div><div class="v">10,000</div><div class="k">Bootstrap paths</div></div>
+        </div>
+        <span class="wgo">Placebo tests, bootstrap intervals and the sealed vault <span class="arw">→</span></span>
       </div>
     </div>
   </a>
@@ -138,7 +134,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <a class="wcard reveal" href="strategies.html" style="--ac:var(--blue);--op:center top">
     <div class="wgrid">
       <div class="wtext">
-        <div class="wnum">02</div>
+        <div class="wnum">03</div>
         <h2>Systematic strategies</h2>
         <div class="wkind">Pine Script v6 · published open source</div>
         <p>Four trading systems, each targeting a different return source: volatility-targeted trend,
@@ -153,18 +149,15 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         </div>
         <span class="wgo">Systems, results and validation <span class="arw">→</span></span>
       </div>
-      <div class="wshot">
-        <img src="assets/strategy-hero.webp" width="1293" height="960" loading="lazy" decoding="async"
-             alt="Compression Breakout System on AAPL with every trade labelled on the chart">
-        <span class="wtag">Every trade labelled</span>
-      </div>
+      <figure class="wshot"><img src="assets/strategy-hero.webp" width="1293" height="960" loading="lazy" decoding="async"
+             alt="Compression Breakout System on AAPL with every trade labelled on the chart"><figcaption>Every trade labelled</figcaption></figure>
     </div>
   </a>
 
   <a class="wcard reveal" href="projects.html" style="--ac:var(--violet);--op:left top">
     <div class="wgrid">
       <div class="wtext">
-        <div class="wnum">03</div>
+        <div class="wnum">04</div>
         <h2>EDGAR institutional flow</h2>
         <div class="wkind">Python · SEC filings · in development</div>
         <p>Reads institutional filings from SEC EDGAR and reconstructs position flow: which filers
@@ -178,11 +171,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         </div>
         <span class="wgo">Data sources, method and limitations <span class="arw">→</span></span>
       </div>
-      <div class="wshot">
-        <img src="assets/edgar-dashboard.webp" width="2200" height="886" loading="lazy" decoding="async"
-             alt="Institutional flow dashboard ranking net accumulation and distribution by ticker for a completed quarter">
-        <span class="wtag">Quarter ending 2026-03-31</span>
-      </div>
+      <figure class="wshot"><img src="assets/edgar-dashboard.webp" width="2200" height="886" loading="lazy" decoding="async"
+             alt="Institutional flow dashboard ranking net accumulation and distribution by ticker for a completed quarter"><figcaption>Quarter ending 2026-03-31</figcaption></figure>
     </div>
   </a>
 
@@ -207,6 +197,7 @@ if ('IntersectionObserver' in window) {
   var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 } else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(e){e.classList.add('in')})},1500);
 </script>
 </body>
 </html>

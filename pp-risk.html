@@ -1,13 +1,13 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Risk spine — Profit Pilot — Mateo Sandoval</title>
 <meta name="description" content="Profit Pilot's risk spine: eight independent governors composed with min() into a single exposure multiplier, failing closed, with binding-constraint attribution.">
-<meta name="color-scheme" content="dark light">
+<meta name="color-scheme" content="light dark">
 <link rel="stylesheet" href="styles.css">
-<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
 </head>
 <body>
@@ -17,6 +17,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="navwrap">
     <nav>
       <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
       <a href="strategies.html">Strategies</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
@@ -39,14 +40,14 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   "fine"s keeps trading. Taking the minimum means <b>any single governor can stop the system on its own</b>,
   and the console always names which one is binding.</p>
   <div class="grid g4">
-    <div class="gov" style="--c:var(--red)"><div class="role">Hazard</div><div class="nm">Shield</div><p>Blocks individual trades on hazard conditions before they can reach sizing. 146 catalogued micros.</p></div>
-    <div class="gov" style="--c:var(--amber)"><div class="role">Aggression</div><div class="nm">WRAB</div><p>Regime-adaptive aggression scaling. The largest module in the system at 229 catalogued micros.</p></div>
-    <div class="gov" style="--c:var(--red)"><div class="role">Tiered cut</div><div class="nm">Drawdown circuit breaker</div><p>Steps exposure down in tiers as intraday drawdown deepens, rather than cutting in one jump.</p></div>
-    <div class="gov" style="--c:var(--blue)"><div class="role">Tail sizing</div><div class="nm">CVaR tail sizer</div><p>Sizes off conditional tail expectation rather than variance — it cares about the bad tail, not the average.</p></div>
-    <div class="gov" style="--c:var(--violet)"><div class="role">Overshoot</div><div class="nm">Equity bands &amp; cool-off</div><p>Anti-overshoot bands stop equity-driven sizing running away from itself; a steady-state governor enforces cool-off after abnormal activity.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Hazard</div><div class="nm">Shield</div><p>Blocks individual trades on hazard conditions before they can reach sizing. 146 catalogued micros.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Aggression</div><div class="nm">WRAB</div><p>Regime-adaptive aggression scaling. The largest module in the system at 229 catalogued micros.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Tiered cut</div><div class="nm">Drawdown circuit breaker</div><p>Steps exposure down in tiers as intraday drawdown deepens, rather than cutting in one jump.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Tail sizing</div><div class="nm">CVaR tail sizer</div><p>Sizes off conditional tail expectation rather than variance — it cares about the bad tail, not the average.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Overshoot</div><div class="nm">Equity bands &amp; cool-off</div><p>Anti-overshoot bands stop equity-driven sizing running away from itself; a steady-state governor enforces cool-off after abnormal activity.</p></div>
     <div class="gov" style="--c:var(--accent)"><div class="role">Re-entry</div><div class="nm">Recovery parachute</div><p>Staged, rate-limited re-entry after a drawdown event instead of an immediate return to full size.</p></div>
-    <div class="gov" style="--c:var(--teal)"><div class="role">Capital</div><div class="nm">Allocator</div><p>Distributes capital across the six sleeves under every constraint above. 190 catalogued micros.</p></div>
-    <div class="gov" style="--c:var(--dim)"><div class="role">Governance</div><div class="nm">Omega ops</div><p>Top-level operational circuit and credit budget — the governor that can stand the whole system down.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Capital</div><div class="nm">Allocator</div><p>Distributes capital across the six sleeves under every constraint above. 190 catalogued micros.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Governance</div><div class="nm">Omega ops</div><p>Top-level operational circuit and credit budget — the governor that can stand the whole system down.</p></div>
   </div>
   <pre><code>"""Profit Pilot — Risk Clamp Book.
 
