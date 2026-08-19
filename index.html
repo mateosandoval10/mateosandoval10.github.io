@@ -10,28 +10,74 @@
 <script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
 <style>
-  .lede{max-width:60ch}
-  .idline{font-size:15.5px;color:var(--dim);margin-top:14px;max-width:62ch;line-height:1.6}
-  .work{border-top:1px solid var(--line);padding:52px 0}
-  .work:last-of-type{border-bottom:1px solid var(--line)}
-  .worknum{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--dimmer);margin-bottom:12px}
-  .work h2{font-size:clamp(24px,3vw,31px);font-weight:680;letter-spacing:-.02em;margin-bottom:6px}
-  .worksub{font-family:var(--mono);font-size:12.5px;color:var(--accent);letter-spacing:.03em;margin-bottom:16px}
-  .work p{color:var(--dim);font-size:16px;max-width:66ch;margin-bottom:8px;line-height:1.65}
-  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:24px 0 22px;
-         border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--panel)}
-  .facts div{padding:16px 18px;border-right:1px solid var(--line)}
-  .facts div:last-child{border-right:none}
-  .facts .v{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
-  .facts .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dimmer);margin-top:5px}
-  .go{display:inline-block;font-size:15px;font-weight:560;text-decoration:none;color:var(--text);
-      border-bottom:1.5px solid var(--accent);padding-bottom:2px;margin-top:6px}
-  .go:hover{color:var(--accent)}
-  .meta{font-size:13.5px;color:var(--dimmer);margin-top:14px;max-width:66ch;line-height:1.55}
-  .contact{padding:46px 0 10px}
-  @media(max-width:760px){.facts{grid-template-columns:repeat(2,1fr)}
-    .facts div:nth-child(2){border-right:none}
-    .facts div:nth-child(1),.facts div:nth-child(2){border-bottom:1px solid var(--line)}}
+  /* ---------- landing page ---------- */
+  .hero{padding:96px 0 60px;position:relative;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:-40% -20% auto -20%;height:120%;
+    background:radial-gradient(58% 46% at 22% 0%,var(--glow1),transparent 70%),
+               radial-gradient(50% 42% at 82% 8%,var(--glow2),transparent 70%);
+    pointer-events:none}
+  .hero .wrap{position:relative}
+  .hname{font-size:clamp(44px,7.4vw,88px);font-weight:780;letter-spacing:-.042em;line-height:1.02}
+  .hrule{width:56px;height:3px;background:var(--grad);border-radius:2px;margin:26px 0 22px}
+  .idline{font-size:clamp(16px,1.9vw,18.5px);color:var(--dim);max-width:60ch;line-height:1.62}
+  .idline b{color:var(--text);font-weight:600}
+  .herometa{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+  .herometa span{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+    color:var(--dim);border:1px solid var(--line2);border-radius:100px;padding:6px 13px}
+
+  .worklist{padding:14px 0 70px}
+  .wcard{display:block;text-decoration:none;color:inherit;position:relative;
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--card);
+    margin-bottom:26px;transition:transform .28s cubic-bezier(.2,.7,.3,1),border-color .28s,box-shadow .28s}
+  .wcard:hover{transform:translateY(-4px);border-color:var(--line2);box-shadow:var(--shadowUp)}
+  .wgrid{display:grid;grid-template-columns:1.02fr 1.28fr;align-items:stretch}
+  .wcard:nth-child(even) .wgrid{grid-template-columns:1.28fr 1.02fr}
+  .wcard:nth-child(even) .wtext{order:2}
+  .wtext{padding:40px 40px 34px;display:flex;flex-direction:column;justify-content:center}
+  .wnum{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:var(--ac);margin-bottom:14px}
+  .wcard h2{font-size:clamp(25px,2.9vw,34px);font-weight:700;letter-spacing:-.024em;line-height:1.12}
+  .wkind{font-family:var(--mono);font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;
+    color:var(--dimmer);margin:9px 0 16px}
+  .wtext p{color:var(--dim);font-size:15.4px;line-height:1.62;margin-bottom:20px}
+  .wfacts{display:flex;flex-wrap:wrap;gap:26px;margin-bottom:22px}
+  .wfacts .v{font-family:var(--mono);font-size:18px;font-weight:620;color:var(--text);
+    font-variant-numeric:tabular-nums;line-height:1.1}
+  .wfacts .k{font-family:var(--mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;
+    color:var(--dimmer);margin-top:5px}
+  .wgo{display:inline-flex;align-items:center;gap:9px;font-size:15px;font-weight:600;color:var(--ac);margin-top:auto}
+  .wgo .arw{transition:transform .28s cubic-bezier(.2,.7,.3,1)}
+  .wcard:hover .wgo .arw{transform:translateX(6px)}
+
+  .wshot{position:relative;overflow:hidden;min-height:300px;background:var(--bg2);
+    border-left:1px solid var(--line)}
+  .wcard:nth-child(even) .wshot{border-left:none;border-right:1px solid var(--line)}
+  .wshot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:var(--op,center top);
+    transition:transform .5s cubic-bezier(.2,.7,.3,1)}
+  .wcard:hover .wshot img{transform:scale(1.035)}
+  .wshot::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,var(--card) 0%,transparent 22%,transparent 100%);pointer-events:none}
+  .wcard:nth-child(even) .wshot::after{background:linear-gradient(270deg,var(--card) 0%,transparent 22%,transparent 100%)}
+  .wtag{position:absolute;left:18px;bottom:16px;z-index:2;font-family:var(--mono);font-size:10.5px;
+    letter-spacing:.07em;text-transform:uppercase;color:var(--dim);
+    background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(8px);
+    border:1px solid var(--line);border-radius:7px;padding:6px 10px}
+  .wcard:nth-child(even) .wtag{left:auto;right:18px}
+
+  .contact{padding:8px 0 12px}
+  @media(max-width:900px){
+    .wgrid,.wcard:nth-child(even) .wgrid{grid-template-columns:1fr}
+    .wcard:nth-child(even) .wtext{order:0}
+    .wshot{min-height:216px;border-left:none;border-top:1px solid var(--line)}
+    .wcard:nth-child(even) .wshot{border-right:none}
+    .wshot::after,.wcard:nth-child(even) .wshot::after{background:none}
+    .wtext{padding:30px 26px 26px}
+    .hero{padding:64px 0 44px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .wcard,.wshot img,.wgo .arw{transition:none}
+    .wcard:hover{transform:none}
+    .wcard:hover .wshot img{transform:none}
+  }
 </style>
 </head>
 <body>
@@ -51,63 +97,95 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <main id="main">
 
 <header class="hero"><div class="wrap">
-  <h1>Mateo Sandoval</h1>
-  <p class="idline">Finance and Economics at Gonzaga University, with minors in Management Information
-  Systems and Business Analytics. I build quantitative trading systems and the infrastructure that tests them.
-  Three projects are documented here.</p>
+  <h1 class="hname">Mateo Sandoval</h1>
+  <div class="hrule"></div>
+  <p class="idline">Finance and Economics at Gonzaga University, minors in Management Information Systems
+  and Business Analytics. I build <b>quantitative trading systems</b> and the infrastructure that tests them.</p>
+  <div class="herometa">
+    <span>Spokane, WA</span>
+    <span>Class of 2028</span>
+    <span>Python · Pine Script</span>
+  </div>
 </div></header>
 
-<section class="work"><div class="wrap reveal">
-  <div class="worknum">01</div>
-  <h2>Profit Pilot</h2>
-  <div class="worksub">EVENT-DRIVEN TRADING PLATFORM · 2025 – PRESENT</div>
-  <p>A trading platform built on a deterministic event bus, with an eight-governor risk spine, six
-  independent strategy sleeves, and an automated research loop that proposes and gates its own parameter
-  changes. Deployed and running continuously against live market data.</p>
-  <div class="facts">
-    <div><div class="v">39</div><div class="k">Locked modules</div></div>
-    <div><div class="v">1,023</div><div class="k">Micros implemented</div></div>
-    <div><div class="v">~340k</div><div class="k">Lines of Python</div></div>
-    <div><div class="v">220</div><div class="k">Test suites</div></div>
-  </div>
-  <a class="go" href="profit-pilot.html">Architecture, risk spine, modules and console →</a>
-  <p class="meta">In independent testing ahead of public release.</p>
-</div></section>
+<section class="worklist"><div class="wrap">
 
-<section class="work"><div class="wrap reveal">
-  <div class="worknum">02</div>
-  <h2>Systematic strategies</h2>
-  <div class="worksub">PINE SCRIPT V6 · PUBLISHED OPEN SOURCE ON TRADINGVIEW</div>
-  <p>Four systematic trading systems, each targeting a different return source. Three are published as
-  open-source scripts on TradingView, so the code is readable and every result is reproducible in the Strategy
-  Tester. Each system is documented with its mechanism, its validation, and the experiments that were tested
-  and rejected.</p>
-  <div class="facts">
-    <div><div class="v">4</div><div class="k">Systems documented</div></div>
-    <div><div class="v">3</div><div class="k">Published open source</div></div>
-    <div><div class="v">1999–2026</div><div class="k">Longest test window</div></div>
-    <div><div class="v">6</div><div class="k">Rejections published</div></div>
-  </div>
-  <a class="go" href="strategies.html">Systems, results and validation →</a>
-  <p class="meta">Backtested in TradingView's Strategy Tester with commissions and slippage modeled.
-  Results are in-sample and single-history.</p>
-</div></section>
+  <a class="wcard reveal" href="profit-pilot.html" style="--ac:var(--accent);--op:78% top">
+    <div class="wgrid">
+      <div class="wtext">
+        <div class="wnum">01</div>
+        <h2>Profit Pilot</h2>
+        <div class="wkind">Event-driven trading platform · 2025 – present</div>
+        <p>Thirty-nine modules on a deterministic event bus, an eight-governor risk spine that no signal can
+        bypass, six strategy sleeves competing for capital, and a research loop that proposes and gates its
+        own parameter changes. Deployed and running continuously against live market data.</p>
+        <div class="wfacts">
+          <div><div class="v">39</div><div class="k">Modules</div></div>
+          <div><div class="v">1,023</div><div class="k">Micros built</div></div>
+          <div><div class="v">~340k</div><div class="k">Lines</div></div>
+          <div><div class="v">220</div><div class="k">Test suites</div></div>
+        </div>
+        <span class="wgo">Architecture, risk spine and modules <span class="arw">→</span></span>
+      </div>
+      <div class="wshot">
+        <img src="assets/pp/risk-spine-console.webp" width="2600" height="1417" loading="eager" decoding="async"
+             alt="Profit Pilot risk spine console showing eight governors, clamp-stack waterfall and event lineage">
+        <span class="wtag">Live operator console</span>
+      </div>
+    </div>
+  </a>
 
-<section class="work"><div class="wrap reveal">
-  <div class="worknum">03</div>
-  <h2>SEC EDGAR institutional-flow tracker</h2>
-  <div class="worksub">PYTHON · IN DEVELOPMENT</div>
-  <p>A tool that reads institutional filings from SEC EDGAR and reconstructs position flow: which filers
-  accumulated or distributed a security, at what scale relative to their book, and over what period. It
-  separates 13F holdings, which are filed up to 45 days after quarter end, from Form 4 insider transactions,
-  which are filed within two business days.</p>
-  <div class="facts">
-    <div><div class="v">13F</div><div class="k">Quarterly holdings</div></div>
-    <div><div class="v">Form 4</div><div class="k">Insider transactions</div></div>
-    <div><div class="v">13D/G</div><div class="k">Activist stakes</div></div>
-    <div><div class="v">6,300</div><div class="k">Lines of Python</div></div>
-  </div>
-  <a class="go" href="projects.html">Data sources, method and limitations →</a>
+  <a class="wcard reveal" href="strategies.html" style="--ac:var(--blue);--op:center top">
+    <div class="wgrid">
+      <div class="wtext">
+        <div class="wnum">02</div>
+        <h2>Systematic strategies</h2>
+        <div class="wkind">Pine Script v6 · published open source</div>
+        <p>Four trading systems, each targeting a different return source: volatility-targeted trend,
+        compression breakout, channel reversion, and a regime-scored swing model. Three are published as
+        open-source scripts on TradingView, so the code is readable and every result is reproducible in the
+        Strategy Tester. The experiments that failed are published alongside the ones that worked.</p>
+        <div class="wfacts">
+          <div><div class="v">4</div><div class="k">Systems</div></div>
+          <div><div class="v">3</div><div class="k">Open source</div></div>
+          <div><div class="v">1999–2026</div><div class="k">Longest window</div></div>
+          <div><div class="v">6</div><div class="k">Rejections shown</div></div>
+        </div>
+        <span class="wgo">Systems, results and validation <span class="arw">→</span></span>
+      </div>
+      <div class="wshot">
+        <img src="assets/strategy-hero.webp" width="1293" height="960" loading="lazy" decoding="async"
+             alt="Compression Breakout System on AAPL with every trade labelled on the chart">
+        <span class="wtag">Every trade labelled</span>
+      </div>
+    </div>
+  </a>
+
+  <a class="wcard reveal" href="projects.html" style="--ac:var(--violet);--op:left top">
+    <div class="wgrid">
+      <div class="wtext">
+        <div class="wnum">03</div>
+        <h2>EDGAR institutional flow</h2>
+        <div class="wkind">Python · SEC filings · in development</div>
+        <p>Reads institutional filings from SEC EDGAR and reconstructs position flow: which filers
+        accumulated or distributed a security, at what scale relative to their book, over which quarter. It
+        separates 13F holdings, filed up to 45 days after quarter end, from Form 4 insider transactions, filed
+        within two business days, and states on every view how stale the data it is showing actually is.</p>
+        <div class="wfacts">
+          <div><div class="v">8,165</div><div class="k">13F filings parsed</div></div>
+          <div><div class="v">8,053</div><div class="k">Distinct filers</div></div>
+          <div><div class="v">13F · 4 · 13D/G</div><div class="k">Form coverage</div></div>
+        </div>
+        <span class="wgo">Data sources, method and limitations <span class="arw">→</span></span>
+      </div>
+      <div class="wshot">
+        <img src="assets/edgar-dashboard.webp" width="2200" height="886" loading="lazy" decoding="async"
+             alt="Institutional flow dashboard ranking net accumulation and distribution by ticker for a completed quarter">
+        <span class="wtag">Quarter ending 2026-03-31</span>
+      </div>
+    </div>
+  </a>
+
 </div></section>
 
 <section class="contact"><div class="wrap reveal">
