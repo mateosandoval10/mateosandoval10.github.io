@@ -25,11 +25,20 @@ python3 -m http.server 8000
 
 Then open <http://localhost:8000>.
 
-## File ownership (2026-08-18)
+## Write ownership
 
-`profit-pilot.html` is owned by the hub session. Everything else in this repo is Workstream A's.
-Do not edit a file you do not own while the other session is active — an earlier concurrent write
-silently dropped four features from the Profit Pilot page.
+**Workstream A holds sole write access to this repository and is the only session that commits or
+pushes it.** Other sessions hand off through `assets/` for images and through messages or markdown files
+for copy — not by editing, deleting, restoring or committing files here.
+
+Three concurrent-write incidents on 2026-08-18 prompted this: pages restored and then deleted again while
+being actively edited, and an uncommitted working tree committed by another session. The repo is public and
+live, so a half-finished commit is immediately visible.
+
+If something must be reverted urgently and A is unresponsive, take it — but say so, so it is not re-applied.
+
+**Do not remove the `.js` gate on `.reveal` in `styles.css`.** Without it, pages render blank when
+JavaScript is disabled, in print, or in a background viewport. That shipped once already.
 
 ## Conventions
 
