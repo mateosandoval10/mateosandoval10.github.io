@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Systematic Strategies — Mateo Sandoval</title>
-<meta name="description" content="Four original systematic trading strategies in Pine Script v6, backtested with commissions and slippage modeled, split-sample validated, and published with their cross-symbol misses, rejected experiments and limitations.">
+<title>Systematic Trading Strategies — Mateo Sandoval</title>
+<meta name="description" content="Four original Pine Script v6 trading systems — split-sample validated, slippage-stressed, benchmarked against the S&P 500 and buy-and-hold, published open-source on TradingView, with every failed experiment documented.">
 <meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
@@ -25,100 +25,147 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
   </div>
 </div></header>
-
 <main id="main">
 
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">Pine Script v6 · TradingView Strategy Tester · costs modeled</div>
-  <h1>Systematic<br><span class="grad">strategies.</span></h1>
-  <p class="lede">Four original systems, each targeting a distinct return source: a volatility-compression
-  breakout, a volatility-targeted trend engine, a channel mean-reverter, and a money-flow swing score rebuilt
-  after a loss autopsy. <b>Each page carries the mechanism, the results, the experiments that failed, and what
-  the numbers are not.</b></p>
+  <div class="eyebrow">Systematic trading strategies &middot; Pine Script v6</div>
+  <h1>The method is<br><span class="grad">the differentiator.</span></h1>
+  <p class="lede">Four original trading systems I designed and coded &mdash; then spent most of my time trying
+  to break. What makes them worth reading is not the headline returns. It is the frozen-parameter
+  cross-validation, the documented miss, the ~30 rejected experiments with measured results, and the fact
+  that <b>three of them are published as open-source code anyone can read and re-run.</b></p>
   <div class="pills">
-    <a class="pill" href="cbs.html">CBS</a><a class="pill" href="vtte.html">VTTE</a>
-    <a class="pill" href="crs.html">CRS</a><a class="pill" href="qv2.html">QV v2</a>
-    <a class="pill warn" href="#method">How to read these numbers</a>
+    <a class="pill live" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">3 open-source strategies on TradingView &#8599;</a>
+    <a class="pill" href="#validation">Validation evidence</a>
+    <a class="pill" href="#rejected">Rejection log</a>
+    <a class="pill warn" href="#method">Scope &amp; limitations</a>
   </div>
 </div></header>
 
-<div class="statband"><div class="wrap"><div class="stats c4">
-  <div class="stat"><div class="v">4</div><div class="k">Documented systems</div></div>
-  <div class="stat"><div class="v">27</div><div class="k">Years of history covered</div></div>
-  <div class="stat"><div class="v">0.05%</div><div class="k">Commission per side modeled</div></div>
+<div class="statband"><div class="wrap"><div class="stats">
+  <div class="stat"><div class="v">3</div><div class="k">Published open-source</div></div>
   <div class="stat"><div class="v">30+</div><div class="k">Experiments rejected</div></div>
+  <div class="stat"><div class="v">27</div><div class="k">Year window, CRS</div></div>
+  <div class="stat"><div class="v">5&times;</div><div class="k">Slippage stress passed</div></div>
+  <div class="stat"><div class="v">2</div><div class="k">Cross-symbol transfers</div></div>
+  <div class="stat"><div class="v">1</div><div class="k">Documented miss, kept</div></div>
 </div></div></div>
 
-<div class="pagehead">
-  <h1>Systematic strategies</h1>
-  <div class="sym">Four original systems · Pine Script v6 · TradingView Strategy Tester · costs modeled</div>
-  <p class="sub" style="margin-top:18px;font-size:17px">Four systems, each targeting a distinct return source:
-  a volatility-compression breakout, a volatility-targeted trend engine, a channel mean-reverter, and a
-  money-flow swing score rebuilt after a loss autopsy. Each page carries the mechanism, the results, the
-  experiments that failed, and what the numbers are not.</p>
-</div>
-
-
-<section><div class="wrap reveal">
-  <div class="kicker">At a glance</div>
-  <h2>Four systems, four return sources</h2>
-  <div class="tablewrap"><table>
-    <caption>TradingView Strategy Tester · daily bars · 0.05% commission/side · slippage modeled · $10,000 initial.</caption>
-    <thead><tr><th>System</th><th>Market · window</th><th>Net</th><th>PF</th><th>Win</th><th>Max DD</th><th>Return source</th></tr></thead>
-    <tbody>
-      <tr><td class="txt"><a href="cbs.html">CBS</a></td><td>AAPL · 2005–26</td><td class="pos">+899%</td><td>4.33</td><td>59%</td><td>14.4%</td><td class="txt">Volatility compression → expansion</td></tr>
-      <tr><td class="txt"><a href="vtte.html">VTTE</a></td><td>TQQQ · 2010–26</td><td class="pos">+3,862%</td><td>3.33</td><td class="mut">—</td><td class="neg">41.9%</td><td class="txt">Regime gating + volatility targeting</td></tr>
-      <tr><td class="txt"><a href="crs.html">CRS</a></td><td>QQQ · 1999–26</td><td>+104%</td><td>2.28</td><td class="pos">64%</td><td class="pos">15.2%</td><td class="txt">Mean reversion, with the trend only</td></tr>
-      <tr><td class="txt"><a href="qv2.html">QV v2</a></td><td>TQQQ · 2011–26</td><td class="pos">+489%</td><td>2.17</td><td class="mut">45%</td><td class="mut">−20% worst trade</td><td class="txt">Money flow + volatility calm</td></tr>
-    </tbody>
-  </table></div>
-  <div class="chiplabel">Every result on these pages carries</div>
-  <div class="chips">
-    <span class="chip">Modeled commission</span><span class="chip">Modeled slippage</span>
-    <span class="chip">Fills on bar close</span><span class="chip">No look-ahead constructs</span>
-    <span class="chip">Frozen params in cross-tests</span><span class="chip"><b>A limitations section</b></span>
+<section id="verify"><div class="wrap reveal">
+  <div class="kicker">Verification chain</div>
+  <h2>You do not have to<br>take my word for any of it</h2>
+  <p class="sub">Most strategy write-ups end at a screenshot. This one does not, because the code is public.
+  The chain runs in three steps, and every link in it is something a reader can check without contacting
+  me.</p>
+  <div class="flow">
+    <div class="step"><div class="num">01</div><div class="nm">The claim</div><p>A figure stated on this page, with its market, window, cost model and drawdown attached.</p></div>
+    <div class="step"><div class="num">02</div><div class="nm">The code</div><p>The strategy published as <b>open-source Pine Script v6</b> on TradingView &mdash; full source readable, full methodology in the description.</p></div>
+    <div class="step"><div class="num">03</div><div class="nm">The re-run</div><p>Anyone loads the script, sets the same commission and slippage, and gets the same Strategy Tester output on the same symbol and window.</p></div>
+  </div>
+  <div class="confirmed"><b>WHY THIS MATTERS MORE THAN THE RETURNS.</b> A backtest on my own website is an
+  assertion. A backtest whose source is public and whose result is reproducible by a stranger is
+  <b>evidence</b>. Publishing the code also removes the most common escape hatch in retail strategy
+  marketing &mdash; you cannot quietly change the rules after the fact when the rules are already
+  published under your name.</div>
+  <div class="btnrow">
+    <a class="btn" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">All published scripts &#8599;</a>
+    <a class="btn ghost" href="https://www.tradingview.com/x/bFTYG47k/" rel="noopener">Live labeled-trades chart &#8599;</a>
+    <a class="btn ghost" href="https://mateosandoval10.github.io/quant-strategies/" rel="noopener">Full research sub-site &#8599;</a>
   </div>
 </div></section>
 
-<section><div class="wrap reveal">
-  <h2>The library</h2>
-  <div class="grid cards">
+<section id="validation"><div class="wrap reveal">
+  <div class="kicker">Validation evidence</div>
+  <h2>Frozen parameters, and what<br>happened when they moved</h2>
+  <p class="sub">This is the section I would want read first. Nothing below was re-tuned between cells &mdash;
+  the parameters were fixed on the primary market and then run, once, on everything else.</p>
+  <div class="tablewrap"><table>
+    <caption>Compression Breakout System unless noted. Parameters frozen across every row.</caption>
+    <thead><tr><th>Test</th><th>Window / condition</th><th>Net</th><th>PF</th><th>Win</th><th>Max DD</th></tr></thead>
+    <tbody>
+      <tr><td class="txt">Split-sample, first half</td><td>2005 &ndash; 2015</td><td class="pos">+164%</td><td>3.35</td><td>64%</td><td>14.4%</td></tr>
+      <tr><td class="txt">Split-sample, second half</td><td>2015 &ndash; 2026</td><td class="pos">+293%</td><td>4.97</td><td>58%</td><td>10.3%</td></tr>
+      <tr><td class="txt">Slippage stress</td><td>5 ticks/side &mdash; 5&times; modeled</td><td class="pos">+256%</td><td>4.77</td><td>63%</td><td>10.7%</td></tr>
+      <tr><td class="txt">Cross-symbol transfer</td><td>NVDA, frozen params</td><td class="pos">+658%</td><td>3.26</td><td>45%</td><td class="mut">&mdash;</td></tr>
+      <tr><td class="txt">Cross-symbol transfer</td><td>MSFT, frozen params</td><td>+46%</td><td class="neg">1.32</td><td>37%</td><td class="txt neg">the miss</td></tr>
+      <tr><td class="txt">Cross-symbol transfer (CRS)</td><td>SPY, frozen params</td><td class="pos">+67%</td><td>1.80</td><td>62%</td><td>8.5%</td></tr>
+    </tbody>
+  </table></div>
+  <div class="rejected"><b>THE MSFT ROW IS THE MOST CREDIBLE THING ON THIS PAGE.</b> Run on Microsoft with
+  parameters frozen, the system returns +46% at a profit factor of <b>1.32</b> &mdash; a rounding error away
+  from not clearing costs. That is not a failure of the test; it is the test working. CBS feeds on
+  post-squeeze volatility expansion, and a low-volatility grinding mega-cap does not produce it. A system that
+  appears to work on every symbol usually means a test that was not run on every symbol, so the dispersion
+  stays visible and a production deployment would gate the universe on trend quality rather than trading
+  everything.</div>
+  <div class="grid g2">
+    <div class="card accent">
+      <div class="tag hot">Both halves, both regimes</div>
+      <h3>The split holds across different markets</h3>
+      <p>The two decade halves contain genuinely different conditions &mdash; the GFC recovery and the
+      2011/2015 corrections against the 2018, 2020 and 2022 shocks and two melt-ups. Positive with healthy
+      profit factors in both means the edge is not a single-era artifact.</p>
+    </div>
+    <div class="card accent">
+      <div class="tag hot">27 years, two bear markets</div>
+      <h3>CRS spans the dot-com crash and the GFC</h3>
+      <p>QQQ from <b>March 1999 to August 2026</b> &mdash; a window containing the dot-com collapse and the
+      2008 crisis. Worst drawdown across all 27 years: <b>15.2%</b>, while sitting in cash roughly 80% of the
+      time. That combination is unusual, and it is a capital-efficiency profile rather than a return one.</p>
+    </div>
+  </div>
+</div></section>
 
-    <a class="card" href="cbs.html">
+<section id="library"><div class="wrap reveal">
+  <div class="kicker">The library</div>
+  <h2>Four return sources</h2>
+  <p class="sub">Each system targets something structurally different. Three link to their published
+  open-source code; full research notes live on the sub-site.</p>
+  <div class="grid g2">
+
+    <div class="card">
+      <div class="tag hot">Open source &middot; volatility compression</div>
       <h3>Compression Breakout System</h3>
-      <div class="sym">CBS · AAPL daily · 2005–2026 · split-validated + slippage-stressed</div>
+      <div class="sym">CBS &middot; AAPL daily &middot; 2005&ndash;2026 &middot; split-validated + slippage-stressed</div>
       <div class="metrics">
         <div class="metric"><div class="v">+899%</div><div class="k">Net @ 4% risk</div></div>
         <div class="metric"><div class="v">4.33</div><div class="k">Profit factor</div></div>
         <div class="metric"><div class="v">14.4%</div><div class="k">Max drawdown</div></div>
         <div class="metric"><div class="v">59%</div><div class="k">Win rate</div></div>
       </div>
-      <p class="desc">Bollinger-width percentile squeeze → range break on volume → chandelier trail, risk-sized
-      off the stop distance. Positive in both decade halves (PF 3.35 / 4.97) and at five times the modeled
-      slippage. Cross-validated on NVDA (+658%) — and on MSFT, where it barely clears costs. That miss stays
-      on the page.</p>
-      <span class="more">Full research note →</span>
-    </a>
+      <p class="desc">Bollinger-width percentile squeeze &rarr; range break on volume &rarr; chandelier trail,
+      risk-sized off the stop distance. The width filter is a <b>percentile rank rather than an absolute
+      threshold</b>, which is what makes the frozen-parameter cross-symbol tests meaningful at all.</p>
+      <div class="btnrow" style="margin-top:16px">
+        <a class="btn ghost" href="https://www.tradingview.com/script/97gxVA5b-Compression-Breakout-System/" rel="noopener">Open-source script &#8599;</a>
+        <a class="btn ghost" href="https://mateosandoval10.github.io/quant-strategies/cbs.html" rel="noopener">Research note &#8599;</a>
+      </div>
+    </div>
 
-    <a class="card" href="vtte.html">
+    <div class="card">
+      <div class="tag hot">Open source &middot; regime + vol targeting</div>
       <h3>Vol-Target Trend Engine</h3>
-      <div class="sym">VTTE · TQQQ daily · 2010–2026</div>
+      <div class="sym">VTTE &middot; TQQQ daily &middot; 2010&ndash;2026</div>
       <div class="metrics">
         <div class="metric"><div class="v">+3,862%</div><div class="k">Net return</div></div>
         <div class="metric"><div class="v">3.33</div><div class="k">Profit factor</div></div>
         <div class="metric"><div class="v">41.9%</div><div class="k">Max drawdown</div></div>
         <div class="metric"><div class="v">~26%</div><div class="k">CAGR vs SPX ~13%</div></div>
       </div>
-      <p class="desc">A 200-day regime gate plus volatility-targeted exposure on a 3x ETF — the vol-control-index
-      architecture in about 60 lines. There is no predictive signal to overfit; the entire edge is the sizing
-      policy. Raw buy-and-hold TQQQ earns more, if you survive two 80% drawdowns. The page makes that
-      comparison rather than hiding it.</p>
-      <span class="more">Full research note →</span>
-    </a>
+      <p class="desc">A 200-day regime gate plus volatility-targeted exposure on a 3x ETF &mdash; the
+      vol-control-index architecture in about 60 lines. <b>There is no predictive signal to overfit</b>; the
+      entire edge is the sizing policy. Raw buy-and-hold TQQQ earns more, if a holder survives two &gt;80%
+      drawdowns &mdash; the note makes that comparison rather than hiding it.</p>
+      <div class="btnrow" style="margin-top:16px">
+        <a class="btn ghost" href="https://www.tradingview.com/script/2wyXTTMc-Vol-Target-Trend-Engine/" rel="noopener">Open-source script &#8599;</a>
+        <a class="btn ghost" href="https://mateosandoval10.github.io/quant-strategies/vtte.html" rel="noopener">Research note &#8599;</a>
+      </div>
+    </div>
 
-    <a class="card" href="crs.html">
+    <div class="card">
+      <div class="tag hot">Open source &middot; mean reversion with trend</div>
       <h3>Channel Reversion System</h3>
-      <div class="sym">CRS · QQQ daily · 1999–2026 (includes dot-com &amp; 2008)</div>
+      <div class="sym">CRS &middot; QQQ daily &middot; Mar 1999&ndash;Aug 2026 &middot; dot-com + GFC included</div>
       <div class="metrics">
         <div class="metric"><div class="v">2.28</div><div class="k">Profit factor</div></div>
         <div class="metric"><div class="v">64%</div><div class="k">Win rate</div></div>
@@ -126,121 +173,90 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         <div class="metric"><div class="v">~80%</div><div class="k">Time in cash</div></div>
       </div>
       <p class="desc">Buys weakness at Donchian support inside uptrends only; exits at the channel midline.
-      Survives two full bear markets with a mid-teens drawdown, and transfers to SPY with parameters untouched.
-      It does <i>not</i> beat buy-and-hold on raw return, and the page says so — a system long 20% of the time
-      cannot outrun a secular bull.</p>
-      <span class="more">Full research note →</span>
-    </a>
+      Mean reversion traded <b>with</b> the prevailing trend, never against it. It does not beat buy-and-hold
+      on raw return &mdash; a system long 20% of the time cannot outrun a secular bull, and the note says so
+      plainly.</p>
+      <div class="btnrow" style="margin-top:16px">
+        <a class="btn ghost" href="https://www.tradingview.com/script/XRZCjbFr-Channel-Reversion-System/" rel="noopener">Open-source script &#8599;</a>
+        <a class="btn ghost" href="https://mateosandoval10.github.io/quant-strategies/crs.html" rel="noopener">Research note &#8599;</a>
+      </div>
+    </div>
 
-    <a class="card" href="qv2.html">
+    <div class="card">
+      <div class="tag">Money flow + volatility calm</div>
       <h3>QV Signal Pro v2</h3>
-      <div class="sym">QV v2 · TQQQ daily · 2011–2026 · complete trade log</div>
+      <div class="sym">QV v2 &middot; TQQQ daily &middot; 2011&ndash;2026 &middot; complete trade log</div>
       <div class="metrics">
         <div class="metric"><div class="v">+489%</div><div class="k">Net return</div></div>
         <div class="metric"><div class="v">2.17</div><div class="k">Profit factor</div></div>
-        <div class="metric"><div class="v">−20%</div><div class="k">Worst trade (capped)</div></div>
+        <div class="metric"><div class="v">&minus;20%</div><div class="k">Worst trade, capped</div></div>
         <div class="metric"><div class="v">22</div><div class="k">Trades, all shown</div></div>
       </div>
-      <p class="desc">A money-flow and volatility-calm swing score, rebuilt after a trade-by-trade autopsy of
-      every v1 loss. The improvement is risk-shaped rather than return-shaped: same winners, smaller disasters.
-      Every trade, the equity curve, and the exact loss patterns that drove the redesign are on the page.</p>
-      <span class="more">Full research note + trade log →</span>
-    </a>
+      <p class="desc">Rebuilt after a trade-by-trade autopsy of every v1 loss. The improvement is
+      <b>risk-shaped rather than return-shaped</b>: same winners, smaller disasters &mdash; the kind of
+      improvement that does not depend on the future producing more upside than the past. Not yet published
+      as open source.</p>
+      <div class="btnrow" style="margin-top:16px">
+        <a class="btn ghost" href="https://mateosandoval10.github.io/quant-strategies/qv2.html" rel="noopener">Research note + trade log &#8599;</a>
+      </div>
+    </div>
 
   </div>
 </div></section>
 
-<section><div class="wrap reveal">
-  <h2>Validation — parameters frozen between cells</h2>
-  <p class="sub">The flagship system was pushed through a split-sample, slippage-stress and cross-symbol
-  gauntlet with nothing re-tuned between runs. The cross-symbol rows are the informative ones, because they
-  are the only cells the parameters were not chosen on.</p>
-  <div class="tablewrap"><table>
-    <tr><th>Test</th><th>Window / condition</th><th>Net return</th><th>Profit factor</th><th>Win rate</th><th>Max DD</th></tr>
-    <tr><td class="txt">CBS in-sample half</td><td>2005 – 2015</td><td class="pos">+164%</td><td>3.35</td><td>64%</td><td>14.4%</td></tr>
-    <tr><td class="txt">CBS out-of-half</td><td>2015 – 2026</td><td class="pos">+293%</td><td>4.97</td><td>58%</td><td>10.3%</td></tr>
-    <tr><td class="txt">CBS slippage stress</td><td>5 ticks/side (5× modeled)</td><td class="pos">+256%</td><td>4.77</td><td>63%</td><td>10.7%</td></tr>
-    <tr><td class="txt">CBS cross-symbol</td><td>NVDA, frozen params</td><td class="pos">+658%</td><td>3.26</td><td>45%</td><td class="mut">—</td></tr>
-    <tr><td class="txt">CBS cross-symbol</td><td>MSFT, frozen params</td><td>+46%</td><td>1.32</td><td>37%</td><td class="txt mut">honest miss — see below</td></tr>
-    <tr><td class="txt">CRS cross-symbol</td><td>SPY, frozen params</td><td class="pos">+67%</td><td>1.80</td><td>62%</td><td>8.5%</td></tr>
-  </table></div>
-  <p class="sub" style="margin-top:14px">The MSFT row is on this site deliberately. CBS feeds on post-squeeze
-  volatility expansion, and a low-volatility grinding mega-cap barely clears costs — a profit factor of 1.32
-  is a rounding error away from nothing. An honest dispersion table is the difference between research and
-  marketing, and a system that works everywhere usually means a test that was not run everywhere.</p>
-</div></section>
-
-<section><div class="wrap reveal">
-  <h2>The rejection log</h2>
-  <p class="sub">Roughly thirty candidate improvements have been tested and rejected across these systems and
-  the intraday research program. Each strategy page carries its own rejected experiments with measured
-  numbers; four findings shaped everything else here.</p>
-  <div class="grid cards">
+<section id="rejected"><div class="wrap reveal">
+  <div class="kicker">The rejection log</div>
+  <h2>Roughly thirty experiments,<br>killed with numbers</h2>
+  <p class="sub">Each research note carries its own rejected experiments with the measured results that
+  killed them. These four shaped everything else.</p>
+  <div class="grid g2">
     <div class="card">
+      <div class="tag">Rejected</div>
       <h3>Reaction speed usually loses</h3>
-      <p>A faster de-risking variant of VTTE more than doubled turnover, sold volatility spikes at their lows,
-      and made the maximum drawdown <i>worse</i> (41.9% → 49.6%) while cutting net return by nearly half.
-      Slow rebalancing is a feature, not laziness.</p>
+      <p>A faster de-risking variant of VTTE more than doubled turnover (155 &rarr; 376 events), sold
+      volatility spikes at their lows, and made maximum drawdown <b>worse</b> (41.9% &rarr; 49.6%) while
+      cutting net return from +3,862% to +2,158%. Slow rebalancing is a feature.</p>
     </div>
     <div class="card">
+      <div class="tag">Rejected</div>
       <h3>In a reversion system, the target is the edge</h3>
-      <p>Replacing CRS's channel-midline target with a trailing stop kept net return identical but dropped the
-      profit factor from 2.28 to 1.79 and the win rate from 64% to 47%. The reversion to the middle is the
-      reliable move; everything after it is noise you pay for.</p>
+      <p>Replacing CRS's channel-midline target with a 2.5-ATR trail kept net return identical but dropped the
+      profit factor 2.28 &rarr; 1.79, the win rate 64% &rarr; 47%, and pushed drawdown 15% &rarr; 19%.</p>
     </div>
     <div class="card">
-      <h3>Sizing is what turns a signal into a system</h3>
-      <p>CBS's identical signal stack sized all-in per trade produced a bigger headline (+1,040%) and an
-      <b>89% drawdown</b>. Fixed-fractional risk sized off the stop cut the largest loss from $4,720 to $1,366
-      and raised the profit factor from 2.87 to 3.16 — on exactly the same signals.</p>
+      <div class="tag">Rejected</div>
+      <h3>Leverage does not bolt on</h3>
+      <p>Running CRS's identical signals on a 3x ETF collapsed the profit factor to 1.43 and tripled max
+      drawdown to 43%. Triple leverage triples the noise around a structural stop. Leverage belongs in systems
+      designed for it &mdash; which is what VTTE is.</p>
     </div>
     <div class="card">
-      <h3>A big backtest predicts almost nothing</h3>
-      <p>Measured directly on 60,480 configurations of the intraday research engine: the correlation between
-      train-period net and out-of-sample net is <b>+0.087</b>, and the top 100 configs by backtest lost money
-      out of sample 79% of the time. <a href="research.html">The experiment is on the methodology page.</a></p>
+      <div class="tag">Rejected</div>
+      <h3>Sizing turns a signal into a system</h3>
+      <p>CBS's identical signal stack sized all-in produced a bigger headline (+1,040%) and an <b>89%
+      drawdown</b>. Fixed-fractional risk sized off the stop cut the largest loss from $4,720 to $1,366 and
+      raised the profit factor 2.87 &rarr; 3.16 &mdash; on exactly the same signals.</p>
     </div>
   </div>
 </div></section>
 
-<section id="method"><div class="wrap reveal">
-  <h2>Methodology &amp; limitations</h2>
+<section id="method" class="last"><div class="wrap reveal">
+  <div class="kicker">Scope &amp; limitations</div>
+  <h2>What these numbers mean,<br>and what they do not</h2>
+  <p class="sub">These pages report returns, so the methodology stays attached to them. That is not hedging
+  &mdash; it is what makes the figures mean anything at all.</p>
   <div class="defs">
     <div class="defrow"><div class="l">Engine</div><div class="r">TradingView Strategy Tester, daily bars, $10,000 initial capital</div></div>
-    <div class="defrow"><div class="l">Costs</div><div class="r"><b>0.05% commission per side</b>, slippage modeled, fills on bar close</div></div>
-    <div class="defrow"><div class="l">Construction</div><div class="r">No look-ahead constructs; frozen parameters in every cross-symbol test</div></div>
-    <div class="defrow"><div class="l">Status of the figures</div><div class="r"><b>In-sample backtests on single price histories</b> — upper bounds on expectancy, not forecasts. Where a test is out-of-sample or uses frozen parameters on a different symbol, the page says so explicitly</div></div>
-    <div class="defrow"><div class="l">Standing caveat</div><div class="r">Past performance does not predict future results. Nothing here is investment advice</div></div>
+    <div class="defrow"><div class="l">Cost model</div><div class="r"><b>0.05% commission per side</b>, slippage modeled, fills on bar close &mdash; disclosed in each published script's description</div></div>
+    <div class="defrow"><div class="l">Construction</div><div class="r">No look-ahead constructs; parameters frozen in every cross-symbol and split-sample cell</div></div>
+    <div class="defrow"><div class="l">In-sample</div><div class="r">Parameters were chosen with these histories visible. Split-sample and slippage stress <b>reduce</b> selection effects; they do not eliminate them</div></div>
+    <div class="defrow"><div class="l">Single-history</div><div class="r">One primary symbol per system. The cross-symbol tests share a market era, so they establish <b>parameter robustness, not regime robustness</b></div></div>
+    <div class="defrow"><div class="l">Small samples</div><div class="r">22 to 69 trades per system. Every statistic carries a correspondingly wide error bar, whether or not it is printed</div></div>
+    <div class="defrow"><div class="l">Benchmarks</div><div class="r">Index comparisons are approximate total-return figures over the same window, not a risk-adjusted attribution. A strategy in cash 80% of the time is not comparable to a fully-invested index on raw return alone</div></div>
+    <div class="defrow"><div class="l">Status</div><div class="r">These are <b>backtests &mdash; upper bounds on expectancy, not forecasts</b>. Real execution is worse than modeled execution. Live paper trading is the next gate before any capital conclusion</div></div>
+    <div class="defrow"><div class="l">Roadmap</div><div class="r">Subperiod splits for VTTE and CRS, a multi-name universe test rather than hand-picked symbols, and parameter-perturbation Monte Carlo</div></div>
   </div>
-
-  <h3>How every number here was generated</h3>
-  <p><span class="pill">TradingView Strategy Tester</span><span class="pill">daily bars</span>
-  <span class="pill">0.05% commission/side</span><span class="pill">slippage modeled</span>
-  <span class="pill">fills on bar close</span><span class="pill">$10,000 initial</span>
-  <span class="pill">no look-ahead constructs</span><span class="pill">frozen params in cross-tests</span></p>
-
-  <h3>What these results are not</h3>
-  <div class="defs">
-    <div class="defrow"><div class="l">In-sample</div><div class="r">The parameters were chosen with these histories visible. Split-sample and slippage stress <b>reduce</b> selection effects; they do not eliminate them</div></div>
-    <div class="defrow"><div class="l">Single-history</div><div class="r">One symbol per system, one market era. The cross-symbol tests share that era, so they test <b>parameter robustness, not regime robustness</b></div></div>
-    <div class="defrow"><div class="l">Small samples</div><div class="r">22 to 69 trades per system. Every statistic derived from them carries a correspondingly wide error bar, whether or not that bar is printed</div></div>
-    <div class="defrow"><div class="l">Upper bounds</div><div class="r">Real execution is worse than modeled execution, and the modeling here is a simulation of a market, not the market</div></div>
-    <div class="defrow"><div class="l">Next gate</div><div class="r">Live paper trading, before any of this becomes a capital conclusion</div></div>
-  </div>
-  <p class="sub" style="margin-top:16px">Remaining work: subperiod splits for VTTE and CRS (currently blocked by
-  plan-level deep-backtesting limits), a multi-name universe test rather than hand-picked symbols, and
-  parameter-perturbation Monte Carlo. The <a href="research.html">methodology page</a> shows the standard I am
-  working toward — the intraday research pipeline applies placebo tests and bootstrap intervals that these
-  Pine Script backtests do not yet have.</p>
-</div></section>
-
-<section class="last"><div class="wrap reveal">
-  <h2>Source</h2>
-  <p class="sub">Strategy scripts live in my TradingView library; each research note links to a live chart
-  snapshot. The write-ups are also published as a standalone repository.</p>
-  <div class="btnrow">
-    <a class="btn ghost" href="https://github.com/mateosandoval10/quant-strategies" rel="noopener">Repository ↗</a>
-  </div>
+  <p class="sub">Past performance does not predict future results. Nothing here is investment advice.</p>
 </div></section>
 
 </main>

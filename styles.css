@@ -379,3 +379,35 @@ pre .d{color:#ffcb6b}pre .n{color:#f78c6c}
 [data-theme="light"] pre .k{color:#8250df}[data-theme="light"] pre .s{color:#0a7d33}
 [data-theme="light"] pre .c{color:#6e7781}[data-theme="light"] pre .d{color:#9a6700}
 [data-theme="light"] pre .n{color:#953800}
+
+/* ---------- Profit Pilot sub-site: lateral sub-nav + status band ---------- */
+.subnav{border-bottom:1px solid var(--line);background:var(--panel);position:sticky;top:58px;z-index:40}
+@supports (backdrop-filter:blur(14px)){
+  .subnav{background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(14px)}
+}
+.subnav .wrap{display:flex;align-items:center;gap:4px;overflow-x:auto;scrollbar-width:none;min-height:46px}
+.subnav .wrap::-webkit-scrollbar{display:none}
+.subnav a{font-family:var(--mono);font-size:12px;letter-spacing:.03em;color:var(--dim);
+  padding:6px 11px;border-radius:7px;white-space:nowrap;text-decoration:none}
+.subnav a:hover{color:var(--text);background:var(--panel2);text-decoration:none}
+.subnav a[aria-current="page"]{color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.subnav .home{color:var(--dimmer);padding-right:14px;margin-right:6px;border-right:1px solid var(--line)}
+
+.ppstatus{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--panel);
+  padding:22px 0;margin-top:0}
+.ppstatus .wrap{display:flex;gap:26px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.ppstatus .t{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--accent);margin-bottom:7px}
+.ppstatus p{color:var(--dim);font-size:14.5px;max-width:760px;margin:0;line-height:1.6}
+.ppstatus p b{color:var(--text)}
+
+/* deep subsection blocks (sleeves, governors) */
+.deep{border-top:1px solid var(--line);padding-top:34px;margin-top:38px}
+.deep:first-of-type{border-top:none;padding-top:0;margin-top:26px}
+.deep .dhead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-bottom:6px}
+.deep .dnum{font-family:var(--mono);font-size:12px;color:var(--dimmer);letter-spacing:.1em}
+.deep h3{font-size:25px;font-weight:700;letter-spacing:-.02em;margin:0}
+.deep .dtag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
+  border-radius:100px;padding:3px 11px}
+.deep .dtag.off{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}

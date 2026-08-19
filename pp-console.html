@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Console — Profit Pilot — Mateo Sandoval</title>
+<meta name="description" content="Mission Control — the Profit Pilot operator console: 37 routes covering risk attribution, capital allocation, the research loop, replay, stress scenarios and post-mortem tooling.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+<div class="subnav"><div class="wrap"><a class="home" href="index.html">← hub</a><a href="profit-pilot.html">Overview</a><a href="pp-architecture.html">Architecture</a><a href="pp-risk.html">Risk spine</a><a href="pp-sleeves.html">Sleeves</a><a href="pp-modules.html">Modules</a><a href="pp-testing.html">Testing</a><a href="pp-console.html" aria-current="page">Console</a></div></div>
+<main id="main">
+
+<header class="hero tight"><div class="wrap">
+  <div class="eyebrow">Profit Pilot &middot; operator console</div>
+  <h1>Mission<br><span class="grad">Control.</span></h1>
+  <p class="lede">Thirty-seven registered operator routes built in React and TypeScript against the platform's
+  read-model API &mdash; risk attribution, capital allocation, live charting, order lifecycle, the research
+  loop, replay, stress scenarios and post-mortem tooling.</p>
+</div></header>
+
+<section id="live"><div class="wrap reveal">
+  <div class="kicker">Captured from the deployed instance</div>
+  <h2>Live production surfaces</h2>
+  <p class="sub">These frames are the running system, captured from the deployed console against live market
+  data. <b>Account balances and position values are redacted</b> &mdash; equity, buying power, cash,
+  deployable capital, per-sleeve dollar allocations, order fill prices and quantities, and the per-symbol
+  model internals on the Conviction Board. Everything structural is untouched: percentages, ratios, weights,
+  concentration, drift and counts, which is the part that carries the information.</p>
+  <div class="shots">
+    <div class="shot wide">
+      <img src="assets/pp/charts.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Charts surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Charts.</b> A 2&times;2 TradingView grid with a linked crosshair across panes, each reusing its symbol&rsquo;s saved indicators &mdash; MA20, MA50 and session VWAP on live daily candles, with the engine&rsquo;s own fill levels marked. TradingView provides the charting layer; the fill markers are the platform&rsquo;s. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot wide">
+      <img src="assets/pp/command-deck.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Command Deck surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Command Deck.</b> Equity curve, capital allocation by sleeve, the risk-spine governor dials with clamp-stack utilisation, champion-versus-challenger state and the intel&rarr;thesis&rarr;position lineage, in one view. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/conviction-board.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Conviction Board surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Conviction Board.</b> Twenty-two symbols ranked with the gate column visible &mdash; what the system currently believes and, more usefully, what it is refusing to act on. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/allocator.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Allocator &amp; capital buckets surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Allocator &amp; capital buckets.</b> Capital distribution across the sleeves under the risk spine&rsquo;s constraints, with concentration and drift measured rather than asserted. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/orders-history.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Orders &amp; History surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Orders &amp; History.</b> The full order lifecycle &mdash; intent, submitted, filled &mdash; which is what makes fill reconciliation against the broker possible. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/sleeve-toggles.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Sleeve toggles &amp; arming ladder surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Sleeve toggles &amp; arming ladder.</b> Per-sleeve enablement, the risk gates, and the live-trading arming ladder with its kill switch. This is the surface that keeps the system in paper. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/catalyst-calendar.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Catalyst Calendar surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Catalyst Calendar.</b> Three hundred live catalysts with provider status &mdash; the scheduled-event feed that Inside Mode and the Catalyst Map consume. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/news-feed.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="News Feed surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>News Feed.</b> Three hundred headlines across eight live providers with the sentiment mix broken out. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/settings-ai.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Settings &amp; feature flags surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Settings &amp; feature flags.</b> The runtime flag surface &mdash; where <code>allow_live_trading</code> and the rest of the gating actually lives. <b>Live production console.</b> Account balances and position values are redacted; percentages, ratios, weights, concentration and counts are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+    </div>
+  </div>
+</div></section>
+
+<section id="demo" class="last"><div class="wrap reveal">
+  <div class="kicker">Rendered without a backend</div>
+  <h2>Demo-mode surfaces</h2>
+  <p class="sub">These surfaces have not yet been captured from the deployed instance, so they are shown in
+  demo mode &mdash; the frontend rendering its bundled sample dataset. <b>The interfaces are real; the numbers
+  in them are not.</b> They are evidence that the surface exists and works, and evidence of nothing else.
+  Live captures of the Risk Spine and Self-Improvement rooms are the next two to replace.</p>
+  <div class="shots">
+    <div class="shot">
+      <img src="assets/pp/stress-scenario-lab.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Stress Scenario Lab surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Stress Scenario Lab.</b> Scenario construction and portfolio response. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/sim-replay.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Sim &amp; Replay surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Sim &amp; Replay.</b> Deterministic replay of a recorded tape &mdash; the surface that makes golden-replay determinism observable. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/loss-day-analyzer.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Loss-Day Analyzer surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Loss-Day Analyzer.</b> Post-mortem fingerprinting of losing sessions. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/calibration-lab.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Calibration Lab surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Calibration Lab.</b> Parameter calibration and readiness measurement. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/telemetry.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Telemetry surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Telemetry.</b> Observability and the audit trail behind every reason code. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
+    </div>
+    <div class="shot">
+      <img src="assets/pp/liquidity-forecaster.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Liquidity Forecaster surface of the Profit Pilot Mission Control console">
+      <div class="cap"><b>Liquidity Forecaster.</b> Predictive depth modelling, feeding the risk spine and the fill router. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
+    </div>
+  </div>
+</div></section>
+
+</main>
+<div class="ppstatus"><div class="wrap">
+  <div>
+    <div class="t">Current status</div>
+    <p>Profit Pilot is a <b>working trading system</b>, running continuously against a live brokerage API
+    with real market data. It is in an <b>independent testing stage ahead of public release</b> — live
+    capital is gated at the configuration layer by <code>allow_live_trading: false</code> while the
+    five-layer test stack does its work.</p>
+  </div>
+  <a class="btn ghost" href="pp-testing.html">The five test layers →</a>
+</div></div>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="profit-pilot.html">← Profit Pilot overview</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+
+</body>
+</html>

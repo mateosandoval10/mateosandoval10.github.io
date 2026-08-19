@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Architecture — Profit Pilot — Mateo Sandoval</title>
+<meta name="description" content="Profit Pilot architecture: a deterministic in-process event bus, schema-validated EventEnvelope messages, golden-replay determinism, and a hot-reloadable configuration spine.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+<div class="subnav"><div class="wrap"><a class="home" href="index.html">← hub</a><a href="profit-pilot.html">Overview</a><a href="pp-architecture.html" aria-current="page">Architecture</a><a href="pp-risk.html">Risk spine</a><a href="pp-sleeves.html">Sleeves</a><a href="pp-modules.html">Modules</a><a href="pp-testing.html">Testing</a><a href="pp-console.html">Console</a></div></div>
+<main id="main">
+
+<section id="arch"><div class="wrap reveal">
+  <div class="kicker">Architecture</div>
+  <h2>The event bus is the design decision</h2>
+  <p class="sub">Everything else follows from it. Market data arrives as events, signals are events, risk
+  vetoes are events, orders and fills are events — and every one carries a schema-validated envelope and a
+  reason code. Nothing calls anything else directly.</p>
+  <div class="grid g2">
+    <div class="card">
+      <div class="tag">Property one</div>
+      <h3>Golden-replay determinism</h3>
+      <p>Replaying an identical input tape reproduces an identical event sequence, byte for byte. This is the
+      property most home-built trading systems silently lack, and without it you cannot prove that a code
+      change altered nothing it shouldn't have.</p>
+    </div>
+    <div class="card">
+      <div class="tag">Property two</div>
+      <h3>Hot-reloadable configuration</h3>
+      <p>Roughly 1,015 configuration values reload without a restart through a config → override →
+      <code>_on_reload</code> spine. Without it, an automated calibration loop cannot tune a system that is
+      currently running.</p>
+    </div>
+  </div>
+  <pre><code>@dataclass(frozen=True, slots=True)
+class EventEnvelope:
+    schema: str
+    event_id: str
+    event_type: str
+    event_version: int
+    ts_event_ns: int          # when it happened
+    ts_ingest_ns: int         # when we saw it
+    seq: int                  # monotonic, per run
+    source: str
+    stream: str
+    run_id: str
+    session_id: str
+    payload: Mapping[str, Any]
+    reason_codes: tuple[str, ...] = ()
+    payload_hash: str | None = None</code></pre>
+  <p class="sub"><code>frozen=True</code> makes events immutable, so no downstream consumer can rewrite
+  history, and <code>payload_hash</code> makes tampering detectable. The two timestamps are what make replay
+  honest: separating <b>when something happened</b> from <b>when the system saw it</b> lets you reconstruct
+  what the system knew at a moment, rather than what was true at that moment — the distinction that separates
+  a realistic replay from an accidentally clairvoyant one. Reason codes propagate through the whole chain, so
+  any decision can be traced back to the conditions that caused it.</p>
+
+  <div class="tablewrap"><table>
+    <thead><tr><th>Layer</th><th>Implementation</th></tr></thead>
+    <tbody>
+      <tr><td class="txt">Event bus</td><td class="txt">Deterministic in-process bus; schema-validated <code>EventEnvelope</code>; golden-replay determinism tests in CI</td></tr>
+      <tr><td class="txt">Engine</td><td class="txt">Python — 39 locked modules, 339,913 lines across 1,127 files, 220 test suites</td></tr>
+      <tr><td class="txt">Risk spine</td><td class="txt">Eight governors composed into a single exposure multiplier with binding-constraint attribution</td></tr>
+      <tr><td class="txt">Strategy layer</td><td class="txt">Six independent sleeves, each with its own cadence, universe and risk budget</td></tr>
+      <tr><td class="txt">Research loop</td><td class="txt">Champion–challenger and shadow search over ~1,270 tunable leaves, statistically gated</td></tr>
+      <tr><td class="txt">Operator API</td><td class="txt">FastAPI — snapshot and history endpoints, <code>/v1/stream</code> WebSocket, bearer auth, bounded and audited config overrides</td></tr>
+      <tr><td class="txt">Console</td><td class="txt">React + TypeScript + Vite + Tailwind — 37 registered operator routes</td></tr>
+      <tr><td class="txt">Intelligence</td><td class="txt">Catalyst mapping, regime detection, EDGAR extraction, MLES ensemble selection, uncertainty calibration</td></tr>
+      <tr><td class="txt">Execution</td><td class="txt">Adaptive fill router with probe-based venue selection; stealth order obfuscation</td></tr>
+      <tr><td class="txt">Deployment</td><td class="txt">Single Hetzner CX23 instance running 24/7 paper trading; a separate research learner runs independently</td></tr>
+      <tr><td class="txt">Broker &amp; data</td><td class="txt">Alpaca paper account, IEX real-time stream (30-symbol cap on the free tier), plus macro, news and filings feeds</td></tr>
+    </tbody>
+  </table></div>
+</div></section>
+
+<section id="loop" class="last"><div class="wrap reveal">
+  <div class="kicker">Research loop</div>
+  <h2>The system tunes itself — under gates</h2>
+  <p class="sub">With ~1,270 tunable parameters, the default outcome of an unconstrained search is an overfit,
+  not a discovery. So the interesting engineering here is not the search. It's the gates.</p>
+  <div class="flow">
+    <div class="step"><div class="num">01</div><div class="nm">Propose</div><p>Shadow search generates challenger parameter sets against the running champion.</p></div>
+    <div class="step"><div class="num">02</div><div class="nm">Evaluate out-of-sample</div><p>Challengers are scored on data outside the fitting window. Most are declined here — that rejection rate is the feature.</p></div>
+    <div class="step"><div class="num">03</div><div class="nm">Canary</div><p>Survivors deploy at fractional allocation first, never straight to full size.</p></div>
+    <div class="step"><div class="num">04</div><div class="nm">Gated promotion</div><p>Promotion requires a significance threshold, a cooldown window, and a per-day promotion cap.</p></div>
+  </div>
+  <p class="sub">Every cycle's verdict is written to an append-only decision ledger, so the parameter state of
+  the system at any past moment is reconstructible — which matters more than it sounds, because a
+  self-modifying system without an audit trail is one you can never debug after the fact.</p>
+  <div class="shot">
+    <img src="assets/pp/self-improvement-loop.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages of the research loop">
+    <div class="cap"><b>Self-Improvement Control Room.</b> The loop end to end — propose, evaluate out-of-sample, canary, promote. <b>Demo mode</b> — the candidate counts and outcomes shown are the frontend's bundled sample dataset, not a record of real promotions.</div>
+  </div>
+</div></section>
+
+</main>
+<div class="ppstatus"><div class="wrap">
+  <div>
+    <div class="t">Current status</div>
+    <p>Profit Pilot is a <b>working trading system</b>, running continuously against a live brokerage API
+    with real market data. It is in an <b>independent testing stage ahead of public release</b> — live
+    capital is gated at the configuration layer by <code>allow_live_trading: false</code> while the
+    five-layer test stack does its work.</p>
+  </div>
+  <a class="btn ghost" href="pp-testing.html">The five test layers →</a>
+</div></div>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="profit-pilot.html">← Profit Pilot overview</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+
+</body>
+</html>

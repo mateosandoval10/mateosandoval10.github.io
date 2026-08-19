@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Risk spine — Profit Pilot — Mateo Sandoval</title>
+<meta name="description" content="Profit Pilot's risk spine: eight independent governors composed with min() into a single exposure multiplier, failing closed, with binding-constraint attribution.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+<div class="subnav"><div class="wrap"><a class="home" href="index.html">← hub</a><a href="profit-pilot.html">Overview</a><a href="pp-architecture.html">Architecture</a><a href="pp-risk.html" aria-current="page">Risk spine</a><a href="pp-sleeves.html">Sleeves</a><a href="pp-modules.html">Modules</a><a href="pp-testing.html">Testing</a><a href="pp-console.html">Console</a></div></div>
+<main id="main">
+
+<section id="risk" class="last"><div class="wrap reveal">
+  <div class="kicker">Risk spine</div>
+  <h2>Eight governors, composed</h2>
+  <p class="sub">This is the part of the system I would defend most confidently, because it is designed to be
+  <b>correct rather than profitable</b>. Risk controls don't need a forward-looking edge in order to work —
+  they need to be structurally impossible to bypass. Each governor independently emits a clamp, and a clamp
+  book aggregates them deterministically.</p>
+  <p class="sub"><b>The aggregation rule is the design decision worth defending.</b> Multipliers compose via
+  <code>min()</code>, not by averaging, and the book fails closed — the most restrictive clamp wins. Averaging
+  would let a permissive governor dilute a restrictive one, so a system that averages one "halt" against three
+  "fine"s keeps trading. Taking the minimum means <b>any single governor can stop the system on its own</b>,
+  and the console always names which one is binding.</p>
+  <div class="grid g4">
+    <div class="gov" style="--c:var(--red)"><div class="role">Hazard</div><div class="nm">Shield</div><p>Blocks individual trades on hazard conditions before they can reach sizing. 146 catalogued micros.</p></div>
+    <div class="gov" style="--c:var(--amber)"><div class="role">Aggression</div><div class="nm">WRAB</div><p>Regime-adaptive aggression scaling. The largest module in the system at 229 catalogued micros.</p></div>
+    <div class="gov" style="--c:var(--red)"><div class="role">Tiered cut</div><div class="nm">Drawdown circuit breaker</div><p>Steps exposure down in tiers as intraday drawdown deepens, rather than cutting in one jump.</p></div>
+    <div class="gov" style="--c:var(--blue)"><div class="role">Tail sizing</div><div class="nm">CVaR tail sizer</div><p>Sizes off conditional tail expectation rather than variance — it cares about the bad tail, not the average.</p></div>
+    <div class="gov" style="--c:var(--violet)"><div class="role">Overshoot</div><div class="nm">Equity bands &amp; cool-off</div><p>Anti-overshoot bands stop equity-driven sizing running away from itself; a steady-state governor enforces cool-off after abnormal activity.</p></div>
+    <div class="gov" style="--c:var(--accent)"><div class="role">Re-entry</div><div class="nm">Recovery parachute</div><p>Staged, rate-limited re-entry after a drawdown event instead of an immediate return to full size.</p></div>
+    <div class="gov" style="--c:var(--teal)"><div class="role">Capital</div><div class="nm">Allocator</div><p>Distributes capital across the six sleeves under every constraint above. 190 catalogued micros.</p></div>
+    <div class="gov" style="--c:var(--dim)"><div class="role">Governance</div><div class="nm">Omega ops</div><p>Top-level operational circuit and credit budget — the governor that can stand the whole system down.</p></div>
+  </div>
+  <pre><code>"""Profit Pilot — Risk Clamp Book.
+
+Multiple modules emit `risk.clamp` events (drawdown breaker, equity bands,
+loss-day fingerprint, recovery parachute, etc.).
+
+Execution needs a single coherent answer to questions like:
+- "Am I allowed to open new positions right now?"
+- "What risk multiplier applies to this sleeve/symbol?"
+- "Is the system in exit-only mode?"
+
+Design principles
+-----------------
+- *Fail closed*: the most restrictive clamp wins.
+- Multipliers compose via `min()` (i.e., smallest multiplier dominates).
+- Entry denial and exit-only flags follow highest-priority clamps.
+- TTL is in bars and decays on `market.bar` ticks.
+"""</code></pre>
+  <p class="sub">The choice worth defending is <b>composition by <code>min()</code> rather than by product or
+  average</b>. Averaging would let a permissive governor dilute a restrictive one — a system that averages one
+  "halt" against three "fine"s keeps trading. Taking the minimum means any single governor can stop the system
+  alone, and adding a ninth governor can only ever make the system safer, never riskier. That is the
+  difference between a risk layer that is <i>structurally</i> safe and one that is merely <i>behaviourally</i>
+  safe, and it is why the clamp book is one of the few places in this codebase where I would defend every
+  line.</p>
+
+  <div class="shot">
+    <img src="assets/pp/risk-spine-console.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Risk Spine Console showing six status dials, a binding-constraint explainer, a clamp-stack waterfall, and the ladder of eight risk governors with their multipliers and states">
+    <div class="cap"><b>Risk Spine Console.</b> The clamp-stack waterfall showing how each governor composes into the final multiplier, and the binding-constraint explainer — "risk is capped at ×0.75 by drawdown circuit breaker because intraday DD tier 1." <b>Demo mode</b> — rendered with the frontend's bundled sample dataset; the interface is real, the figures shown are illustrative. A live capture of this surface is the next one queued.</div>
+  </div>
+</div></section>
+
+</main>
+<div class="ppstatus"><div class="wrap">
+  <div>
+    <div class="t">Current status</div>
+    <p>Profit Pilot is a <b>working trading system</b>, running continuously against a live brokerage API
+    with real market data. It is in an <b>independent testing stage ahead of public release</b> — live
+    capital is gated at the configuration layer by <code>allow_live_trading: false</code> while the
+    five-layer test stack does its work.</p>
+  </div>
+  <a class="btn ghost" href="pp-testing.html">The five test layers →</a>
+</div></div>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="profit-pilot.html">← Profit Pilot overview</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+
+</body>
+</html>

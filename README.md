@@ -12,8 +12,7 @@ GitHub Pages serves this repository directly.
 | `index.html` | Landing |
 | `research.html` | Research methodology — placebo testing, bootstrap CIs, frozen-config OOS. The centerpiece. |
 | `profit-pilot.html` | Profit Pilot — event-driven trading platform |
-| `strategies.html` | Systematic strategies overview |
-| `cbs.html` `vtte.html` `crs.html` `qv2.html` | Individual strategy research notes |
+| `strategies.html` | Systematic strategies — a full section, incl. published TradingView scripts |
 | `projects.html` | Research tooling in development |
 | `about.html` | Background and contact |
 | `styles.css` | The whole design system, light + dark |
@@ -46,6 +45,29 @@ silently dropped four features from the Profit Pilot page.
 - All pages share `styles.css`. Do not give a page its own `<style>` block — that is how the site
   starts looking like two sites.
 - Page shape: `<main>` → `header.hero` → `.statband` → `<section><div class="wrap reveal">`.
+
+## Strategy research notes live off-site
+
+The four long-form notes (CBS, VTTE, CRS, QV v2) are **not** duplicated here. They live on the already-public
+sub-site at <https://mateosandoval10.github.io/quant-strategies/> and `strategies.html` links out to each one.
+One copy of every figure — do not re-import them, or the numbers will drift between two live sites.
+
+## Screenshot provenance — get this right
+
+`assets/pp/*.webp` splits two ways and the captions must match:
+
+- **Live production captures** (command-deck, allocator, conviction-board, charts, orders-history,
+  catalyst-calendar, news-feed, sleeve-toggles, settings-ai) — captured from the deployed instance.
+  Account balances and position values are redacted; percentages, ratios, weights, concentration, drift
+  and counts are intact. The account is a **paper** account. Caption these as live production, never as
+  sample data.
+- **Demo-mode captures** (risk-spine-console, self-improvement-loop, stress-scenario-lab, sim-replay,
+  calibration-lab, loss-day-analyzer, telemetry, liquidity-forecaster, and the unused catalysts-intel,
+  compliance, execution-afr) — the frontend's bundled sample dataset. Caption these as demo mode, never
+  as live.
+
+Captioning either one as the other is the failure mode. `pp-console.html` separates them into two
+sections so it cannot be got backwards by accident.
 
 ## Assets
 

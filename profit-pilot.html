@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Profit Pilot — Mateo Sandoval</title>
-<meta name="description" content="Profit Pilot: an event-driven quantitative trading platform — 39 locked modules on a deterministic event bus, an eight-governor risk spine, six strategy sleeves, and a gated self-improvement loop.">
+<title>Overview — Profit Pilot — Mateo Sandoval</title>
+<meta name="description" content="Profit Pilot — an event-driven quantitative trading platform: 39 modules on a deterministic event bus, an eight-governor risk spine, six strategy sleeves, and a five-layer test stack. In independent testing ahead of public release.">
 <meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
@@ -25,6 +25,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
   </div>
 </div></header>
+<div class="subnav"><div class="wrap"><a class="home" href="index.html">← hub</a><a href="profit-pilot.html" aria-current="page">Overview</a><a href="pp-architecture.html">Architecture</a><a href="pp-risk.html">Risk spine</a><a href="pp-sleeves.html">Sleeves</a><a href="pp-modules.html">Modules</a><a href="pp-testing.html">Testing</a><a href="pp-console.html">Console</a></div></div>
 <main id="main">
 
 <header class="hero"><div class="wrap">
@@ -32,21 +33,17 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <h1>Profit Pilot<em>.</em></h1>
   <p class="lede">An <b>event-driven quantitative trading platform</b> — 39 locked modules on a deterministic
   event bus, an eight-governor risk spine, six independent strategy sleeves, and an automated research loop
-  that proposes, tests and gates its own parameter changes.</p>
+  that proposes, tests and gates its own parameter changes. Built, deployed, and running against live market
+  data.</p>
   <div class="pills">
-    <span class="pill live">Paper trading · live brokerage API</span>
-    <span class="pill">First testing year</span>
+    <span class="pill live">Trading system · running 24/7</span>
+    <span class="pill">In independent testing ahead of public release</span>
     <span class="pill">Python · FastAPI · React</span>
-    <span class="pill">Deployed 24/7</span>
-    <a class="pill" href="#testing">Five-layer test stack →</a>
   </div>
-
   <div class="heroshot">
     <img src="assets/pp/command-deck.webp" width="1600" height="1000" loading="eager" decoding="async"
       alt="Profit Pilot Command Deck: equity curve, capital allocation treemap by sleeve, risk spine dials, and champion-versus-challenger state">
-    <div class="cap"><b>Mission Control — Command Deck.</b> Equity curve, capital allocation by sleeve, the
-    live risk-spine dials and champion-versus-challenger state in a single view. <b>Rendered with the
-    console's built-in sample dataset; every figure shown is illustrative, not a performance record.</b></div>
+    <div class="cap"><b>Mission Control — Command Deck.</b> Equity curve, capital allocation by sleeve, the risk-spine governor dials and champion-versus-challenger state in a single view. <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
 </div></header>
 
@@ -67,413 +64,100 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   whose job is to <b>supervise, constrain, measure and retire</b> the strategies running inside it. A sleeve
   that stops earning its risk budget gets throttled by the allocator and eventually refused promotion. The
   system is designed to outlive any idea in it.</p>
+  <div class="minis">
+    <div><div class="v">8</div><div class="k">Risk governors</div></div>
+    <div><div class="v">min()</div><div class="k">Clamp composition</div></div>
+    <div><div class="v">5</div><div class="k">Verification layers</div></div>
+    <div><div class="v">37</div><div class="k">Operator routes</div></div>
+    <div><div class="v">1,023</div><div class="k">Micros implemented</div></div>
+    <div><div class="v">24/7</div><div class="k">Deployment</div></div>
+  </div>
+</div></section>
+
+<section id="explore"><div class="wrap reveal">
+  <div class="kicker">Explore the system</div>
+  <h2>Six ways in</h2>
+  <p class="sub">Each subsystem has its own page. Start wherever the question you'd ask first lives.</p>
   <div class="grid g3">
-    <div class="card accent">
-      <div class="tag">Governed by construction</div>
-      <h3>Risk is structural, not advisory</h3>
-      <p>Eight independent governors compose into a single exposure multiplier. No signal reaches the broker
-      without passing through all of them, and the console always reports which one is binding and why.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag">Reproducible by construction</div>
-      <h3>Determinism is a first-class property</h3>
-      <p>Every component speaks through schema-validated events on a deterministic bus. The same input tape
-      replayed produces a byte-identical event sequence — which is what makes a bug reproducible three weeks
-      later and a backtest auditable.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag">Adaptive by construction</div>
-      <h3>The system tunes itself, under gates</h3>
-      <p>~1,270 parameters are hot-reloadable and searchable by an automated research loop — but promotion
-      requires clearing an out-of-sample gate, a fractional canary, a significance threshold and a cooldown.</p>
-    </div>
+    <a class="card accent" href="pp-architecture.html">
+      <div class="tag hot">01 · Architecture</div>
+      <h3>The event bus</h3>
+      <p>Deterministic, schema-validated <code>EventEnvelope</code> messages; golden-replay determinism;
+      a hot-reload config spine. The design decision everything else follows from.</p>
+      <span class="more">Read →</span>
+    </a>
+    <a class="card accent" href="pp-risk.html">
+      <div class="tag hot">02 · Risk spine</div>
+      <h3>Eight governors</h3>
+      <p>Each governor clamps exposure independently; the clamp book composes them with <code>min()</code>
+      and fails closed, so any one of them can halt the system alone.</p>
+      <span class="more">Read →</span>
+    </a>
+    <a class="card accent" href="pp-sleeves.html">
+      <div class="tag hot">03 · Sleeves</div>
+      <h3>Six strategies</h3>
+      <p>Core, Day Trading, Inside Mode, Arbitrage, Moonshot and Crypto — what each trades, on what
+      cadence, and why each one exists separately from the others.</p>
+      <span class="more">Read →</span>
+    </a>
+    <a class="card" href="pp-modules.html">
+      <div class="tag">04 · Modules</div>
+      <h3>The 39-module directory</h3>
+      <p>Every locked module with its catalogued and implemented micro counts, filterable by category and
+      expandable to its built capabilities.</p>
+      <span class="more">Browse →</span>
+    </a>
+    <a class="card" href="pp-testing.html">
+      <div class="tag">05 · Testing</div>
+      <h3>Five verification layers</h3>
+      <p>Backtesting, deterministic blind replay, out-of-sample gating, Monte Carlo and synthetic
+      scenarios, and live forward testing.</p>
+      <span class="more">Read →</span>
+    </a>
+    <a class="card" href="pp-console.html">
+      <div class="tag">06 · Console</div>
+      <h3>Mission Control</h3>
+      <p>Thirty-seven operator routes — risk attribution, allocation, the research loop, replay, stress
+      scenarios and post-mortem tooling.</p>
+      <span class="more">See the gallery →</span>
+    </a>
   </div>
 </div></section>
 
-<section id="arch"><div class="wrap reveal">
-  <div class="kicker">Architecture</div>
-  <h2>The event bus is the design decision</h2>
-  <p class="sub">Everything else follows from it. Market data arrives as events, signals are events, risk
-  vetoes are events, orders and fills are events — and every one carries a schema-validated envelope and a
-  reason code. Nothing calls anything else directly.</p>
-  <div class="grid g2">
-    <div class="card">
-      <div class="tag">Property one</div>
-      <h3>Golden-replay determinism</h3>
-      <p>Replaying an identical input tape reproduces an identical event sequence, byte for byte. This is the
-      property most home-built trading systems silently lack, and without it you cannot prove that a code
-      change altered nothing it shouldn't have.</p>
-    </div>
-    <div class="card">
-      <div class="tag">Property two</div>
-      <h3>Hot-reloadable configuration</h3>
-      <p>Roughly 1,015 configuration values reload without a restart through a config → override →
-      <code>_on_reload</code> spine. Without it, an automated calibration loop cannot tune a system that is
-      currently running.</p>
-    </div>
+<section id="stack" class="last"><div class="wrap reveal">
+  <div class="kicker">Stack</div>
+  <h2>What it runs on</h2>
+  <div class="defs">
+    <div class="defrow"><div class="l">Engine</div><div class="r">Python — 39 locked modules, 339,913 lines across 1,127 files, 220 test suites in CI</div></div>
+    <div class="defrow"><div class="l">Operator API</div><div class="r">FastAPI — snapshot and history endpoints, <code>/v1/stream</code> WebSocket, bearer auth, bounded and audited config overrides</div></div>
+    <div class="defrow"><div class="l">Console</div><div class="r">React + TypeScript + Vite + Tailwind — 37 registered operator routes</div></div>
+    <div class="defrow"><div class="l">Broker &amp; data</div><div class="r">Alpaca account, IEX real-time stream, plus macro, news and filings feeds</div></div>
+    <div class="defrow"><div class="l">Deployment</div><div class="r">Single Hetzner CX23 instance running 24/7; a separate research learner runs independently</div></div>
+    <div class="defrow"><div class="l">Repository</div><div class="r">Private pending release. A read-only walkthrough is available on request</div></div>
   </div>
-  <pre><code>@dataclass(frozen=True, slots=True)
-class EventEnvelope:
-    schema: str
-    event_id: str
-    event_type: str
-    event_version: int
-    ts_event_ns: int          # when it happened
-    ts_ingest_ns: int         # when we saw it
-    seq: int                  # monotonic, per run
-    source: str
-    stream: str
-    run_id: str
-    session_id: str
-    payload: Mapping[str, Any]
-    reason_codes: tuple[str, ...] = ()
-    payload_hash: str | None = None</code></pre>
-  <p class="sub"><code>frozen=True</code> makes events immutable, so no downstream consumer can rewrite
-  history, and <code>payload_hash</code> makes tampering detectable. The two timestamps are what make replay
-  honest: separating <b>when something happened</b> from <b>when the system saw it</b> lets you reconstruct
-  what the system knew at a moment, rather than what was true at that moment — the distinction that separates
-  a realistic replay from an accidentally clairvoyant one. Reason codes propagate through the whole chain, so
-  any decision can be traced back to the conditions that caused it.</p>
-
-  <div class="tablewrap"><table>
-    <thead><tr><th>Layer</th><th>Implementation</th></tr></thead>
-    <tbody>
-      <tr><td class="txt">Event bus</td><td class="txt">Deterministic in-process bus; schema-validated <code>EventEnvelope</code>; golden-replay determinism tests in CI</td></tr>
-      <tr><td class="txt">Engine</td><td class="txt">Python — 39 locked modules, 339,913 lines across 1,127 files, 220 test suites</td></tr>
-      <tr><td class="txt">Risk spine</td><td class="txt">Eight governors composed into a single exposure multiplier with binding-constraint attribution</td></tr>
-      <tr><td class="txt">Strategy layer</td><td class="txt">Six independent sleeves, each with its own cadence, universe and risk budget</td></tr>
-      <tr><td class="txt">Research loop</td><td class="txt">Champion–challenger and shadow search over ~1,270 tunable leaves, statistically gated</td></tr>
-      <tr><td class="txt">Operator API</td><td class="txt">FastAPI — snapshot and history endpoints, <code>/v1/stream</code> WebSocket, bearer auth, bounded and audited config overrides</td></tr>
-      <tr><td class="txt">Console</td><td class="txt">React + TypeScript + Vite + Tailwind — 37 registered operator routes</td></tr>
-      <tr><td class="txt">Intelligence</td><td class="txt">Catalyst mapping, regime detection, EDGAR extraction, MLES ensemble selection, uncertainty calibration</td></tr>
-      <tr><td class="txt">Execution</td><td class="txt">Adaptive fill router with probe-based venue selection; stealth order obfuscation</td></tr>
-      <tr><td class="txt">Deployment</td><td class="txt">Single Hetzner CX23 instance running 24/7 paper trading; a separate research learner runs independently</td></tr>
-      <tr><td class="txt">Broker &amp; data</td><td class="txt">Alpaca paper account, IEX real-time stream (30-symbol cap on the free tier), plus macro, news and filings feeds</td></tr>
-    </tbody>
-  </table></div>
-</div></section>
-
-<section id="risk"><div class="wrap reveal">
-  <div class="kicker">Risk spine</div>
-  <h2>Eight governors, composed</h2>
-  <p class="sub">This is the part of the system I would defend most confidently, because it is designed to be
-  <b>correct rather than profitable</b>. Risk controls don't need a forward-looking edge in order to work —
-  they need to be structurally impossible to bypass. Each governor independently emits a clamp, and a clamp
-  book aggregates them deterministically.</p>
-  <p class="sub"><b>The aggregation rule is the design decision worth defending.</b> Multipliers compose via
-  <code>min()</code>, not by averaging, and the book fails closed — the most restrictive clamp wins. Averaging
-  would let a permissive governor dilute a restrictive one, so a system that averages one "halt" against three
-  "fine"s keeps trading. Taking the minimum means <b>any single governor can stop the system on its own</b>,
-  and the console always names which one is binding.</p>
-  <div class="grid g4">
-    <div class="gov" style="--c:var(--red)"><div class="role">Hazard</div><div class="nm">Shield</div><p>Blocks individual trades on hazard conditions before they can reach sizing. 146 catalogued micros.</p></div>
-    <div class="gov" style="--c:var(--amber)"><div class="role">Aggression</div><div class="nm">WRAB</div><p>Regime-adaptive aggression scaling. The largest module in the system at 229 catalogued micros.</p></div>
-    <div class="gov" style="--c:var(--red)"><div class="role">Tiered cut</div><div class="nm">Drawdown circuit breaker</div><p>Steps exposure down in tiers as intraday drawdown deepens, rather than cutting in one jump.</p></div>
-    <div class="gov" style="--c:var(--blue)"><div class="role">Tail sizing</div><div class="nm">CVaR tail sizer</div><p>Sizes off conditional tail expectation rather than variance — it cares about the bad tail, not the average.</p></div>
-    <div class="gov" style="--c:var(--violet)"><div class="role">Overshoot</div><div class="nm">Equity bands &amp; cool-off</div><p>Anti-overshoot bands stop equity-driven sizing running away from itself; a steady-state governor enforces cool-off after abnormal activity.</p></div>
-    <div class="gov" style="--c:var(--accent)"><div class="role">Re-entry</div><div class="nm">Recovery parachute</div><p>Staged, rate-limited re-entry after a drawdown event instead of an immediate return to full size.</p></div>
-    <div class="gov" style="--c:var(--teal)"><div class="role">Capital</div><div class="nm">Allocator</div><p>Distributes capital across the six sleeves under every constraint above. 190 catalogued micros.</p></div>
-    <div class="gov" style="--c:var(--dim)"><div class="role">Governance</div><div class="nm">Omega ops</div><p>Top-level operational circuit and credit budget — the governor that can stand the whole system down.</p></div>
-  </div>
-  <pre><code>"""Profit Pilot — Risk Clamp Book.
-
-Multiple modules emit `risk.clamp` events (drawdown breaker, equity bands,
-loss-day fingerprint, recovery parachute, etc.).
-
-Execution needs a single coherent answer to questions like:
-- "Am I allowed to open new positions right now?"
-- "What risk multiplier applies to this sleeve/symbol?"
-- "Is the system in exit-only mode?"
-
-Design principles
------------------
-- *Fail closed*: the most restrictive clamp wins.
-- Multipliers compose via `min()` (i.e., smallest multiplier dominates).
-- Entry denial and exit-only flags follow highest-priority clamps.
-- TTL is in bars and decays on `market.bar` ticks.
-"""</code></pre>
-  <p class="sub">The choice worth defending is <b>composition by <code>min()</code> rather than by product or
-  average</b>. Averaging would let a permissive governor dilute a restrictive one — a system that averages one
-  "halt" against three "fine"s keeps trading. Taking the minimum means any single governor can stop the system
-  alone, and adding a ninth governor can only ever make the system safer, never riskier. That is the
-  difference between a risk layer that is <i>structurally</i> safe and one that is merely <i>behaviourally</i>
-  safe, and it is why the clamp book is one of the few places in this codebase where I would defend every
-  line.</p>
-
-  <div class="shot">
-    <img src="assets/pp/risk-spine-console.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Risk Spine Console showing six status dials, a binding-constraint explainer, a clamp-stack waterfall, and the ladder of eight risk governors with their multipliers and states">
-    <div class="cap"><b>Risk Spine Console.</b> The clamp-stack waterfall showing how each governor composes
-    into the final multiplier, and the binding-constraint explainer — "risk is capped at ×0.75 by drawdown
-    circuit breaker because intraday DD tier 1." <b>Rendered with the console's built-in sample dataset; every
-    figure shown is illustrative, not a performance record.</b></div>
-  </div>
-</div></section>
-
-<section id="sleeves"><div class="wrap reveal">
-  <div class="kicker">Strategy layer</div>
-  <h2>Six independent sleeves</h2>
-  <p class="sub">Each sleeve has its own cadence, universe and risk budget, and competes for capital through
-  the allocator. They are deliberately uncorrelated in mechanism, so that no single market regime can disable
-  all of them at once.</p>
-  <div class="grid g3">
-    <div class="card"><div class="tag">Swing · core book</div><h3>Core</h3><p>The primary multi-day book — the sleeve the rest of the platform is calibrated around.</p></div>
-    <div class="card"><div class="tag">Intraday</div><h3>Day trading</h3><p>Same-session entries and exits on a faster cadence with tighter risk envelopes.</p></div>
-    <div class="card"><div class="tag">Range</div><h3>Inside mode</h3><p>Compression and inside-bar structures — trades the resolution of contracted ranges.</p></div>
-    <div class="card"><div class="tag">Relative value</div><h3>Arbitrage</h3><p>Relationship and dislocation trades rather than directional exposure.</p></div>
-    <div class="card"><div class="tag">Convex</div><h3>Moonshot</h3><p>Small, strictly-capped asymmetric positions. Sized so that being wrong repeatedly is survivable.</p></div>
-    <div class="card"><div class="tag">24/7</div><h3>Crypto</h3><p>Continuous-session sleeve with its own cadence model, since crypto has no market close to anchor to.</p></div>
-  </div>
-</div></section>
-
-<section id="loop"><div class="wrap reveal">
-  <div class="kicker">Research loop</div>
-  <h2>The system tunes itself — under gates</h2>
-  <p class="sub">With ~1,270 tunable parameters, the default outcome of an unconstrained search is an overfit,
-  not a discovery. So the interesting engineering here is not the search. It's the gates.</p>
-  <div class="flow">
-    <div class="step"><div class="num">01</div><div class="nm">Propose</div><p>Shadow search generates challenger parameter sets against the running champion.</p></div>
-    <div class="step"><div class="num">02</div><div class="nm">Evaluate out-of-sample</div><p>Challengers are scored on data outside the fitting window. Most are declined here — that rejection rate is the feature.</p></div>
-    <div class="step"><div class="num">03</div><div class="nm">Canary</div><p>Survivors deploy at fractional allocation first, never straight to full size.</p></div>
-    <div class="step"><div class="num">04</div><div class="nm">Gated promotion</div><p>Promotion requires a significance threshold, a cooldown window, and a per-day promotion cap.</p></div>
-  </div>
-  <p class="sub">Every cycle's verdict is written to an append-only decision ledger, so the parameter state of
-  the system at any past moment is reconstructible — which matters more than it sounds, because a
-  self-modifying system without an audit trail is one you can never debug after the fact.</p>
-  <div class="shot">
-    <img src="assets/pp/self-improvement-loop.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages of the research loop">
-    <div class="cap"><b>Self-Improvement Control Room.</b> The loop end to end, including the count of
-    candidates declined at the out-of-sample gate. <b>Sample data — the candidate counts and outcomes shown
-    are the frontend's demo dataset, not a record of real promotions.</b></div>
-  </div>
-</div></section>
-
-<section id="modules"><div class="wrap reveal">
-  <div class="kicker">Module directory</div>
-  <h2>39 locked modules</h2>
-  <p class="sub">Every module is specified as a set of numbered "micros" — discrete, individually
-  implementable behaviours catalogued in a ledger before any of them are written. The counts below are read
-  from that ledger. The full ledger spans <b>1,823 catalogued micros across 54 module keys, of which 1,023
-  are implemented in code today</b>; the 39 locked modules shown here account for 1,706 of those rows and 984
-  of the implementations. The remainder are specified, redirected, held for review, or explicitly retired.</p>
-  <p class="sub"><b>The distinction is easy to abuse and worth being exact about.</b> "1,800 features" is a
-  number that would fit on a résumé; 1,023 implemented is the number that survives someone opening the
-  ledger. Both are on this page for that reason.</p>
-  <p class="sub">Modules with catalogued detail expand. The capabilities listed inside are the ones the
-  generated micro audit marks as <b>built</b> — not the full catalogue, and not the roadmap.</p>
-  <div class="filters" id="filters"></div>
-  <div class="modgrid" id="modgrid"></div>
-  <noscript><p class="sub">The interactive directory needs JavaScript. The category totals: Risk — 9 modules,
-  720 catalogued, 520 built · Strategy — 7 / 240 / 155 · Intelligence — 7 / 230 / 114 · Research — 6 / 214 /
-  132 · Ops — 7 / 214 / 34 · Execution — 3 / 88 / 29.</p></noscript>
-  <p class="sub">Risk is the largest category on every measure — nine modules, 42% of the catalogued surface
-  of the locked set, and more code than strategy, intelligence and execution combined. That is not an accident
-  of counting; it is where I think the difficulty in this problem actually lives.</p>
-</div></section>
-
-<section id="console"><div class="wrap reveal">
-  <div class="kicker">Operator console</div>
-  <h2>Mission Control</h2>
-  <p class="sub">Thirty-seven registered operator routes built in React and TypeScript against the platform's
-  read-model API — risk attribution, capital allocation, the research loop, replay, stress scenarios and
-  post-mortem tooling.</p>
-  <p class="sub" style="font-size:14.5px;opacity:.72">Every frame below is a live screenshot of the console
-  running against the frontend's built-in sample dataset, which ships with the app so the interface renders
-  without a backend attached. The figures shown are that sample data — the interface is real, the numbers are
-  illustrative.</p>
-  <div class="shots">
-    <div class="shot wide">
-      <img src="assets/pp/command-deck.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Command Deck showing an equity curve, capital allocation by sleeve, risk spine dials and champion-versus-challenger state">
-      <div class="cap"><b>Command Deck.</b> Equity curve, capital allocation by sleeve, live risk dials and
-      champion-vs-challenger state. Sample data.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/stress-scenario-lab.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Stress Scenario Lab interface for scenario construction and portfolio response">
-      <div class="cap"><b>Stress Scenario Lab.</b> Scenario construction and portfolio response. Sample data.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/allocator.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Allocator interface showing capital distribution across the six strategy sleeves">
-      <div class="cap"><b>Allocator.</b> Capital distribution across the six sleeves under the risk spine's
-      constraints. Sample data.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/sim-replay.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Sim and replay interface for deterministic replay of a recorded tape">
-      <div class="cap"><b>Sim &amp; Replay.</b> Deterministic replay of a recorded tape — the surface that makes
-      golden-replay determinism observable. Sample data.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/loss-day-analyzer.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Loss-Day Analyzer showing post-mortem fingerprinting of losing sessions">
-      <div class="cap"><b>Loss-Day Analyzer.</b> Post-mortem fingerprinting of losing sessions. Sample data.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/calibration-lab.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Calibration Lab interface for parameter calibration and readiness measurement">
-      <div class="cap"><b>Calibration Lab.</b> Parameter calibration and readiness measurement. Sample data.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/telemetry.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Telemetry interface showing observability and the audit trail">
-      <div class="cap"><b>Telemetry.</b> Observability and the audit trail behind every reason code. Sample data.</div>
-    </div>
-  </div>
-</div></section>
-
-<section id="testing"><div class="wrap reveal">
-  <div class="kicker">Verification</div>
-  <h2>Five layers of testing, before anything reaches a broker</h2>
-  <p class="sub">A trading system is only as trustworthy as the machinery built to attack it. Profit Pilot
-  carries five independent verification layers, each designed to catch a failure the others would miss.</p>
-
-  <div class="grid g2">
-    <div class="card accent">
-      <div class="tag">Layer one</div>
-      <h3>Historical backtesting</h3>
-      <p>Every sleeve runs against historical bars through the same event bus the live engine uses — the
-      identical code path, not a parallel research implementation. Commissions and slippage are modelled, and
-      the report ships with its own data-quality header, including an explicit survivorship-bias notice when
-      the dataset contains only currently-listed symbols.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag">Layer two</div>
-      <h3>Deterministic blind replay</h3>
-      <p>Any recorded session can be replayed bar for bar and must reproduce a byte-identical event sequence.
-      This is what makes a bug from three weeks ago reproducible on demand, and it is how a code change is
-      proven to have altered nothing it should not have. Golden-replay determinism runs in CI.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag">Layer three</div>
-      <h3>Out-of-sample gating</h3>
-      <p>Challenger parameter sets are scored on data outside the window they were fitted on, and the
-      overwhelming majority are declined there. Only survivors advance — and they advance to a fractional
-      canary, never straight to full size. A significance threshold, a cooldown window and a per-day
-      promotion cap sit behind that.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag">Layer four</div>
-      <h3>Monte Carlo &amp; synthetic scenarios</h3>
-      <p>The Ghost Synthetic Scenario Engine generates market conditions the historical record does not
-      contain, and the Stress Scenario Lab pushes the portfolio through constructed shocks. Resampling turns
-      single-path results into distributions, so a result is judged on its range rather than its one lucky
-      history.</p>
-    </div>
-  </div>
-
-  <div class="card accent" style="margin-top:15px">
-    <div class="tag">Layer five</div>
-    <h3>Live forward testing</h3>
-    <p>The system runs continuously in paper trading against a live brokerage API with real market data —
-    real quotes, real order routing, real fill reconciliation. Forward testing is the only layer that cannot
-    be overfitted, because the data has not been written yet. Every session is reconciled against the broker,
-    and a fail-closed kill switch halts trading on any mismatch between what the engine believes it holds and
-    what the broker reports.</p>
-  </div>
-
-  <p class="sub" style="margin-top:26px">Underneath all five sits an append-only decision ledger recording
-  every cycle's verdict, so the exact parameter state of the system at any past moment can be reconstructed.
-  A self-modifying system without an audit trail is one that can never be debugged after the fact — so the
-  audit trail was built first.</p>
-</div></section>
-
-<section id="road" class="last"><div class="wrap reveal">
-  <div class="kicker">What's next</div>
-  <h2>Where it goes from here</h2>
-  <p class="sub">Profit Pilot is in its first full testing year. The platform is built and running; the work
-  now is deepening the research layer around it.</p>
-  <div class="road">
-    <div class="ritem now"><div class="rn">Walk-forward validation</div><p>Rolling out-of-sample evaluation across historical data. Tuning, backtest and challenger evaluation already exist as components — this is the orchestration layer that chains them into a continuous rolling protocol.</p></div>
-    <div class="ritem"><div class="rn">Execution-model refinement</div><p>Tightening the fill model so simulated execution tracks live execution more closely — queue position, partial fills under stress, and market impact.</p></div>
-    <div class="ritem"><div class="rn">Per-sleeve attribution</div><p>Measuring all six sleeves independently rather than in aggregate, so capital concentrates in the ones earning their risk budget.</p></div>
-    <div class="ritem"><div class="rn">Broader universe</div><p>The live symbol set is currently capped by the market-data plan. Lifting that cap widens the opportunity set the allocator can select from.</p></div>
-  </div>
-  <div class="slot"><b>Repository</b><br>The Profit Pilot engine repository is private.
-  A read-only walkthrough is available on request.</div>
 </div></section>
 
 </main>
+<div class="ppstatus"><div class="wrap">
+  <div>
+    <div class="t">Current status</div>
+    <p>Profit Pilot is a <b>working trading system</b>, running continuously against a live brokerage API
+    with real market data. It is in an <b>independent testing stage ahead of public release</b> — live
+    capital is gated at the configuration layer by <code>allow_live_trading: false</code> while the
+    five-layer test stack does its work.</p>
+  </div>
+  <a class="btn ghost" href="pp-testing.html">The five test layers →</a>
+</div></div>
 <footer><div class="wrap">
   <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
-  <div><a href="index.html">← home</a></div>
+  <div><a href="profit-pilot.html">← Profit Pilot overview</a></div>
 </div></footer>
-
 <script>
-const MODULES = [["WRAB","Risk",229,173,36867],["Allocator","Risk",190,65,38096],["Shield","Risk",146,132,38773],["Calibration","Research",102,59,83337],["MLES","Intelligence",98,38,8609],["Recovery Parachute","Risk",98,98,1794],["Telemetry Logging Replay","Ops",96,4,582],["Moonshot","Strategy",72,46,9087],["Arbitrage","Strategy",70,41,7640],["Regime Detector","Intelligence",66,43,2050],["Stealth Obfuscation","Execution",60,16,5007],["Self Improvement","Research",51,29,3383],["Ops Heartbeat Operational Sentinel","Ops",35,5,501],["Crypto","Strategy",31,16,5248],["Loss Day Fingerprint","Research",29,29,5853],["Omega Ops","Ops",28,5,1057],["Day Trading","Strategy",23,18,6708],["Adaptive Fill Router","Execution",21,6,687],["Catalyst Map Reliability Weights","Intelligence",19,9,5846],["Liquidity Forecaster","Risk",19,16,3386],["Core","Strategy",18,16,1923],["Inside Mode","Strategy",18,10,2932],["Sim Replay","Research",18,11,2043],["Reporting Compliance Autopilot","Ops",17,4,370],["Uncertainty Calibration Layer","Intelligence",17,6,320],["Session Reports","Ops",16,3,274],["Edgar Extractor","Intelligence",13,9,3410],["Equity Bands Anti-Overshoot","Risk",13,13,1023],["Global Health Score","Ops",12,10,2640],["Catalyst Calendar","Intelligence",11,4,5846],["Daily Reports","Ops",10,3,313],["Steady-State Cool-Off Governor","Risk",10,10,899],["Drawdown Circuit Breaker","Risk",9,9,1269],["Ghost Synthetic Scenario Engine","Research",9,2,977],["Mode Switch Orchestrator","Strategy",8,8,1334],["AFR","Execution",7,7,687],["CVaR Position Sizer","Risk",6,4,675],["Catalyst Map","Intelligence",6,5,5846],["Performance Attribution Engine","Research",5,2,1527]];
-const DEEP = {"AFR": ["Adverse Fill Sentinel 2.0", "Cross-Venue Spread Arb Hooks", "Heat-Aware Routing (WRAB sync)", "Latency & Venue Health Matrix", "Predictive Microstructure Engine", "Self-Improvement Hooks", "Smart Kill Switch"], "ALLOCATOR": ["Adaptive Risk Parity", "All decisions are reason-coded", "Anomaly Clarifier+", "Anti-Correlation Drain & Cluster Governor", "Audit-proof", "Auto-Rebalance", "CVaR + correlation caps", "CVaR-Budgeted Sizing", "Calibration/Adaptation"], "ARBITRAGE": ["ADR–Ordinary Parity Check", "Arb Piggyback", "Atomic Tri-Leg IOC/FAK", "Auction & Reopen Drifts", "Borrow-Aware Proxy", "Borrow-Aware Short Guard", "Borrow/Short Awareness", "Capital Cycle with Core/DayTrade", "Core Fusion", "Corporate-Action Guard"], "CALIBRATION": ["Admin Runtime Config", "Aggressive fast-track (v3.2)", "Audit & Ledger", "Auto-Hedge Tuner", "Calibration & Replay", "Calibration Autopilot", "Calibration Harness + Meta-Calibrator"], "CATALYST_MAP": ["Catalyst Graph Memory", "Cross-Module Catalyst Fusion", "Event-Outcome Learning", "Hierarchical Catalyst Ontology", "Reliability Scoring Engine 2.0"], "CATALYST_MAP_RELIABILITY_WEIGHTS": ["FRQ+ severity", "Medium-term clarity", "Per-symbol scores", "primary for overnight earnings & news"], "CORE": ["Catalyst-Adaptive Core Bias", "Core Spine", "Defensive Bundle Auto-Fallback", "Drift & Fragility Dashboard", "Drift & Variance Sentinel", "Global Equity Harmonizer", "Market Regime Integrator", "Multi-Stream Fusion", "Operator Transparency Layer", "Portfolio balancing and daily core exposure logic"], "CRYPTO": ["Cross-Asset Firewall", "Cross-Exchange Volatility Arb", "Crypto Catalyst Overlay", "Crypto Trend Gate", "Entitlements/Providers", "Future-module adapters + reason codes + cohorting", "Self-Improvement Hooks", "Stablecoin Risk Manager"], "DAY_TRADING": ["ATR-Adaptive TP/SL", "Adaptive Heat Cycling", "Burst Detector", "Dynamic Micro-Ratchets", "Flow Predictor 1–3s", "Intraday Catalyst Overlay", "Micro-Alpha Ensemble 2.0", "Microstructure Shock Sentinels", "Path-Aware Burst-Stop", "Velocity Edge"], "DRAWDOWN_CIRCUIT_BREAKER": ["Drawdown Circuit Breaker", "Multi-Threshold Structure", "Multi-threshold risk halts with hysteresis", "Operator Transparency", "Real-Time Equity Sentinel", "Restart & Recovery Protocol", "WRAB & Allocator Sync"], "EDGAR_EXTRACTOR": ["EDGAR Extractor", "Edgar Extractor, Catalyst Map, Attribution", "K/Q ingestion; catalyst bridge", "SEC catalysts", "filing classifiers, signal hooks", "for news + filing catalyst ingestion", "integrate fundamental data parsing"], "EQUITY_BANDS_ANTI_OVERSHOOT": ["Anti-Overshoot Dampers", "Anti-Overshoot", "Dynamic Equity Bands", "Equity Bands & Anti-Overshoot", "Equity-band tracking", "Equity-based risk bands; WRAB feedback integration", "Loss-Band Clamp", "Ratchet-Lock Harmony", "Self-Improvement Hooks", "Stealth Integration"], "GLOBAL_HEALTH_SCORE": ["Daily & Session Reports", "Final Build 3, Attributor", "Ghost scenarios failed/passed", "Insider/political trades", "Plain-language digest", "Schema & math validation, SHA-256 anchor. Evidence", "Unified builder façade and schedulers. Evidence"], "INSIDE_MODE": ["Compliance Autopilot 2.0", "Cross-Module Injection", "Inside Mode", "Insider Fingerprint Bank", "Insider Graph Network", "Political Flow Sentinel"], "LIQUIDITY_FORECASTER": ["Catalyst-Aware Liquidity Adjustments", "Cross-Venue Liquidity Matrix", "Depth-Curvature Analysis", "Mode Switch Orchestrator", "Multi-Horizon Liquidity Modeling", "Normalization + constraints", "Predictive depth model; input to WRAB & AFR", "Self-Improvement Hooks", "Steady-State cool off governor"], "LOSS_DAY_FINGERPRINT": ["API surface for UI (read-only)", "Background sim (during live)", "Decoupled UI", "Emit reason-codes like prior.tighten", "LDF v2.0 scope", "Loss-day elimination", "Multi-armed penalty model", "Piecewise-smooth map"], "MLES": ["ATR-based hard stops", "Adaptivity/Self-improvement", "Catalyst Injection Layer", "Context Tags", "Contextual Ensemble", "Cost-Aware Online Meta-Learner", "Diversification Penalty", "Drift & Failover", "Ensemble Stack"], "MODE_SWITCH_ORCHESTRATOR": ["Mode Switch Orchestrator", "One-way guards", "Ops Heartbeat / Stale-Data Sentinel", "Promotion KPIs"], "MOONSHOT": ["Adaptive Equity Curve Governor", "Auto-Optimizer", "Auto-Pause on Cold Streak", "Burst-Profit Skimming", "Calendar Filter", "Catalyst Confirmed", "Catalyst Overlay", "Catalyst Supercharge Overlay", "Catalyst-confirmed convexity + time-box", "Confidence-Gated Allocation"], "RECOVERY_PARACHUTE": ["Anti-Overshoot Bands", "Catalyst-Aware Recovery", "Catalyst-aware fast-pass", "Day Trading Mode", "Day Trading Mode core structure", "Day Trading Mode is structurally in a good place", "Deterministic IDs", "Drawdown Circuit Breakers", "Drawdown Profile Detector", "Equity Bands & Anti-Overshoot"], "REGIME_DETECTOR": ["Behavior Auditor", "Calendar Dampers", "Catalyst Confirmation Gate", "Catalyst-Aware Regime Override", "Compute Cap_raw", "Confidence-Weighted Labels", "Cross-Timeframe Concordance", "Daily Hyper-tilts", "Event Fingerprint", "Fault-Tolerance"], "SELF_IMPROVEMENT": ["Confidence-Weighted Fusion Across Modules", "Ensemble Drift Sentinel", "Evolutionary Parameter Tuning", "Explainable Ledger", "Feature Gap Analyzer", "Global Scenario Synthesizer", "Hierarchical Confidence Fusion", "Hyper-parameter tuner", "Innovation Channel", "Interface Bridge"], "SHIELD": ["Adaptive Heat Cap", "Adaptive Risk Thermostat", "Adaptivity / Self-Evolution", "Adaptivity / Self-Improvement", "Allocator ↔ WRAB", "Anomaly + Circuit", "Anomaly Clarifier+", "Archive Awareness", "Auto-Optimizer", "Backlog Orchestrator"], "STEADY_STATE_COOL_OFF_GOVERNOR": ["Adaptive Decay Curve", "Dead-Zone Stabilizer", "Multi-Layer Integration", "Post-Win Refractory Period", "Post-surge risk decay controller; anti-over-trade", "Self-Improvement Hooks", "Steady-State Cool-Off Governor"], "STEALTH_OBFUSCATION": ["Adaptive Stealth Governor", "Audit-First", "Dynamic Bucket Weights", "Hard flag (temporary block)", "Invisible Hand", "Soft flag (throttle/reject patterns)"], "UNCERTAINTY_CALIBRATION_LAYER": ["Market-aware priors", "Quantifies forecast confidence for signal weighting", "Uncertainty Calibration Layer"], "WRAB": ["Adaptation Ledger (persisted)", "Adaptive DD Throttle", "Adaptive Ramp Slope", "Adaptive gating & recovery power", "Adverse-fill sentry", "Aggression Multiplier", "Aggression budget (raw)", "Aggressive Recovery & Compounding", "Aggressive Recovery & Compounding Governor", "Aggressive Recovery Governor"]};
-const KEYOF = {"WRAB":"WRAB","Allocator":"ALLOCATOR","Shield":"SHIELD","Calibration":"CALIBRATION","MLES":"MLES","Recovery Parachute":"RECOVERY_PARACHUTE","Telemetry Logging Replay":"TELEMETRY_LOGGING_REPLAY","Moonshot":"MOONSHOT","Arbitrage":"ARBITRAGE","Regime Detector":"REGIME_DETECTOR","Stealth Obfuscation":"STEALTH_OBFUSCATION","Self Improvement":"SELF_IMPROVEMENT","Ops Heartbeat Operational Sentinel":"OPS_HEARTBEAT_OPERATIONAL_SENTINEL","Crypto":"CRYPTO","Loss Day Fingerprint":"LOSS_DAY_FINGERPRINT","Omega Ops":"OMEGA_OPS","Day Trading":"DAY_TRADING","Adaptive Fill Router":"ADAPTIVE_FILL_ROUTER","Catalyst Map Reliability Weights":"CATALYST_MAP_RELIABILITY_WEIGHTS","Liquidity Forecaster":"LIQUIDITY_FORECASTER","Core":"CORE","Inside Mode":"INSIDE_MODE","Sim Replay":"SIM_REPLAY","Reporting Compliance Autopilot":"REPORTING_COMPLIANCE_AUTOPILOT","Uncertainty Calibration Layer":"UNCERTAINTY_CALIBRATION_LAYER","Session Reports":"SESSION_REPORTS","Edgar Extractor":"EDGAR_EXTRACTOR","Equity Bands Anti-Overshoot":"EQUITY_BANDS_ANTI_OVERSHOOT","Global Health Score":"GLOBAL_HEALTH_SCORE","Catalyst Calendar":"CATALYST_CALENDAR","Daily Reports":"DAILY_REPORTS","Steady-State Cool-Off Governor":"STEADY_STATE_COOL_OFF_GOVERNOR","Drawdown Circuit Breaker":"DRAWDOWN_CIRCUIT_BREAKER","Ghost Synthetic Scenario Engine":"GHOST_SYNTHETIC_SCENARIO_ENGINE","Mode Switch Orchestrator":"MODE_SWITCH_ORCHESTRATOR","AFR":"AFR","CVaR Position Sizer":"CVAR_POSITION_SIZER","Catalyst Map":"CATALYST_MAP","Performance Attribution Engine":"PERFORMANCE_ATTRIBUTION_ENGINE"};
-const GC = {Risk:'var(--red)',Strategy:'var(--accent)',Execution:'var(--blue)',Intelligence:'var(--violet)',Research:'var(--teal)',Ops:'var(--dimmer)'};
-const groups = ['All','Risk','Strategy','Intelligence','Research','Execution','Ops'];
-const fEl = document.getElementById('filters'), gEl = document.getElementById('modgrid');
-let active = 'All';
-groups.forEach(function(g){
-  var b = document.createElement('button');
-  b.className = 'fbtn' + (g === 'All' ? ' on' : '');
-  b.type = 'button';
-  var n = g === 'All' ? MODULES.length : MODULES.filter(function(m){return m[1] === g}).length;
-  b.textContent = g + '  ' + n;
-  b.onclick = function(){ active = g; Array.prototype.forEach.call(fEl.children,function(c){c.classList.remove('on')}); b.classList.add('on'); render(); };
-  fEl.appendChild(b);
-});
-function render(){
-  gEl.innerHTML = '';
-  MODULES.filter(function(m){return active === 'All' || m[1] === active}).forEach(function(m){
-    var caps = DEEP[KEYOF[m[0]]] || [];
-    var d = document.createElement('div');
-    d.className = 'mod' + (caps.length ? ' has' : '');
-    d.style.setProperty('--gc', GC[m[1]] || 'var(--dimmer)');
-
-    var head = document.createElement('div'); head.className = 'modhead';
-    var l = document.createElement('div'); l.className = 'l';
-    var n = document.createElement('div'); n.className = 'n'; n.textContent = m[0];
-    var g = document.createElement('div'); g.className = 'g'; g.textContent = m[1];
-    l.appendChild(n); l.appendChild(g);
-    var r = document.createElement('div'); r.className = 'r';
-    var box = document.createElement('div');
-    var mc = document.createElement('div'); mc.className = 'mc'; mc.textContent = m[2];
-    var ml = document.createElement('div'); ml.className = 'ml'; ml.textContent = m[3] + ' built';
-    box.appendChild(mc); box.appendChild(ml); r.appendChild(box);
-    if (caps.length) {
-      var ch = document.createElement('span'); ch.className = 'chev'; ch.textContent = '\u25B6';
-      r.appendChild(ch);
-    }
-    head.appendChild(l); head.appendChild(r); d.appendChild(head);
-
-    if (caps.length) {
-      var det = document.createElement('div'); det.className = 'moddet';
-      var dl = document.createElement('div'); dl.className = 'dl';
-      dl.textContent = 'Catalogued capabilities · sample of ' + m[3] + ' implemented';
-      var wrapc = document.createElement('div'); wrapc.className = 'caps';
-      caps.forEach(function(c){
-        var chip = document.createElement('span'); chip.className = 'cap-chip'; chip.textContent = c;
-        wrapc.appendChild(chip);
-      });
-      var loc = document.createElement('div'); loc.className = 'loc';
-      loc.textContent = m[4].toLocaleString() + ' lines in module';
-      det.appendChild(dl); det.appendChild(wrapc); det.appendChild(loc);
-      d.appendChild(det);
-      d.onclick = function(){
-        var wasOpen = d.classList.contains('open');
-        Array.prototype.forEach.call(gEl.querySelectorAll('.mod.open'), function(o){o.classList.remove('open')});
-        if (!wasOpen) d.classList.add('open');
-      };
-    }
-    gEl.appendChild(d);
-  });
-}
-var PY_RE = /(#[^\n]*)|("""[\s\S]*?"""|"[^"\n]*"|'[^'\n]*')|(@[\w.]+)|\b(class|def|return|import|from|None|True|False|self|str|int|float|bool|tuple|dict|list|Any|Mapping)\b|\b(\d+(?:\.\d+)?)\b/g;
-Array.prototype.forEach.call(document.querySelectorAll('pre code'), function(el){
-  var esc = el.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  el.innerHTML = esc.replace(PY_RE, function(m, c, st, dd, k, nn){
-    if (c)  return '<span class="c">' + c  + '</span>';
-    if (st) return '<span class="s">' + st + '</span>';
-    if (dd) return '<span class="d">' + dd + '</span>';
-    if (k)  return '<span class="k">' + k  + '</span>';
-    if (nn) return '<span class="n">' + nn + '</span>';
-    return m;
-  });
-});
-render();
 if ('IntersectionObserver' in window) {
   var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
-} else {
-  document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});
-}
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
 </script>
+
 </body>
 </html>

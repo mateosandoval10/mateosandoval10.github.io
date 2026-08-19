@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sleeves — Profit Pilot — Mateo Sandoval</title>
+<meta name="description" content="The six Profit Pilot strategy sleeves - Core, Day Trading, Inside Mode, Arbitrage, Moonshot and Crypto: what each trades, on what cadence, why each exists separately, and how they compete for capital.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+<div class="subnav"><div class="wrap"><a class="home" href="index.html">← hub</a><a href="profit-pilot.html">Overview</a><a href="pp-architecture.html">Architecture</a><a href="pp-risk.html">Risk spine</a><a href="pp-sleeves.html" aria-current="page">Sleeves</a><a href="pp-modules.html">Modules</a><a href="pp-testing.html">Testing</a><a href="pp-console.html">Console</a></div></div>
+<main id="main">
+
+<header class="hero tight"><div class="wrap">
+  <div class="eyebrow">Profit Pilot &middot; strategy layer</div>
+  <h1>Six independent<br><span class="grad">sleeves.</span></h1>
+  <p class="lede">Each sleeve is a separate signal producer with its own cadence, universe and risk budget.
+  They are deliberately uncorrelated in mechanism, so that <b>no single market regime can disable all of
+  them at once</b> &mdash; and they compete for capital through the allocator rather than being allotted it.</p>
+</div></header>
+
+<section id="why"><div class="wrap reveal">
+  <div class="kicker">Why sleeves at all</div>
+  <h2>Separation is a risk decision,<br>not an organisational one</h2>
+  <p class="sub">A single strategy with many conditions inside it is one failure away from silence &mdash; and
+  when it fails, there is no way to tell which condition broke. Splitting the book into sleeves buys three
+  specific things: each one can be <b>measured for its own expectancy</b>, each can be <b>throttled or halted
+  independently</b> by the risk spine, and each can be <b>retired without touching the others</b>. The cost is
+  that every sleeve has to justify its capital against the rest, every day.</p>
+  <div class="defs">
+    <div class="defrow"><div class="l">Signal contract</div><div class="r">Every sleeve emits <code>strategy.signal</code> events onto the same bus. A sleeve does not size the trade, choose the venue, or decide whether it is allowed &mdash; it makes a claim, and the rest of the platform adjudicates</div></div>
+    <div class="defrow"><div class="l">Capital competition</div><div class="r">The <b>allocator</b> distributes capital across all six under the risk spine's constraints. A sleeve that stops earning its risk budget is throttled, and eventually refused promotion</div></div>
+    <div class="defrow"><div class="l">Independent halt</div><div class="r">Any governor can clamp a single sleeve without touching the others &mdash; clamp scope is <code>GLOBAL</code>, <code>SLEEVE</code> or <code>SYMBOL</code></div></div>
+    <div class="defrow"><div class="l">Cadence isolation</div><div class="r">A sub-second sleeve and a multi-day sleeve share no timing assumptions, so neither can starve or overwhelm the other</div></div>
+  </div>
+</div></section>
+
+<section id="sleeves" class="last"><div class="wrap reveal">
+  <div class="kicker">The six</div>
+  <h2>What each one trades, and why it exists</h2>
+  <p class="sub">Ordered from the slowest and most conservative to the most specialised. Engine versions,
+  micro counts and module sizes are read from the implementation ledger.</p>
+<div class="deep">
+  <div class="dhead">
+    <span class="dnum">01</span>
+    <h3>Core</h3>
+    <span class="dtag ">Swing &middot; core book</span>
+  </div>
+  <div class="minis c4">
+    <div><div class="v">v4.0</div><div class="k">Engine version</div></div>
+    <div><div class="v">18</div><div class="k">Catalogued micros</div></div>
+    <div><div class="v">16</div><div class="k">Implemented</div></div>
+    <div><div class="v">1,923</div><div class="k">Lines in module</div></div>
+  </div>
+  <div class="defs"><div class="defrow"><div class="l">What it trades</div><div class="r">Multi-day equity positions &mdash; the primary book the rest of the platform is calibrated around</div></div><div class="defrow"><div class="l">Cadence</div><div class="r">Daily exposure logic with portfolio balancing; the slowest sleeve in the system</div></div><div class="defrow"><div class="l">Design intent</div><div class="r">Explicitly <b>conservative alpha</b>. The engine's own specification says it should <i>survive anything and keep compounding</i>, and that it <b>defers aggressive behaviour to Moonshot and Day Trading</b></div></div><div class="defrow"><div class="l">Why it is separate</div><div class="r">It is the sleeve that must still be standing after a bad quarter. Mixing it with faster, convex strategies would let their drawdowns dictate its sizing</div></div><div class="defrow"><div class="l">How it differs</div><div class="r">Regime-aware and catalyst-aware, but not event-triggered like Inside Mode and not microstructure-driven like Day Trading. It reacts to the state of the market, not to individual prints</div></div><div class="defrow"><div class="l">Capital competition</div><div class="r">Holds the baseline allocation; the other sleeves bid for capital above it</div></div></div>
+  <div class="chiplabel">Built capabilities</div>
+  <div class="chips"><span class="chip">Core Spine</span><span class="chip">Market Regime Integrator</span><span class="chip">Catalyst-Adaptive Core Bias</span><span class="chip">Multi-Stream Fusion</span><span class="chip">Global Equity Harmonizer</span><span class="chip">Defensive Bundle Auto-Fallback</span><span class="chip">Drift &amp; Fragility Dashboard</span><span class="chip">Operator Transparency Layer</span></div>
+</div>
+<div class="deep">
+  <div class="dhead">
+    <span class="dnum">02</span>
+    <h3>Day Trading</h3>
+    <span class="dtag ">Intraday &middot; microstructure</span>
+  </div>
+  <div class="minis c4">
+    <div><div class="v">v6.0</div><div class="k">Engine version</div></div>
+    <div><div class="v">23</div><div class="k">Catalogued micros</div></div>
+    <div><div class="v">18</div><div class="k">Implemented</div></div>
+    <div><div class="v">6,708</div><div class="k">Lines in module</div></div>
+  </div>
+  <div class="defs"><div class="defrow"><div class="l">What it trades</div><div class="r">Same-session equity entries and exits, sized off intraday volatility</div></div><div class="defrow"><div class="l">Cadence</div><div class="r">The fastest sleeve &mdash; dedicated tick-horizon learners at <b>30 seconds, 1 minute and 5 minutes</b>, combined by entropy-weighted fusion so the horizon with the clearest signal dominates</div></div><div class="defrow"><div class="l">What makes it work</div><div class="r">Queue-aware microstructure features built from trade, quote and order-book streams, plus a <b>flow predictor on a 1&ndash;3 second horizon</b>. It is the only sleeve that models the order book rather than the bar</div></div><div class="defrow"><div class="l">Its own safety layer</div><div class="r">A microstructure shock sentinel watches for spread blowout and depth collapse and auto-resets after 2&ndash;3 bars; a dynamic risk thermostat responds to intraday volatility clustering; a time-of-day heat map enforces what the spec calls <b>no-EOD-binge discipline</b></div></div><div class="defrow"><div class="l">Why it is separate</div><div class="r">Sub-second and multi-day logic cannot share a risk model. A stop that is correct for a swing position is noise at a one-minute horizon, and the reverse</div></div><div class="defrow"><div class="l">Capital competition</div><div class="r">Highest turnover of any sleeve, so it is judged on risk-adjusted contribution rather than gross points &mdash; the same standard that retired a component in my <a href="research.html">intraday futures research</a></div></div></div>
+  <div class="chiplabel">Built capabilities</div>
+  <div class="chips"><span class="chip">Flow Predictor 1&ndash;3s</span><span class="chip">Micro-Alpha Ensemble 2.0</span><span class="chip">Burst Detector</span><span class="chip">Velocity Edge</span><span class="chip">ATR-Adaptive TP/SL</span><span class="chip">Dynamic Micro-Ratchets</span><span class="chip">Path-Aware Burst-Stop</span><span class="chip">Microstructure Shock Sentinels</span><span class="chip">Adaptive Heat Cycling</span><span class="chip">Intraday Catalyst Overlay</span></div>
+</div>
+<div class="deep">
+  <div class="dhead">
+    <span class="dnum">03</span>
+    <h3>Inside Mode</h3>
+    <span class="dtag ">Event-driven &middot; flow</span>
+  </div>
+  <div class="minis c4">
+    <div><div class="v">v5.0</div><div class="k">Engine version</div></div>
+    <div><div class="v">18</div><div class="k">Catalogued micros</div></div>
+    <div><div class="v">10</div><div class="k">Implemented</div></div>
+    <div><div class="v">2,932</div><div class="k">Lines in module</div></div>
+  </div>
+  <div class="defs"><div class="defrow"><div class="l">What it trades</div><div class="r">Positions formed from clustered insider, institutional and political flow signals around catalyst events</div></div><div class="defrow"><div class="l">Cadence</div><div class="r">Event-triggered rather than scheduled &mdash; it consumes <code>catalyst.event</code> messages alongside market bars</div></div><div class="defrow"><div class="l">Mechanism</div><div class="r">Builds an <b>inside-flow cluster score per symbol</b> and emits a signal only when the cluster is strong enough. A single filing is not a trade; a convergence of them might be</div></div><div class="defrow"><div class="l">The interesting part</div><div class="r">When a post-event move exceeds a threshold the sleeve emits a <code>catalyst.attribution_request</code>, so the Catalyst Map can <b>learn the reliability of that event type</b>. The sleeve feeds the system that scores it</div></div><div class="defrow"><div class="l">Why it is separate</div><div class="r">Its inputs are filings and disclosures, not prices. It goes quiet for long stretches, which would look like failure inside a price-driven sleeve</div></div><div class="defrow"><div class="l">Capital competition</div><div class="r">Bursty by nature &mdash; it draws capital when clusters form and returns it when they do not, which is why it sits behind the allocator rather than holding a standing allocation</div></div></div>
+  <div class="chiplabel">Built capabilities</div>
+  <div class="chips"><span class="chip">Insider Fingerprint Bank</span><span class="chip">Insider Graph Network</span><span class="chip">Political Flow Sentinel</span><span class="chip">Cross-Module Injection</span><span class="chip">Compliance Autopilot 2.0</span></div>
+</div>
+<div class="deep">
+  <div class="dhead">
+    <span class="dnum">04</span>
+    <h3>Arbitrage</h3>
+    <span class="dtag ">Relative value &middot; paired legs</span>
+  </div>
+  <div class="minis c4">
+    <div><div class="v">v5.0</div><div class="k">Engine version</div></div>
+    <div><div class="v">70</div><div class="k">Catalogued micros</div></div>
+    <div><div class="v">41</div><div class="k">Implemented</div></div>
+    <div><div class="v">7,640</div><div class="k">Lines in module</div></div>
+  </div>
+  <div class="defs"><div class="defrow"><div class="l">What it trades</div><div class="r">Relationships rather than direction &mdash; ADR against ordinary listings, and dislocations around auctions and reopens</div></div><div class="defrow"><div class="l">Cadence</div><div class="r">Opportunistic, gated on a spread z-score reaching an extreme</div></div><div class="defrow"><div class="l">Mechanism</div><div class="r">Emits <b>paired signals &mdash; two legs at once</b> &mdash; and downstream components must treat them as a group via <code>meta.arb_group</code>. A half-filled pair is not a position, it is exposure</div></div><div class="defrow"><div class="l">Execution requirements</div><div class="r"><b>Atomic tri-leg IOC/FAK</b> execution, because legging into a relative-value trade at market is how the edge gets paid to somebody else. A borrow-aware short guard and a corporate-actions guard sit in front of it</div></div><div class="defrow"><div class="l">Why it is separate</div><div class="r">It is the only sleeve whose signal is inherently multi-symbol, and the only one whose execution failure mode is <i>partial success</i>. That demands its own contract</div></div><div class="defrow"><div class="l">Capital competition</div><div class="r">Shares a capital cycle with Core and Day Trading, so a widening spread can pull capacity away from directional books when the relative-value opportunity is better</div></div></div>
+  <div class="chiplabel">Built capabilities</div>
+  <div class="chips"><span class="chip">ADR&ndash;Ordinary Parity Check</span><span class="chip">Atomic Tri-Leg IOC/FAK</span><span class="chip">Auction &amp; Reopen Drifts</span><span class="chip">Borrow-Aware Short Guard</span><span class="chip">Borrow-Aware Proxy</span><span class="chip">Corporate-Action Guard</span><span class="chip">Capital Cycle with Core/DayTrade</span><span class="chip">Arb Piggyback</span></div>
+</div>
+<div class="deep">
+  <div class="dhead">
+    <span class="dnum">05</span>
+    <h3>Moonshot</h3>
+    <span class="dtag ">Convex &middot; strictly capped</span>
+  </div>
+  <div class="minis c4">
+    <div><div class="v">v8.5</div><div class="k">Engine version</div></div>
+    <div><div class="v">72</div><div class="k">Catalogued micros</div></div>
+    <div><div class="v">46</div><div class="k">Implemented</div></div>
+    <div><div class="v">9,087</div><div class="k">Lines in module</div></div>
+  </div>
+  <div class="defs"><div class="defrow"><div class="l">What it trades</div><div class="r">Small, asymmetric, catalyst-confirmed positions &mdash; deliberately low hit rate, deliberately capped loss</div></div><div class="defrow"><div class="l">Cadence</div><div class="r">Time-boxed. A convexity thesis that has not paid within its window is closed, not held in hope</div></div><div class="defrow"><div class="l">Sizing philosophy</div><div class="r">Sized so that <b>being wrong repeatedly is survivable</b>. This is the sleeve where position sizing does the work, not signal quality</div></div><div class="defrow"><div class="l">Self-limiting behaviour</div><div class="r"><b>Auto-pause on cold streak</b> and an adaptive equity-curve governor mean the sleeve stands itself down after a run of losses, rather than waiting for the risk spine to do it</div></div><div class="defrow"><div class="l">Why it is separate</div><div class="r">Its return distribution is the opposite shape to Core's. Averaged into a conservative book its variance would look like a defect; isolated, it is the point</div></div><div class="defrow"><div class="l">Capital competition</div><div class="r">Confidence-gated allocation &mdash; it draws meaningful capital only when a catalyst is confirmed, and skims profit off bursts rather than pyramiding into them</div></div></div>
+  <div class="chiplabel">Built capabilities</div>
+  <div class="chips"><span class="chip">Catalyst-confirmed convexity + time-box</span><span class="chip">Confidence-Gated Allocation</span><span class="chip">Auto-Pause on Cold Streak</span><span class="chip">Adaptive Equity Curve Governor</span><span class="chip">Burst-Profit Skimming</span><span class="chip">Catalyst Supercharge Overlay</span><span class="chip">Calendar Filter</span></div>
+</div>
+<div class="deep">
+  <div class="dhead">
+    <span class="dnum">06</span>
+    <h3>Crypto</h3>
+    <span class="dtag off">24/7 &middot; paper-enabled</span>
+  </div>
+  <div class="minis c4">
+    <div><div class="v">v5.0</div><div class="k">Engine version</div></div>
+    <div><div class="v">31</div><div class="k">Catalogued micros</div></div>
+    <div><div class="v">16</div><div class="k">Implemented</div></div>
+    <div><div class="v">5,248</div><div class="k">Lines in module</div></div>
+  </div>
+  <div class="defs"><div class="defrow"><div class="l">What it trades</div><div class="r">Continuous-session digital assets, with its own cadence model &mdash; crypto has no market close to anchor a session to</div></div><div class="defrow"><div class="l">Cadence</div><div class="r">24/7. Every other sleeve can assume a daily reset; this one cannot, so it carries a separate activation and readiness spine</div></div><div class="defrow"><div class="l">Current state</div><div class="r">Enabled in <b>paper mode</b> since 2026-07-04 (<code>activation_mode: paper</code>). Live trading for every sleeve remains gated by <code>allow_live_trading: false</code></div></div><div class="defrow"><div class="l">Its own risk problem</div><div class="r">A <b>cross-asset firewall</b> stops crypto volatility propagating into equity sizing, and a stablecoin risk manager treats the settlement asset as a risk rather than as cash</div></div><div class="defrow"><div class="l">Why it is separate</div><div class="r">Different venues, different settlement, different hours and different tail behaviour. Folding it into an equity sleeve would import all four assumptions incorrectly</div></div><div class="defrow"><div class="l">Capital competition</div><div class="r">Gated by provider entitlement and readiness checks before it can bid for capital at all</div></div></div>
+  <div class="chiplabel">Built capabilities</div>
+  <div class="chips"><span class="chip">Crypto Trend Gate</span><span class="chip">Cross-Asset Firewall</span><span class="chip">Cross-Exchange Volatility Arb</span><span class="chip">Stablecoin Risk Manager</span><span class="chip">Entitlements/Providers</span><span class="chip">Future-module adapters + reason codes</span></div>
+</div>
+
+  <div class="confirmed" style="margin-top:34px"><b>THE POINT OF THE SPLIT.</b> Six sleeves means six
+  independent answers to "is this still working?" &mdash; and six places the platform can intervene without
+  touching anything else. A monolithic strategy gives you one answer and one lever. The
+  <a href="pp-risk.html">risk spine</a> is what makes the separation enforceable, and the
+  <a href="pp-modules.html">module directory</a> shows what each sleeve is actually built out of.</div>
+</div></section>
+
+</main>
+<div class="ppstatus"><div class="wrap">
+  <div>
+    <div class="t">Current status</div>
+    <p>Profit Pilot is a <b>working trading system</b>, running continuously against a live brokerage API
+    with real market data. It is in an <b>independent testing stage ahead of public release</b> — live
+    capital is gated at the configuration layer by <code>allow_live_trading: false</code> while the
+    five-layer test stack does its work.</p>
+  </div>
+  <a class="btn ghost" href="pp-testing.html">The five test layers →</a>
+</div></div>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="profit-pilot.html">← Profit Pilot overview</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+
+</body>
+</html>

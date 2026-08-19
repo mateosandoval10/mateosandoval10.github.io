@@ -36,7 +36,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="pills">
     <a class="pill live" href="profit-pilot.html">Profit Pilot · 39 modules · running 24/7</a>
     <a class="pill" href="research.html">Validation pipeline</a>
-    <a class="pill" href="strategies.html">4 documented strategies</a>
+    <a class="pill" href="strategies.html">3 open-source strategies published</a>
   </div>
 </div></header>
 
@@ -58,8 +58,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   </div>
   <div class="shot">
     <img src="assets/pp/command-deck.webp" width="1600" height="1000" alt="Profit Pilot Mission Control Command Deck showing an equity curve, capital allocation by sleeve, risk spine dials and champion-versus-challenger state" decoding="async">
-    <div class="cap"><b>Mission Control — Command Deck.</b> Rendered with the frontend's built-in sample
-    dataset; every figure shown is illustrative, not a performance record.</div>
+    <div class="cap"><b>Mission Control — Command Deck.</b> <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
   <div class="chiplabel">Risk spine — eight governors, composed by min(), fails closed</div>
   <div class="chips">
@@ -85,7 +84,12 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   live code path, deterministic blind replay, out-of-sample gating, Monte Carlo and synthetic scenario
   generation, and continuous live forward testing against a real brokerage API. It is in its first full
   testing year.</p>
-  <div class="btnrow"><a class="btn" href="profit-pilot.html">Open Profit Pilot →</a></div>
+  <div class="btnrow">
+    <a class="btn" href="profit-pilot.html">Open Profit Pilot →</a>
+    <a class="btn ghost" href="pp-risk.html">Risk spine</a>
+    <a class="btn ghost" href="pp-sleeves.html">The six sleeves</a>
+    <a class="btn ghost" href="pp-testing.html">Five test layers</a>
+  </div>
 </div></section>
 
 <section id="method"><div class="wrap reveal">
@@ -132,24 +136,42 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 </div></section>
 
 <section id="strategies"><div class="wrap reveal">
-  <div class="kicker">Strategy library</div>
-  <h2>Four documented systems</h2>
-  <p class="sub">Each targets a distinct return source. All results: TradingView Strategy Tester, daily bars,
-  0.05% commission per side, slippage modeled, $10,000 initial capital — in-sample upper bounds, never
-  forecasts.</p>
+  <div class="kicker">Systematic trading strategies</div>
+  <h2>Three published as<br>open-source code</h2>
+  <p class="sub">Four original systems in Pine Script v6. The differentiator is not the headline returns —
+  it is that <b>three of them are published open-source on TradingView</b>, so the logic is readable and the
+  Strategy Tester result is reproducible by anyone. A backtest on my own site is an assertion; one whose
+  source is public and whose result a stranger can re-run is evidence.</p>
+  <div class="minis">
+    <div><div class="v">3</div><div class="k">Published open-source</div></div>
+    <div><div class="v">30+</div><div class="k">Experiments rejected</div></div>
+    <div><div class="v">27</div><div class="k">Year window, CRS</div></div>
+    <div><div class="v">5×</div><div class="k">Slippage stress passed</div></div>
+    <div><div class="v">2</div><div class="k">Cross-symbol transfers</div></div>
+    <div><div class="v">1</div><div class="k">Documented miss, kept</div></div>
+  </div>
+  <div class="shot">
+    <img src="assets/cbs_trades.webp" width="1600" height="585" loading="lazy" decoding="async" alt="Compression Breakout System running on AAPL daily bars with every entry and exit labeled with its profit or loss">
+    <div class="cap"><b>CBS on AAPL daily.</b> Every entry and exit labeled with per-trade P&amp;L — Strategy
+    Tester output on historical bars, not a trading record.</div>
+  </div>
   <div class="tablewrap"><table>
-    <thead><tr><th>System</th><th>Market</th><th>Net</th><th>PF</th><th>Max DD</th><th>Mechanism</th></tr></thead>
+    <caption>Frozen-parameter validation. Nothing was re-tuned between cells.</caption>
+    <thead><tr><th>Test</th><th>Condition</th><th>Net</th><th>PF</th><th>What it shows</th></tr></thead>
     <tbody>
-      <tr><td class="txt"><a href="cbs.html">Compression Breakout</a></td><td>AAPL 2005–26</td><td class="pos">+899%</td><td>4.33</td><td>14.4%</td><td class="txt">Bollinger-width squeeze → volume-confirmed range break → chandelier trail, risk-sized off the stop</td></tr>
-      <tr><td class="txt"><a href="vtte.html">Vol-Target Trend Engine</a></td><td>TQQQ 2010–26</td><td class="pos">+3,862%</td><td>3.33</td><td>41.9%</td><td class="txt">200-day regime gate plus volatility-targeted exposure — the edge is the sizing policy, not a signal</td></tr>
-      <tr><td class="txt"><a href="crs.html">Channel Reversion</a></td><td>QQQ 1999–26</td><td>+104%</td><td>2.28</td><td class="pos">15.2%</td><td class="txt">Donchian support inside uptrends only, exit at the channel mid. ~80% of the time in cash</td></tr>
-      <tr><td class="txt"><a href="qv2.html">QV Signal Pro v2</a></td><td>TQQQ 2011–26</td><td class="pos">+489%</td><td>2.17</td><td class="mut">−20% worst trade</td><td class="txt">Money-flow and volatility-calm swing score, rebuilt from a trade-by-trade loss autopsy</td></tr>
+      <tr><td class="txt">Split-sample</td><td>2005–15 / 2015–26</td><td class="pos">+164% / +293%</td><td>3.35 / 4.97</td><td class="txt">Positive in both decade halves — not a single-era artifact</td></tr>
+      <tr><td class="txt">Slippage stress</td><td>5× modeled</td><td class="pos">+256%</td><td>4.77</td><td class="txt">Not execution-fragile</td></tr>
+      <tr><td class="txt">Cross-symbol</td><td>NVDA, frozen</td><td class="pos">+658%</td><td>3.26</td><td class="txt">Parameters transfer</td></tr>
+      <tr><td class="txt">Cross-symbol</td><td>MSFT, frozen</td><td>+46%</td><td class="neg">1.32</td><td class="txt neg">The documented miss — kept visible on purpose</td></tr>
     </tbody>
   </table></div>
-  <p class="sub">The library page also carries the cross-symbol test where the flagship system barely cleared
-  costs, and the rejection log — roughly thirty candidate improvements tested and killed, with the measured
-  numbers that killed them.</p>
-  <div class="btnrow"><a class="btn ghost" href="strategies.html">Open the strategy library →</a></div>
+  <p class="sub">All figures are <b>in-sample backtests with costs modeled — upper bounds on expectancy, not
+  forecasts.</b> The strategy section carries the full cost model, the cross-symbol dispersion and the
+  limitations that go with them.</p>
+  <div class="btnrow">
+    <a class="btn" href="strategies.html">Open the strategy section →</a>
+    <a class="btn ghost" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">Published scripts ↗</a>
+  </div>
 </div></section>
 
 <section id="tooling"><div class="wrap reveal">
@@ -187,7 +209,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <tr><td class="txt">Intraday research</td><td class="txt">Placebo-tested, bootstrap-bounded model results under stated fill assumptions</td><td class="txt neg">Not a track record. One instrument, one era, small samples</td></tr>
       <tr><td class="txt">Strategy library</td><td class="txt">Backtests with costs modeled; split-sample and cross-symbol tests shown</td><td class="txt neg">In-sample, single-history. Upper bounds, not forecasts</td></tr>
       <tr><td class="txt">Research tooling</td><td class="txt">Design, architecture and intent</td><td class="txt mut">In active development</td></tr>
-      <tr><td class="txt">Open source</td><td class="txt mut">—</td><td class="txt neg">Zero merged pull requests. Not described as a contributor until one merges</td></tr>
+      <tr><td class="txt">Open source</td><td class="txt">Three strategies published as open-source Pine Script v6 on TradingView, source readable and results reproducible</td><td class="txt neg">Zero merged pull requests to other projects. Not described as a contributor to those until one merges</td></tr>
     </tbody>
   </table></div>
   <div class="defs">

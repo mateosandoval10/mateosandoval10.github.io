@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Modules — Profit Pilot — Mateo Sandoval</title>
+<meta name="description" content="The full Profit Pilot module directory: 39 locked modules with catalogued and implemented micro counts, filterable by category and expandable to their built capabilities.">
+<meta name="color-scheme" content="dark light">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}
+document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site"><div class="wrap">
+  <div class="brand"><a href="index.html">mateo<b>sandoval</b></a></div>
+  <div class="navwrap">
+    <nav>
+      <a href="profit-pilot.html" aria-current="page">Profit Pilot</a>
+      <a href="research.html">Methodology</a>
+      <a href="strategies.html">Strategies</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+    <button class="themebtn" data-theme-toggle type="button" aria-label="Switch theme"><span class="ico-light">◐</span><span class="ico-dark">◑</span></button>
+  </div>
+</div></header>
+<div class="subnav"><div class="wrap"><a class="home" href="index.html">← hub</a><a href="profit-pilot.html">Overview</a><a href="pp-architecture.html">Architecture</a><a href="pp-risk.html">Risk spine</a><a href="pp-sleeves.html">Sleeves</a><a href="pp-modules.html" aria-current="page">Modules</a><a href="pp-testing.html">Testing</a><a href="pp-console.html">Console</a></div></div>
+<main id="main">
+
+<section id="modules" class="last"><div class="wrap reveal">
+  <div class="kicker">Module directory</div>
+  <h2>39 locked modules</h2>
+  <p class="sub">Every module is specified as a set of numbered "micros" — discrete, individually
+  implementable behaviours catalogued in a ledger before any of them are written. The counts below are read
+  from that ledger. The full ledger spans <b>1,823 catalogued micros across 54 module keys, of which 1,023
+  are implemented in code today</b>; the 39 locked modules shown here account for 1,706 of those rows and 984
+  of the implementations. The remainder are specified, redirected, held for review, or explicitly retired.</p>
+  <p class="sub"><b>The distinction is easy to abuse and worth being exact about.</b> "1,800 features" is a
+  number that would fit on a résumé; 1,023 implemented is the number that survives someone opening the
+  ledger. Both are on this page for that reason.</p>
+  <p class="sub">Modules with catalogued detail expand. The capabilities listed inside are the ones the
+  generated micro audit marks as <b>built</b> — not the full catalogue, and not the roadmap.</p>
+  <div class="filters" id="filters"></div>
+  <div class="modgrid" id="modgrid"></div>
+  <noscript><p class="sub">The interactive directory needs JavaScript. The category totals: Risk — 9 modules,
+  720 catalogued, 520 built · Strategy — 7 / 240 / 155 · Intelligence — 7 / 230 / 114 · Research — 6 / 214 /
+  132 · Ops — 7 / 214 / 34 · Execution — 3 / 88 / 29.</p></noscript>
+  <p class="sub">Risk is the largest category on every measure — nine modules, 42% of the catalogued surface
+  of the locked set, and more code than strategy, intelligence and execution combined. That is not an accident
+  of counting; it is where I think the difficulty in this problem actually lives.</p>
+</div></section>
+
+</main>
+<div class="ppstatus"><div class="wrap">
+  <div>
+    <div class="t">Current status</div>
+    <p>Profit Pilot is a <b>working trading system</b>, running continuously against a live brokerage API
+    with real market data. It is in an <b>independent testing stage ahead of public release</b> — live
+    capital is gated at the configuration layer by <code>allow_live_trading: false</code> while the
+    five-layer test stack does its work.</p>
+  </div>
+  <a class="btn ghost" href="pp-testing.html">The five test layers →</a>
+</div></div>
+<footer><div class="wrap">
+  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div><a href="profit-pilot.html">← Profit Pilot overview</a></div>
+</div></footer>
+<script>
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
+</script>
+<script>
+const MODULES = [["WRAB","Risk",229,173,36867],["Allocator","Risk",190,65,38096],["Shield","Risk",146,132,38773],["Calibration","Research",102,59,83337],["MLES","Intelligence",98,38,8609],["Recovery Parachute","Risk",98,98,1794],["Telemetry Logging Replay","Ops",96,4,582],["Moonshot","Strategy",72,46,9087],["Arbitrage","Strategy",70,41,7640],["Regime Detector","Intelligence",66,43,2050],["Stealth Obfuscation","Execution",60,16,5007],["Self Improvement","Research",51,29,3383],["Ops Heartbeat Operational Sentinel","Ops",35,5,501],["Crypto","Strategy",31,16,5248],["Loss Day Fingerprint","Research",29,29,5853],["Omega Ops","Ops",28,5,1057],["Day Trading","Strategy",23,18,6708],["Adaptive Fill Router","Execution",21,6,687],["Catalyst Map Reliability Weights","Intelligence",19,9,5846],["Liquidity Forecaster","Risk",19,16,3386],["Core","Strategy",18,16,1923],["Inside Mode","Strategy",18,10,2932],["Sim Replay","Research",18,11,2043],["Reporting Compliance Autopilot","Ops",17,4,370],["Uncertainty Calibration Layer","Intelligence",17,6,320],["Session Reports","Ops",16,3,274],["Edgar Extractor","Intelligence",13,9,3410],["Equity Bands Anti-Overshoot","Risk",13,13,1023],["Global Health Score","Ops",12,10,2640],["Catalyst Calendar","Intelligence",11,4,5846],["Daily Reports","Ops",10,3,313],["Steady-State Cool-Off Governor","Risk",10,10,899],["Drawdown Circuit Breaker","Risk",9,9,1269],["Ghost Synthetic Scenario Engine","Research",9,2,977],["Mode Switch Orchestrator","Strategy",8,8,1334],["AFR","Execution",7,7,687],["CVaR Position Sizer","Risk",6,4,675],["Catalyst Map","Intelligence",6,5,5846],["Performance Attribution Engine","Research",5,2,1527]];
+const DEEP = {"AFR": ["Adverse Fill Sentinel 2.0", "Cross-Venue Spread Arb Hooks", "Heat-Aware Routing (WRAB sync)", "Latency & Venue Health Matrix", "Predictive Microstructure Engine", "Self-Improvement Hooks", "Smart Kill Switch"], "ALLOCATOR": ["Adaptive Risk Parity", "All decisions are reason-coded", "Anomaly Clarifier+", "Anti-Correlation Drain & Cluster Governor", "Audit-proof", "Auto-Rebalance", "CVaR + correlation caps", "CVaR-Budgeted Sizing", "Calibration/Adaptation"], "ARBITRAGE": ["ADR–Ordinary Parity Check", "Arb Piggyback", "Atomic Tri-Leg IOC/FAK", "Auction & Reopen Drifts", "Borrow-Aware Proxy", "Borrow-Aware Short Guard", "Borrow/Short Awareness", "Capital Cycle with Core/DayTrade", "Core Fusion", "Corporate-Action Guard"], "CALIBRATION": ["Admin Runtime Config", "Aggressive fast-track (v3.2)", "Audit & Ledger", "Auto-Hedge Tuner", "Calibration & Replay", "Calibration Autopilot", "Calibration Harness + Meta-Calibrator"], "CATALYST_MAP": ["Catalyst Graph Memory", "Cross-Module Catalyst Fusion", "Event-Outcome Learning", "Hierarchical Catalyst Ontology", "Reliability Scoring Engine 2.0"], "CATALYST_MAP_RELIABILITY_WEIGHTS": ["FRQ+ severity", "Medium-term clarity", "Per-symbol scores", "primary for overnight earnings & news"], "CORE": ["Catalyst-Adaptive Core Bias", "Core Spine", "Defensive Bundle Auto-Fallback", "Drift & Fragility Dashboard", "Drift & Variance Sentinel", "Global Equity Harmonizer", "Market Regime Integrator", "Multi-Stream Fusion", "Operator Transparency Layer", "Portfolio balancing and daily core exposure logic"], "CRYPTO": ["Cross-Asset Firewall", "Cross-Exchange Volatility Arb", "Crypto Catalyst Overlay", "Crypto Trend Gate", "Entitlements/Providers", "Future-module adapters + reason codes + cohorting", "Self-Improvement Hooks", "Stablecoin Risk Manager"], "DAY_TRADING": ["ATR-Adaptive TP/SL", "Adaptive Heat Cycling", "Burst Detector", "Dynamic Micro-Ratchets", "Flow Predictor 1–3s", "Intraday Catalyst Overlay", "Micro-Alpha Ensemble 2.0", "Microstructure Shock Sentinels", "Path-Aware Burst-Stop", "Velocity Edge"], "DRAWDOWN_CIRCUIT_BREAKER": ["Drawdown Circuit Breaker", "Multi-Threshold Structure", "Multi-threshold risk halts with hysteresis", "Operator Transparency", "Real-Time Equity Sentinel", "Restart & Recovery Protocol", "WRAB & Allocator Sync"], "EDGAR_EXTRACTOR": ["EDGAR Extractor", "Edgar Extractor, Catalyst Map, Attribution", "K/Q ingestion; catalyst bridge", "SEC catalysts", "filing classifiers, signal hooks", "for news + filing catalyst ingestion", "integrate fundamental data parsing"], "EQUITY_BANDS_ANTI_OVERSHOOT": ["Anti-Overshoot Dampers", "Anti-Overshoot", "Dynamic Equity Bands", "Equity Bands & Anti-Overshoot", "Equity-band tracking", "Equity-based risk bands; WRAB feedback integration", "Loss-Band Clamp", "Ratchet-Lock Harmony", "Self-Improvement Hooks", "Stealth Integration"], "GLOBAL_HEALTH_SCORE": ["Daily & Session Reports", "Final Build 3, Attributor", "Ghost scenarios failed/passed", "Insider/political trades", "Plain-language digest", "Schema & math validation, SHA-256 anchor. Evidence", "Unified builder façade and schedulers. Evidence"], "INSIDE_MODE": ["Compliance Autopilot 2.0", "Cross-Module Injection", "Inside Mode", "Insider Fingerprint Bank", "Insider Graph Network", "Political Flow Sentinel"], "LIQUIDITY_FORECASTER": ["Catalyst-Aware Liquidity Adjustments", "Cross-Venue Liquidity Matrix", "Depth-Curvature Analysis", "Mode Switch Orchestrator", "Multi-Horizon Liquidity Modeling", "Normalization + constraints", "Predictive depth model; input to WRAB & AFR", "Self-Improvement Hooks", "Steady-State cool off governor"], "LOSS_DAY_FINGERPRINT": ["API surface for UI (read-only)", "Background sim (during live)", "Decoupled UI", "Emit reason-codes like prior.tighten", "LDF v2.0 scope", "Loss-day elimination", "Multi-armed penalty model", "Piecewise-smooth map"], "MLES": ["ATR-based hard stops", "Adaptivity/Self-improvement", "Catalyst Injection Layer", "Context Tags", "Contextual Ensemble", "Cost-Aware Online Meta-Learner", "Diversification Penalty", "Drift & Failover", "Ensemble Stack"], "MODE_SWITCH_ORCHESTRATOR": ["Mode Switch Orchestrator", "One-way guards", "Ops Heartbeat / Stale-Data Sentinel", "Promotion KPIs"], "MOONSHOT": ["Adaptive Equity Curve Governor", "Auto-Optimizer", "Auto-Pause on Cold Streak", "Burst-Profit Skimming", "Calendar Filter", "Catalyst Confirmed", "Catalyst Overlay", "Catalyst Supercharge Overlay", "Catalyst-confirmed convexity + time-box", "Confidence-Gated Allocation"], "RECOVERY_PARACHUTE": ["Anti-Overshoot Bands", "Catalyst-Aware Recovery", "Catalyst-aware fast-pass", "Day Trading Mode", "Day Trading Mode core structure", "Day Trading Mode is structurally in a good place", "Deterministic IDs", "Drawdown Circuit Breakers", "Drawdown Profile Detector", "Equity Bands & Anti-Overshoot"], "REGIME_DETECTOR": ["Behavior Auditor", "Calendar Dampers", "Catalyst Confirmation Gate", "Catalyst-Aware Regime Override", "Compute Cap_raw", "Confidence-Weighted Labels", "Cross-Timeframe Concordance", "Daily Hyper-tilts", "Event Fingerprint", "Fault-Tolerance"], "SELF_IMPROVEMENT": ["Confidence-Weighted Fusion Across Modules", "Ensemble Drift Sentinel", "Evolutionary Parameter Tuning", "Explainable Ledger", "Feature Gap Analyzer", "Global Scenario Synthesizer", "Hierarchical Confidence Fusion", "Hyper-parameter tuner", "Innovation Channel", "Interface Bridge"], "SHIELD": ["Adaptive Heat Cap", "Adaptive Risk Thermostat", "Adaptivity / Self-Evolution", "Adaptivity / Self-Improvement", "Allocator ↔ WRAB", "Anomaly + Circuit", "Anomaly Clarifier+", "Archive Awareness", "Auto-Optimizer", "Backlog Orchestrator"], "STEADY_STATE_COOL_OFF_GOVERNOR": ["Adaptive Decay Curve", "Dead-Zone Stabilizer", "Multi-Layer Integration", "Post-Win Refractory Period", "Post-surge risk decay controller; anti-over-trade", "Self-Improvement Hooks", "Steady-State Cool-Off Governor"], "STEALTH_OBFUSCATION": ["Adaptive Stealth Governor", "Audit-First", "Dynamic Bucket Weights", "Hard flag (temporary block)", "Invisible Hand", "Soft flag (throttle/reject patterns)"], "UNCERTAINTY_CALIBRATION_LAYER": ["Market-aware priors", "Quantifies forecast confidence for signal weighting", "Uncertainty Calibration Layer"], "WRAB": ["Adaptation Ledger (persisted)", "Adaptive DD Throttle", "Adaptive Ramp Slope", "Adaptive gating & recovery power", "Adverse-fill sentry", "Aggression Multiplier", "Aggression budget (raw)", "Aggressive Recovery & Compounding", "Aggressive Recovery & Compounding Governor", "Aggressive Recovery Governor"]};
+const KEYOF = {"WRAB":"WRAB","Allocator":"ALLOCATOR","Shield":"SHIELD","Calibration":"CALIBRATION","MLES":"MLES","Recovery Parachute":"RECOVERY_PARACHUTE","Telemetry Logging Replay":"TELEMETRY_LOGGING_REPLAY","Moonshot":"MOONSHOT","Arbitrage":"ARBITRAGE","Regime Detector":"REGIME_DETECTOR","Stealth Obfuscation":"STEALTH_OBFUSCATION","Self Improvement":"SELF_IMPROVEMENT","Ops Heartbeat Operational Sentinel":"OPS_HEARTBEAT_OPERATIONAL_SENTINEL","Crypto":"CRYPTO","Loss Day Fingerprint":"LOSS_DAY_FINGERPRINT","Omega Ops":"OMEGA_OPS","Day Trading":"DAY_TRADING","Adaptive Fill Router":"ADAPTIVE_FILL_ROUTER","Catalyst Map Reliability Weights":"CATALYST_MAP_RELIABILITY_WEIGHTS","Liquidity Forecaster":"LIQUIDITY_FORECASTER","Core":"CORE","Inside Mode":"INSIDE_MODE","Sim Replay":"SIM_REPLAY","Reporting Compliance Autopilot":"REPORTING_COMPLIANCE_AUTOPILOT","Uncertainty Calibration Layer":"UNCERTAINTY_CALIBRATION_LAYER","Session Reports":"SESSION_REPORTS","Edgar Extractor":"EDGAR_EXTRACTOR","Equity Bands Anti-Overshoot":"EQUITY_BANDS_ANTI_OVERSHOOT","Global Health Score":"GLOBAL_HEALTH_SCORE","Catalyst Calendar":"CATALYST_CALENDAR","Daily Reports":"DAILY_REPORTS","Steady-State Cool-Off Governor":"STEADY_STATE_COOL_OFF_GOVERNOR","Drawdown Circuit Breaker":"DRAWDOWN_CIRCUIT_BREAKER","Ghost Synthetic Scenario Engine":"GHOST_SYNTHETIC_SCENARIO_ENGINE","Mode Switch Orchestrator":"MODE_SWITCH_ORCHESTRATOR","AFR":"AFR","CVaR Position Sizer":"CVAR_POSITION_SIZER","Catalyst Map":"CATALYST_MAP","Performance Attribution Engine":"PERFORMANCE_ATTRIBUTION_ENGINE"};
+const GC = {Risk:'var(--red)',Strategy:'var(--accent)',Execution:'var(--blue)',Intelligence:'var(--violet)',Research:'var(--teal)',Ops:'var(--dimmer)'};
+const groups = ['All','Risk','Strategy','Intelligence','Research','Execution','Ops'];
+const fEl = document.getElementById('filters'), gEl = document.getElementById('modgrid');
+let active = 'All';
+groups.forEach(function(g){
+  var b = document.createElement('button');
+  b.className = 'fbtn' + (g === 'All' ? ' on' : '');
+  b.type = 'button';
+  var n = g === 'All' ? MODULES.length : MODULES.filter(function(m){return m[1] === g}).length;
+  b.textContent = g + '  ' + n;
+  b.onclick = function(){ active = g; Array.prototype.forEach.call(fEl.children,function(c){c.classList.remove('on')}); b.classList.add('on'); render(); };
+  fEl.appendChild(b);
+});
+function render(){
+  gEl.innerHTML = '';
+  MODULES.filter(function(m){return active === 'All' || m[1] === active}).forEach(function(m){
+    var caps = DEEP[KEYOF[m[0]]] || [];
+    var d = document.createElement('div');
+    d.className = 'mod' + (caps.length ? ' has' : '');
+    d.style.setProperty('--gc', GC[m[1]] || 'var(--dimmer)');
+
+    var head = document.createElement('div'); head.className = 'modhead';
+    var l = document.createElement('div'); l.className = 'l';
+    var n = document.createElement('div'); n.className = 'n'; n.textContent = m[0];
+    var g = document.createElement('div'); g.className = 'g'; g.textContent = m[1];
+    l.appendChild(n); l.appendChild(g);
+    var r = document.createElement('div'); r.className = 'r';
+    var box = document.createElement('div');
+    var mc = document.createElement('div'); mc.className = 'mc'; mc.textContent = m[2];
+    var ml = document.createElement('div'); ml.className = 'ml'; ml.textContent = m[3] + ' built';
+    box.appendChild(mc); box.appendChild(ml); r.appendChild(box);
+    if (caps.length) {
+      var ch = document.createElement('span'); ch.className = 'chev'; ch.textContent = '\u25B6';
+      r.appendChild(ch);
+    }
+    head.appendChild(l); head.appendChild(r); d.appendChild(head);
+
+    if (caps.length) {
+      var det = document.createElement('div'); det.className = 'moddet';
+      var dl = document.createElement('div'); dl.className = 'dl';
+      dl.textContent = 'Catalogued capabilities · sample of ' + m[3] + ' implemented';
+      var wrapc = document.createElement('div'); wrapc.className = 'caps';
+      caps.forEach(function(c){
+        var chip = document.createElement('span'); chip.className = 'cap-chip'; chip.textContent = c;
+        wrapc.appendChild(chip);
+      });
+      var loc = document.createElement('div'); loc.className = 'loc';
+      loc.textContent = m[4].toLocaleString() + ' lines in module';
+      det.appendChild(dl); det.appendChild(wrapc); det.appendChild(loc);
+      d.appendChild(det);
+      d.onclick = function(){
+        var wasOpen = d.classList.contains('open');
+        Array.prototype.forEach.call(gEl.querySelectorAll('.mod.open'), function(o){o.classList.remove('open')});
+        if (!wasOpen) d.classList.add('open');
+      };
+    }
+    gEl.appendChild(d);
+  });
+}
+var PY_RE = /(#[^\n]*)|("""[\s\S]*?"""|"[^"\n]*"|'[^'\n]*')|(@[\w.]+)|\b(class|def|return|import|from|None|True|False|self|str|int|float|bool|tuple|dict|list|Any|Mapping)\b|\b(\d+(?:\.\d+)?)\b/g;
+Array.prototype.forEach.call(document.querySelectorAll('pre code'), function(el){
+  var esc = el.textContent.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  el.innerHTML = esc.replace(PY_RE, function(m, c, st, dd, k, nn){
+    if (c)  return '<span class="c">' + c  + '</span>';
+    if (st) return '<span class="s">' + st + '</span>';
+    if (dd) return '<span class="d">' + dd + '</span>';
+    if (k)  return '<span class="k">' + k  + '</span>';
+    if (nn) return '<span class="n">' + nn + '</span>';
+    return m;
+  });
+});
+render();
+if ('IntersectionObserver' in window) {
+  var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
+  document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
+} else {
+  document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')});
+}
+</script>
+</body>
+</html>
