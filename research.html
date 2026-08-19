@@ -30,10 +30,9 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <header class="hero"><div class="wrap">
   <div class="eyebrow">edge_lab · intraday NQ futures · Python / NumPy / pandas</div>
   <h1>Research<br><span class="grad">methodology.</span></h1>
-  <p class="lede">A validation pipeline whose only job is to <b>reject my own results</b>. Four independent
-  layers — a placebo null, bootstrap confidence intervals, a frozen-config out-of-sample protocol, and
-  per-component audits. It has already killed one of my own live engines and returned a null on a
-  configuration I wanted to believe in.</p>
+  <p class="lede">A validation pipeline built to <b>reject its own results</b>. Four independent layers — a placebo null,
+  bootstrap confidence intervals, a frozen-config out-of-sample protocol, and per-component audits. It has
+  retired one deployed engine and returned a null on a configuration in the frozen committee.</p>
   <div class="pills">
     <a class="pill" href="#chase">Selection-bias experiment</a>
     <a class="pill" href="#placebo">1 · Placebo</a>
@@ -57,8 +56,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="kicker">Why this exists</div>
   <h2>Chase a big backtest,<br>then price what it was worth</h2>
   <p class="sub">Search a parameter grid wide enough and something in it will look excellent. That is not a
-  finding; it is the maximum of a noisy sample. Before trusting any of this work, I measured the problem
-  directly.</p>
+  finding; it is the maximum of a noisy sample. The problem was therefore measured directly before any
+  result was relied on.</p>
   <p class="sub">Protocol, run once and reported as-is: enumerate <b>60,480</b> mechanics configurations of
   the VWAP-fade family — z-threshold, z-window, stop, target style, breakeven arm, trades per day, entry
   window. Score every one on <b>train (2024–2025)</b> only. Then take those exact frozen configurations and
@@ -165,7 +164,7 @@ for each ET session:
   <div class="confirmed"><b>SURVIVES.</b> On both timeframes the real plateau-median Sharpe sits outside the
   placebo distribution's 95th percentile: 13 in 1,000 placebo worlds beat the real 30-minute result, 33 in
   1,000 on the 1-hour. Structure the shuffle destroys is structure the strategy was using.</div>
-  <div class="rejected"><b>AND THE CAVEAT IS THE INTERESTING PART.</b> The <i>best-cell</i> p-values (0.073
+  <div class="rejected"><b>SELECTION BIAS, MEASURED DIRECTLY.</b> The <i>best-cell</i> p-values (0.073
   and 0.053) are markedly weaker than the median p-values (0.013 and 0.033). That is the signature of
   maximum-selection bias, measured directly: a shuffled world with no exploitable structure at all can still
   produce one impressive-looking cell out of 48. It is why this page reports plateau medians everywhere and
@@ -178,8 +177,8 @@ for each ET session:
 <section id="bootstrap"><div class="wrap reveal">
   <div class="kicker">Layer two</div>
   <h2>Bootstrap confidence intervals</h2>
-  <p class="sub">Surviving the placebo says an effect is unlikely to be pure noise. It says nothing about how
-  large it is, or how confident I should be. For that: <b>10,000 resamples</b> of the daily P&amp;L series,
+  <p class="sub">Surviving the placebo says an effect is unlikely to be pure noise. It says nothing about the size of that effect
+  or the confidence around it. For that: <b>10,000 resamples</b> of the daily P&amp;L series,
   with replacement, for each frozen configuration — producing a distribution of Sharpe, net result and
   drawdown rather than a single number. Probability of a losing month is estimated separately by resampling
   21-day blocks.</p>
@@ -221,8 +220,8 @@ for each ET session:
 <section id="oos"><div class="wrap reveal">
   <div class="kicker">Layer three</div>
   <h2>Frozen-config out-of-sample</h2>
-  <p class="sub">The first two layers both run on data I have already looked at. Neither can rule out that my
-  choices were shaped by what I saw. Only withheld data can, and only if the configuration is frozen first.</p>
+  <p class="sub">The first two layers run on data already examined. Neither rules out that configuration choices were
+  shaped by what was observed. Only withheld data does that, and only if the configuration is frozen first.</p>
 
   <h3>The sealed vault</h3>
   <p class="sub">On <b>2026-07-27</b>, before any of the 2024 data had been examined, four configurations were
@@ -284,9 +283,8 @@ d = d[d.et_date &gt;= VAULT_CUT].reset_index(drop=True)   # seal the vault</code
   drawdown of −1,696 points against the PM fade's −652. It was positive in only 3 of 7 months. Its correlation
   with the PM fade is +0.28, so it was not even providing diversification — it was providing variance. It had
   been kept because it added points. Points are the wrong objective; it was retired.</div>
-  <p class="sub">This is the layer I would point to first if asked whether the process actually bites. It cost
-  a working component of a system I built, and the number that had justified keeping it — total points — was
-  one I had chosen myself.</p>
+  <p class="sub">This layer is the clearest evidence that the process binds. It removed a working component from a
+  deployed book, and the metric that had justified keeping it — total points — was the wrong objective.</p>
 </div></section>
 
 <section id="limits"><div class="wrap reveal">
@@ -308,7 +306,7 @@ d = d[d.et_date &gt;= VAULT_CUT].reset_index(drop=True)   # seal the vault</code
       <div class="valrow"><div class="lbl">Null resolution</div><div class="val">150 worlds per timeframe gives a smallest resolvable p-value of ≈0.007. The reported p-values sit near that floor.</div></div>
       <div class="valrow"><div class="lbl">Fill optimism</div><div class="val">Stops are assumed to fill <b>at the stop price</b>. Real gap and fast-market fills are worse, and the 1.5-point slippage assumption does not fully cover that tail.</div></div>
       <div class="valrow"><div class="lbl">Nature of the results</div><div class="val">These are <b>simulated results on historical bars</b> under stated fill assumptions. No figure on this page is a realised trading return, and none should be read as a forecast.</div></div>
-      <div class="valrow"><div class="lbl">Implementation</div><div class="val">The Python was written with <b>AI assistance</b>. I designed the protocols, chose the statistics, and reviewed and ran the code — stated rather than left to be inferred.</div></div>
+      <div class="valrow"><div class="lbl">Implementation</div><div class="val">The Python was written with <b>AI assistance</b>. Protocols, choice of statistics and interpretation are the author's; the code was reviewed and run by the author. Stated rather than left to be inferred.</div></div>
     </div>
   </div>
 </div></section>

@@ -31,11 +31,10 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="risk" class="last"><div class="wrap reveal">
   <div class="kicker">Risk spine</div>
   <h2>Eight governors, composed</h2>
-  <p class="sub">This is the part of the system I would defend most confidently, because it is designed to be
-  <b>correct rather than profitable</b>. Risk controls don't need a forward-looking edge in order to work —
-  they need to be structurally impossible to bypass. Each governor independently emits a clamp, and a clamp
-  book aggregates them deterministically.</p>
-  <p class="sub"><b>The aggregation rule is the design decision worth defending.</b> Multipliers compose via
+  <p class="sub">The risk spine is designed to be <b>correct rather than profitable</b>. Risk controls do not require a
+  forward-looking edge to function; they require that they cannot be bypassed. Each governor independently
+  emits a clamp, and a clamp book aggregates them deterministically.</p>
+  <p class="sub"><b>The aggregation rule is the load-bearing design decision.</b> Multipliers compose via
   <code>min()</code>, not by averaging, and the book fails closed — the most restrictive clamp wins. Averaging
   would let a permissive governor dilute a restrictive one, so a system that averages one "halt" against three
   "fine"s keeps trading. Taking the minimum means <b>any single governor can stop the system on its own</b>,
@@ -67,13 +66,11 @@ Design principles
 - Entry denial and exit-only flags follow highest-priority clamps.
 - TTL is in bars and decays on `market.bar` ticks.
 """</code></pre>
-  <p class="sub">The choice worth defending is <b>composition by <code>min()</code> rather than by product or
-  average</b>. Averaging would let a permissive governor dilute a restrictive one — a system that averages one
-  "halt" against three "fine"s keeps trading. Taking the minimum means any single governor can stop the system
-  alone, and adding a ninth governor can only ever make the system safer, never riskier. That is the
-  difference between a risk layer that is <i>structurally</i> safe and one that is merely <i>behaviourally</i>
-  safe, and it is why the clamp book is one of the few places in this codebase where I would defend every
-  line.</p>
+  <p class="sub">Composition is by <code>min()</code>, not by product or average. Averaging permits a
+  permissive governor to dilute a restrictive one: a system averaging one halt against three clears continues
+  trading. Under a minimum, any single governor halts the system independently, and each governor added can
+  only reduce exposure, never increase it. The distinction is between a risk layer that is
+  <i>structurally</i> constrained and one that is <i>behaviourally</i> constrained.</p>
 
   <div class="confirmed"><b>THE EVENT LINEAGE IS THE WHOLE AUDITABILITY ARGUMENT.</b> The console does not
   merely report that WRAB is clamping exposure to ×0.29 — it lists <b>the 187 individual events that set that
@@ -84,7 +81,7 @@ Design principles
   believe in.</div>
 
   <div class="shot">
-    <img src="assets/pp/risk-spine-console.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Risk Spine Console showing six status dials, a binding-constraint explainer, a clamp-stack waterfall, and the ladder of eight risk governors with their multipliers and states">
+    <img src="assets/pp/risk-spine-console.webp" width="2600" height="1417" loading="lazy" decoding="async" alt="Risk Spine Console showing six status dials, a binding-constraint explainer, a clamp-stack waterfall, and the ladder of eight risk governors with their multipliers and states">
     <div class="cap"><b>Risk Spine Console — Governor Ladder.</b> All eight governors with their clamp multipliers and binding state; WRAB expanded to its inputs and, beneath it, <b>“Events that set it (187)”</b> — the individual reason-coded events that produced the current ×0.29 clamp, each with its timestamp. <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> — live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
 </div></section>

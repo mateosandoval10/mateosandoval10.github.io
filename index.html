@@ -29,10 +29,10 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 
 <header class="hero"><div class="wrap">
   <div class="eyebrow">Quantitative research portfolio · Gonzaga University, class of 2028</div>
-  <h1>I build trading systems,<br><span class="grad">then try to break them.</span></h1>
-  <p class="lede">Mateo Sandoval — Finance and Economics, minors in MIS and Business Analytics. I write
-  systematic trading infrastructure and the validation machinery that decides whether any of it deserves to
-  be believed. <b>Every page here states what its numbers are not.</b></p>
+  <h1>Systematic trading systems,<br><span class="grad">built to be falsified.</span></h1>
+  <p class="lede">Mateo Sandoval — Finance and Economics, minors in MIS and Business Analytics. Systematic trading
+  infrastructure, and the validation machinery that determines whether any of it holds. <b>Every page states
+  the scope and limitations of its figures.</b></p>
   <div class="pills">
     <a class="pill live" href="profit-pilot.html">Profit Pilot · 39 modules · running 24/7</a>
     <a class="pill" href="research.html">Validation pipeline</a>
@@ -57,7 +57,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div><div class="v">220</div><div class="k">Test suites</div></div>
   </div>
   <div class="shot">
-    <img src="assets/pp/command-deck.webp" width="1600" height="1000" alt="Profit Pilot Mission Control Command Deck showing an equity curve, capital allocation by sleeve, risk spine dials and champion-versus-challenger state" decoding="async">
+    <img src="assets/pp/command-deck.webp" width="2600" height="1433" alt="Profit Pilot Mission Control Command Deck showing an equity curve, capital allocation by sleeve, risk spine dials and champion-versus-challenger state" decoding="async">
     <div class="cap"><b>Mission Control — Command Deck.</b> <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
   <div class="chiplabel">Risk spine — eight governors, composed by min(), fails closed</div>
@@ -95,9 +95,9 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="method"><div class="wrap reveal">
   <div class="kicker">The credibility centerpiece</div>
   <h2>Research methodology</h2>
-  <p class="sub">A Python validation pipeline for intraday futures research, built around one measurement.
-  I enumerated 60,480 parameter configurations, scored them all on a training period, then ran the frozen
-  configurations on data the optimisation had never seen.</p>
+  <p class="sub">A Python validation pipeline for intraday futures research, built around one measurement. 60,480
+  parameter configurations were enumerated, scored on a training period, then run frozen on data the
+  optimisation had never seen.</p>
   <div class="bignum">
     <div class="n">+0.087</div>
     <div class="t">Correlation between backtest performance and out-of-sample performance across all
@@ -127,9 +127,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div class="card accent">
       <div class="tag hot">Layers three &amp; four</div>
       <h3>Frozen out-of-sample, then audit every part</h3>
-      <p>A sealed data vault with a pre-registered success criterion, still unopened. And a component audit
-      that retired one of my own live engines for adding points while cutting the book's Sharpe from 2.16 to
-      1.38.</p>
+      <p>A sealed data vault with a pre-registered success criterion, still unopened. A component audit
+      retired a deployed engine for adding points while cutting the book's Sharpe from 2.16 to 1.38.</p>
     </div>
   </div>
   <div class="btnrow"><a class="btn ghost" href="research.html">Read the methodology →</a></div>
@@ -140,8 +139,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <h2>Three published as<br>open-source code</h2>
   <p class="sub">Four original systems in Pine Script v6. The differentiator is not the headline returns —
   it is that <b>three of them are published open-source on TradingView</b>, so the logic is readable and the
-  Strategy Tester result is reproducible by anyone. A backtest on my own site is an assertion; one whose
-  source is public and whose result a stranger can re-run is evidence.</p>
+  Strategy Tester result is reproducible independently. A backtest published on its author's own site is an
+  assertion. One whose source is public and whose result reproduces elsewhere is evidence.</p>
   <div class="minis">
     <div><div class="v">3</div><div class="k">Published open-source</div></div>
     <div><div class="v">30+</div><div class="k">Experiments rejected</div></div>
@@ -216,7 +215,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div class="defrow"><div class="l">Limitations</div><div class="r">Every page carrying numbers has a limitations section — sample size, market era, fitting history, and what would have to be true for the result to be wrong. <b>Not a footer disclaimer.</b></div></div>
     <div class="defrow"><div class="l">Negative results</div><div class="r">A cross-symbol test that barely cleared costs, a component that added points but destroyed Sharpe, a confidence interval straddling zero — <b>all still published</b>.</div></div>
     <div class="defrow"><div class="l">Screenshots</div><div class="r">Most console frames are captures of the live production system, with account balances and position values redacted. A few surfaces render the frontend's bundled sample dataset instead, and each of those is labelled <b>demo mode</b> in words next to the image.</div></div>
-    <div class="defrow"><div class="l">Implementation</div><div class="r">The Python across these projects is <b>AI-assisted</b>. I design the architecture, specify the contracts and statistics, review the code, and run and interpret the results.</div></div>
+    <div class="defrow"><div class="l">Implementation</div><div class="r">The Python across these projects is <b>AI-assisted</b>. Architecture, event contracts, risk logic and choice of statistics are specified and reviewed by the author; the results are run and interpreted by the author.</div></div>
   </div>
 </div></section>
 

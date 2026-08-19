@@ -38,9 +38,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div class="card">
       <div class="tag">Property one</div>
       <h3>Golden-replay determinism</h3>
-      <p>Replaying an identical input tape reproduces an identical event sequence, byte for byte. This is the
-      property most home-built trading systems silently lack, and without it you cannot prove that a code
-      change altered nothing it shouldn't have.</p>
+      <p>Replaying an identical input tape reproduces an identical event sequence, byte for byte. Most self-built trading systems lack this property, and
+      without it a code change cannot be proven to have altered nothing outside its intent.</p>
     </div>
     <div class="card">
       <div class="tag">Property two</div>
@@ -104,9 +103,9 @@ class EventEnvelope:
   </div>
   <p class="sub">Every cycle's verdict is written to an append-only decision ledger, so the parameter state of
   the system at any past moment is reconstructible — which matters more than it sounds, because a
-  self-modifying system without an audit trail is one you can never debug after the fact.</p>
+  self-modifying system without an audit trail cannot be debugged after the fact.</p>
   <div class="shot">
-    <img src="assets/pp/self-improvement-loop.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages of the research loop">
+    <img src="assets/pp/self-improvement-loop.webp" width="2600" height="1418" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages of the research loop">
     <div class="cap"><b>Self-Improvement Control Room.</b> The loop end to end — propose, evaluate out-of-sample, canary, promote — with the tunable-knob count and the safety controls that can freeze it. <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> — live capital is gated by <code>allow_live_trading: false</code>.</div>
   </div>
 </div></section>

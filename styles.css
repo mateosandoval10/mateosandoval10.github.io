@@ -411,3 +411,13 @@ pre .d{color:#ffcb6b}pre .n{color:#f78c6c}
   color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 40%,transparent);
   border-radius:100px;padding:3px 11px}
 .deep .dtag.off{color:var(--amber);border-color:color-mix(in srgb,var(--amber) 40%,transparent)}
+
+/* ---------- micro drill-down ---------- */
+.micro{display:grid;grid-template-columns:190px 1fr;gap:16px;padding:11px 0;border-bottom:1px solid var(--line)}
+.micro:last-child{border-bottom:none}
+.micro .mid{font-family:var(--mono);font-size:11.5px;letter-spacing:.04em;color:var(--accent);padding-top:2px}
+.micro .mdesc{color:var(--dim);font-size:14px;line-height:1.55}
+.microwrap{max-height:520px;overflow-y:auto;margin-top:12px;padding-right:6px}
+.microcount{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--dimmer);margin:16px 0 4px}
+@media(max-width:700px){.micro{grid-template-columns:1fr;gap:3px}}
