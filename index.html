@@ -3,12 +3,36 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mateo Sandoval — Quantitative Research Portfolio</title>
-<meta name="description" content="Quantitative research by Mateo Sandoval: Profit Pilot, a 39-module event-driven trading platform; a validation pipeline built to falsify its own results; and four documented systematic strategies — each published with its limitations.">
+<title>Mateo Sandoval</title>
+<meta name="description" content="Mateo Sandoval — quantitative trading systems. Profit Pilot, an event-driven trading platform; three published systematic strategies; an SEC EDGAR institutional-flow tracker.">
 <meta name="color-scheme" content="dark light">
 <link rel="stylesheet" href="styles.css">
 <script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark');d.setAttribute('data-theme',t)}catch(e){}d.classList.add('js');
 document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-theme-toggle]');if(!b)return;var n=d.getAttribute('data-theme')==='dark'?'light':'dark';d.setAttribute('data-theme',n);try{localStorage.setItem('theme',n)}catch(e){}b.setAttribute('aria-label','Switch to '+(n==='dark'?'light':'dark')+' theme')})})();</script>
+<style>
+  .lede{max-width:60ch}
+  .idline{font-size:15.5px;color:var(--dim);margin-top:14px;max-width:62ch;line-height:1.6}
+  .work{border-top:1px solid var(--line);padding:52px 0}
+  .work:last-of-type{border-bottom:1px solid var(--line)}
+  .worknum{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;color:var(--dimmer);margin-bottom:12px}
+  .work h2{font-size:clamp(24px,3vw,31px);font-weight:680;letter-spacing:-.02em;margin-bottom:6px}
+  .worksub{font-family:var(--mono);font-size:12.5px;color:var(--accent);letter-spacing:.03em;margin-bottom:16px}
+  .work p{color:var(--dim);font-size:16px;max-width:66ch;margin-bottom:8px;line-height:1.65}
+  .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:24px 0 22px;
+         border:1px solid var(--line);border-radius:11px;overflow:hidden;background:var(--panel)}
+  .facts div{padding:16px 18px;border-right:1px solid var(--line)}
+  .facts div:last-child{border-right:none}
+  .facts .v{font-family:var(--mono);font-size:19px;font-weight:600;color:var(--text);font-variant-numeric:tabular-nums}
+  .facts .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dimmer);margin-top:5px}
+  .go{display:inline-block;font-size:15px;font-weight:560;text-decoration:none;color:var(--text);
+      border-bottom:1.5px solid var(--accent);padding-bottom:2px;margin-top:6px}
+  .go:hover{color:var(--accent)}
+  .meta{font-size:13.5px;color:var(--dimmer);margin-top:14px;max-width:66ch;line-height:1.55}
+  .contact{padding:46px 0 10px}
+  @media(max-width:760px){.facts{grid-template-columns:repeat(2,1fr)}
+    .facts div:nth-child(2){border-right:none}
+    .facts div:nth-child(1),.facts div:nth-child(2){border-bottom:1px solid var(--line)}}
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -17,7 +41,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="navwrap">
     <nav>
       <a href="profit-pilot.html">Profit Pilot</a>
-      <a href="research.html">Methodology</a>
       <a href="strategies.html">Strategies</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
@@ -28,221 +51,77 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <main id="main">
 
 <header class="hero"><div class="wrap">
-  <div class="eyebrow">Quantitative research portfolio · Gonzaga University, class of 2028</div>
-  <h1>Systematic trading systems,<br><span class="grad">built to be falsified.</span></h1>
-  <p class="lede">Mateo Sandoval — Finance and Economics, minors in MIS and Business Analytics. Systematic trading
-  infrastructure, and the validation machinery that determines whether any of it holds. <b>Every page states
-  the scope and limitations of its figures.</b></p>
-  <div class="pills">
-    <a class="pill live" href="profit-pilot.html">Profit Pilot · 39 modules · running 24/7</a>
-    <a class="pill" href="research.html">Validation pipeline</a>
-    <a class="pill" href="strategies.html">3 open-source strategies published</a>
-  </div>
+  <h1>Mateo Sandoval</h1>
+  <p class="idline">Finance and Economics at Gonzaga University, with minors in Management Information
+  Systems and Business Analytics. I build quantitative trading systems and the infrastructure that tests them.
+  Three projects are documented here.</p>
 </div></header>
 
-<section class="feature"><div class="wrap reveal">
-  <div class="badge">The headline project</div>
+<section class="work"><div class="wrap reveal">
+  <div class="worknum">01</div>
   <h2>Profit Pilot</h2>
-  <p class="lede">An <b>event-driven quantitative trading platform</b>. Thirty-nine locked modules on a
-  deterministic, schema-validated event bus. An eight-governor risk spine that no signal can bypass. Six
-  strategy sleeves competing for capital through an allocator. A research loop that proposes and tests its own
-  parameter changes — behind an out-of-sample gate, a canary, a significance threshold and a cooldown. Running
-  continuously in paper trading against a live brokerage API since mid-2026.</p>
-  <div class="minis">
+  <div class="worksub">EVENT-DRIVEN TRADING PLATFORM · 2025 – PRESENT</div>
+  <p>A trading platform built on a deterministic event bus, with an eight-governor risk spine, six
+  independent strategy sleeves, and an automated research loop that proposes and gates its own parameter
+  changes. Deployed and running continuously against live market data.</p>
+  <div class="facts">
     <div><div class="v">39</div><div class="k">Locked modules</div></div>
     <div><div class="v">1,023</div><div class="k">Micros implemented</div></div>
     <div><div class="v">~340k</div><div class="k">Lines of Python</div></div>
-    <div><div class="v">8</div><div class="k">Risk governors</div></div>
-    <div><div class="v">6</div><div class="k">Strategy sleeves</div></div>
     <div><div class="v">220</div><div class="k">Test suites</div></div>
   </div>
-  <div class="shot">
-    <img src="assets/pp/command-deck.webp" width="2600" height="1433" alt="Profit Pilot Mission Control Command Deck showing an equity curve, capital allocation by sleeve, risk spine dials and champion-versus-challenger state" decoding="async">
-    <div class="cap"><b>Mission Control — Command Deck.</b> <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> &mdash; live capital is gated by <code>allow_live_trading: false</code>.</div>
+  <a class="go" href="profit-pilot.html">Architecture, risk spine, modules and console →</a>
+  <p class="meta">In independent testing ahead of public release.</p>
+</div></section>
+
+<section class="work"><div class="wrap reveal">
+  <div class="worknum">02</div>
+  <h2>Systematic strategies</h2>
+  <div class="worksub">PINE SCRIPT V6 · PUBLISHED OPEN SOURCE ON TRADINGVIEW</div>
+  <p>Four systematic trading systems, each targeting a different return source. Three are published as
+  open-source scripts on TradingView, so the code is readable and every result is reproducible in the Strategy
+  Tester. Each system is documented with its mechanism, its validation, and the experiments that were tested
+  and rejected.</p>
+  <div class="facts">
+    <div><div class="v">4</div><div class="k">Systems documented</div></div>
+    <div><div class="v">3</div><div class="k">Published open source</div></div>
+    <div><div class="v">1999–2026</div><div class="k">Longest test window</div></div>
+    <div><div class="v">6</div><div class="k">Rejections published</div></div>
   </div>
-  <div class="chiplabel">Risk spine — eight governors, composed by min(), fails closed</div>
-  <div class="chips">
-    <span class="chip"><b>Shield</b> · hazard</span>
-    <span class="chip"><b>WRAB</b> · aggression</span>
-    <span class="chip"><b>Drawdown circuit breaker</b> · tiered cut</span>
-    <span class="chip"><b>CVaR tail sizer</b> · tail sizing</span>
-    <span class="chip"><b>Equity bands &amp; cool-off</b> · overshoot</span>
-    <span class="chip"><b>Recovery parachute</b> · re-entry</span>
-    <span class="chip"><b>Allocator</b> · capital</span>
-    <span class="chip"><b>Omega ops</b> · governance</span>
+  <a class="go" href="strategies.html">Systems, results and validation →</a>
+  <p class="meta">Backtested in TradingView's Strategy Tester with commissions and slippage modeled.
+  Results are in-sample and single-history.</p>
+</div></section>
+
+<section class="work"><div class="wrap reveal">
+  <div class="worknum">03</div>
+  <h2>SEC EDGAR institutional-flow tracker</h2>
+  <div class="worksub">PYTHON · IN DEVELOPMENT</div>
+  <p>A tool that reads institutional filings from SEC EDGAR and reconstructs position flow: which filers
+  accumulated or distributed a security, at what scale relative to their book, and over what period. It
+  separates 13F holdings, which are filed up to 45 days after quarter end, from Form 4 insider transactions,
+  which are filed within two business days.</p>
+  <div class="facts">
+    <div><div class="v">13F</div><div class="k">Quarterly holdings</div></div>
+    <div><div class="v">Form 4</div><div class="k">Insider transactions</div></div>
+    <div><div class="v">13D/G</div><div class="k">Activist stakes</div></div>
+    <div><div class="v">6,300</div><div class="k">Lines of Python</div></div>
   </div>
-  <div class="chiplabel">Strategy sleeves</div>
-  <div class="chips">
-    <span class="chip"><b>Core</b> · swing</span>
-    <span class="chip"><b>Day trading</b> · intraday</span>
-    <span class="chip"><b>Inside mode</b> · range</span>
-    <span class="chip"><b>Arbitrage</b> · relative value</span>
-    <span class="chip"><b>Moonshot</b> · convex</span>
-    <span class="chip"><b>Crypto</b> · 24/7</span>
-  </div>
-  <p class="sub">Five independent verification layers sit under it — historical backtesting through the
-  live code path, deterministic blind replay, out-of-sample gating, Monte Carlo and synthetic scenario
-  generation, and continuous live forward testing against a real brokerage API. It is in its first full
-  testing year.</p>
+  <a class="go" href="projects.html">Data sources, method and limitations →</a>
+</div></section>
+
+<section class="contact"><div class="wrap reveal">
   <div class="btnrow">
-    <a class="btn" href="profit-pilot.html">Open Profit Pilot →</a>
-    <a class="btn ghost" href="pp-risk.html">Risk spine</a>
-    <a class="btn ghost" href="pp-sleeves.html">The six sleeves</a>
-    <a class="btn ghost" href="pp-testing.html">Five test layers</a>
-  </div>
-</div></section>
-
-<section id="method"><div class="wrap reveal">
-  <div class="kicker">The credibility centerpiece</div>
-  <h2>Research methodology</h2>
-  <p class="sub">A Python validation pipeline for intraday futures research, built around one measurement. 60,480
-  parameter configurations were enumerated, scored on a training period, then run frozen on data the
-  optimisation had never seen.</p>
-  <div class="bignum">
-    <div class="n">+0.087</div>
-    <div class="t">Correlation between backtest performance and out-of-sample performance across all
-    <b>60,480</b> configurations. The top 100 by backtest lost money out of sample <b>79%</b> of the time —
-    worse than picking at random from the same family. Everything downstream is designed around that fact.</div>
-  </div>
-  <div class="minis c4">
-    <div><div class="v">300</div><div class="k">Placebo worlds run</div></div>
-    <div><div class="v">10,000</div><div class="k">Bootstrap paths per CI</div></div>
-    <div><div class="v">0.502</div><div class="k">P(Sharpe&lt;0) on a published null</div></div>
-    <div><div class="v">1</div><div class="k">Engine retired by the audit</div></div>
-  </div>
-  <div class="grid g3">
-    <div class="card accent">
-      <div class="tag hot">Layer one · placebo</div>
-      <h3>Shuffle the market, keep the volatility</h3>
-      <p>Within-session bar permutation builds structure-free markets that preserve the volatility profile and
-      destroy serial dependence. 300 worlds; the real result clears the null at p = 0.013 and 0.033 across two
-      timeframes.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag hot">Layer two · bootstrap</div>
-      <h3>Intervals, not point estimates</h3>
-      <p>10,000 day-resamples per frozen config give confidence intervals on Sharpe and drawdown. One config in
-      the committee returns P(Sharpe&lt;0) = 0.502 — a coin flip, published as a null rather than dropped.</p>
-    </div>
-    <div class="card accent">
-      <div class="tag hot">Layers three &amp; four</div>
-      <h3>Frozen out-of-sample, then audit every part</h3>
-      <p>A sealed data vault with a pre-registered success criterion, still unopened. A component audit
-      retired a deployed engine for adding points while cutting the book's Sharpe from 2.16 to 1.38.</p>
-    </div>
-  </div>
-  <div class="btnrow"><a class="btn ghost" href="research.html">Read the methodology →</a></div>
-</div></section>
-
-<section id="strategies"><div class="wrap reveal">
-  <div class="kicker">Systematic trading strategies</div>
-  <h2>Three published as<br>open-source code</h2>
-  <p class="sub">Four original systems in Pine Script v6. The differentiator is not the headline returns —
-  it is that <b>three of them are published open-source on TradingView</b>, so the logic is readable and the
-  Strategy Tester result is reproducible independently. A backtest published on its author's own site is an
-  assertion. One whose source is public and whose result reproduces elsewhere is evidence.</p>
-  <div class="minis">
-    <div><div class="v">3</div><div class="k">Published open-source</div></div>
-    <div><div class="v">30+</div><div class="k">Experiments rejected</div></div>
-    <div><div class="v">27</div><div class="k">Year window, CRS</div></div>
-    <div><div class="v">5×</div><div class="k">Slippage stress passed</div></div>
-    <div><div class="v">2</div><div class="k">Cross-symbol transfers</div></div>
-    <div><div class="v">1</div><div class="k">Documented miss, kept</div></div>
-  </div>
-  <div class="shot">
-    <img src="assets/cbs_trades.webp" width="1600" height="585" loading="lazy" decoding="async" alt="Compression Breakout System running on AAPL daily bars with every entry and exit labeled with its profit or loss">
-    <div class="cap"><b>CBS on AAPL daily.</b> Every entry and exit labeled with per-trade P&amp;L — Strategy
-    Tester output on historical bars, not a trading record.</div>
-  </div>
-  <div class="tablewrap"><table>
-    <caption>Frozen-parameter validation. Nothing was re-tuned between cells.</caption>
-    <thead><tr><th>Test</th><th>Condition</th><th>Net</th><th>PF</th><th>What it shows</th></tr></thead>
-    <tbody>
-      <tr><td class="txt">Split-sample</td><td>2005–15 / 2015–26</td><td class="pos">+164% / +293%</td><td>3.35 / 4.97</td><td class="txt">Positive in both decade halves — not a single-era artifact</td></tr>
-      <tr><td class="txt">Slippage stress</td><td>5× modeled</td><td class="pos">+256%</td><td>4.77</td><td class="txt">Not execution-fragile</td></tr>
-      <tr><td class="txt">Cross-symbol</td><td>NVDA, frozen</td><td class="pos">+658%</td><td>3.26</td><td class="txt">Parameters transfer</td></tr>
-      <tr><td class="txt">Cross-symbol</td><td>MSFT, frozen</td><td>+46%</td><td class="neg">1.32</td><td class="txt neg">The documented miss — kept visible on purpose</td></tr>
-    </tbody>
-  </table></div>
-  <p class="sub">All figures are <b>in-sample backtests with costs modeled — upper bounds on expectancy, not
-  forecasts.</b> The strategy section carries the full cost model, the cross-symbol dispersion and the
-  limitations that go with them.</p>
-  <div class="btnrow">
-    <a class="btn" href="strategies.html">Open the strategy section →</a>
-    <a class="btn ghost" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">Published scripts ↗</a>
-  </div>
-</div></section>
-
-<section id="tooling"><div class="wrap reveal">
-  <div class="kicker">In development</div>
-  <h2>Research tooling</h2>
-  <div class="grid g2">
-    <a class="card" href="projects.html">
-      <div class="tag">SEC EDGAR · Python</div>
-      <h3>Institutional-flow tracker</h3>
-      <p>Parses 13F-HR, Form 4 and 13D/G filings into quarter-over-quarter position deltas and per-ticker flow.
-      Built to state that 13F data is lagged up to 45 days and to never present it as real-time flow.</p>
-      <span class="more">Status &amp; scope →</span>
-    </a>
-    <a class="card" href="projects.html">
-      <div class="tag">OpenBB · Claude API</div>
-      <h3>AI equity research agent</h3>
-      <p>Ticker in, structured investment memo out — every claim traceable to its filing, datapoint and date,
-      and explicit handling for missing data so the model cannot fill gaps by invention.</p>
-      <span class="more">Status &amp; scope →</span>
-    </a>
-  </div>
-  <p class="sub">Neither is finished. The page shows an honest empty state rather than a mock-up of output
-  that does not exist.</p>
-</div></section>
-
-<section id="standards"><div class="wrap reveal">
-  <div class="kicker">Reporting standards</div>
-  <h2>What is claimed, and what is not</h2>
-  <p class="sub">Every figure on this site is reported with the methodology that produced it and the scope
-  it applies to.</p>
-  <div class="tablewrap"><table>
-    <thead><tr><th>Body of work</th><th>What is shown</th><th>Scope</th></tr></thead>
-    <tbody>
-      <tr><td class="txt">Profit Pilot</td><td class="txt">Architecture, risk controls, verification stack, test coverage, operational discipline</td><td class="txt mut">Engineering and research infrastructure. In its first full testing year</td></tr>
-      <tr><td class="txt">Intraday research</td><td class="txt">Placebo-tested, bootstrap-bounded model results under stated fill assumptions</td><td class="txt neg">Not a track record. One instrument, one era, small samples</td></tr>
-      <tr><td class="txt">Strategy library</td><td class="txt">Backtests with costs modeled; split-sample and cross-symbol tests shown</td><td class="txt neg">In-sample, single-history. Upper bounds, not forecasts</td></tr>
-      <tr><td class="txt">Research tooling</td><td class="txt">Design, architecture and intent</td><td class="txt mut">In active development</td></tr>
-      <tr><td class="txt">Open source</td><td class="txt">Three strategies published as open-source Pine Script v6 on TradingView, source readable and results reproducible</td><td class="txt neg">Zero merged pull requests to other projects. Not described as a contributor to those until one merges</td></tr>
-    </tbody>
-  </table></div>
-  <div class="defs">
-    <div class="defrow"><div class="l">Limitations</div><div class="r">Every page carrying numbers has a limitations section — sample size, market era, fitting history, and what would have to be true for the result to be wrong. <b>Not a footer disclaimer.</b></div></div>
-    <div class="defrow"><div class="l">Negative results</div><div class="r">A cross-symbol test that barely cleared costs, a component that added points but destroyed Sharpe, a confidence interval straddling zero — <b>all still published</b>.</div></div>
-    <div class="defrow"><div class="l">Screenshots</div><div class="r">Most console frames are captures of the live production system, with account balances and position values redacted. A few surfaces render the frontend's bundled sample dataset instead, and each of those is labelled <b>demo mode</b> in words next to the image.</div></div>
-    <div class="defrow"><div class="l">Implementation</div><div class="r">The Python across these projects is <b>AI-assisted</b>. Architecture, event contracts, risk logic and choice of statistics are specified and reviewed by the author; the results are run and interpreted by the author.</div></div>
-  </div>
-</div></section>
-
-<section id="about" class="last"><div class="wrap reveal">
-  <div class="kicker">About</div>
-  <h2>Mateo Sandoval</h2>
-  <div class="minis c4">
-    <div><div class="v">3.96</div><div class="k">GPA / 4.00</div></div>
-    <div><div class="v">4×</div><div class="k">President's List</div></div>
-    <div><div class="v">2</div><div class="k">Majors · 2 minors</div></div>
-    <div><div class="v">2028</div><div class="k">Expected graduation</div></div>
-  </div>
-  <p class="sub">Junior at Gonzaga University's School of Business Administration — double major in Finance
-  and Economics, double minor in Management Information Systems and Business Analytics. President of Gonzaga
-  Men's Club Soccer, running the program's operating budget and finances. Project consultant with the Gonzaga
-  Sport Consulting Group on sponsorship and market analysis for Spokane Velocity FC. Fluent in English and
-  Spanish.</p>
-  <div class="btnrow">
-    <a class="btn" href="about.html">Full background</a>
+    <a class="btn" href="about.html">Background</a>
     <a class="btn ghost" href="mailto:msandoval@zagmail.gonzaga.edu">msandoval@zagmail.gonzaga.edu</a>
     <a class="btn ghost" href="https://github.com/mateosandoval10" rel="noopener">GitHub ↗</a>
+    <a class="btn ghost" href="https://www.linkedin.com/in/mateo-sandoval-837024353/" rel="noopener">LinkedIn ↗</a>
   </div>
 </div></section>
 
 </main>
 <footer><div class="wrap">
-  <div>© 2026 Mateo Sandoval — research portfolio. Not investment advice.</div>
+  <div>© 2026 Mateo Sandoval. Not investment advice.</div>
   <div><a href="mailto:msandoval@zagmail.gonzaga.edu">msandoval@zagmail.gonzaga.edu</a></div>
 </div></footer>
 <script>
@@ -250,7 +129,6 @@ if ('IntersectionObserver' in window) {
   var io = new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.06});
   document.querySelectorAll('.reveal').forEach(function(e){io.observe(e)});
 } else { document.querySelectorAll('.reveal').forEach(function(e){e.classList.add('in')}); }
-setTimeout(function(){document.querySelectorAll('.reveal:not(.in)').forEach(function(e){e.classList.add('in')})},1500);
 </script>
 </body>
 </html>
