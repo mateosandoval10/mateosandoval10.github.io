@@ -41,7 +41,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   .wgo{display:inline-block;font-size:15px;font-weight:560;color:var(--accent);
        border-bottom:1px solid var(--accent);padding-bottom:1px}
   .wcard:hover .wgo{color:var(--accent2);border-bottom-color:var(--accent2)}
-  .wcard.nofig .wgrid{grid-template-columns:1fr}
   .wshot{margin:0}
   .wshot img{width:100%;height:150px;object-fit:cover;object-position:var(--op,center top);
              border:1px solid var(--line);display:block}
@@ -63,7 +62,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="navwrap">
     <nav>
       <a href="profit-pilot.html">Profit Pilot</a>
-      <a href="research.html">Methodology</a>
       <a href="strategies.html">Strategies</a>
       <a href="projects.html">Projects</a>
       <a href="about.html">About</a>
@@ -109,32 +107,10 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     </div>
   </a>
 
-  <a class="wcard reveal nofig" href="research.html">
-    <div class="wgrid">
-      <div class="wtext">
-        <div class="wnum">02</div>
-        <h2>Research methodology</h2>
-        <div class="wkind">Validation pipeline · Python · intraday NQ futures</div>
-        <p>A validation pipeline built to reject its own results. Within-session bar permutation builds
-        structure-free placebo markets; 10,000-path day bootstraps put confidence intervals on Sharpe and
-        drawdown; configurations are frozen against a sealed data vault with a pre-registered success
-        criterion. Across 60,480 parameter configurations, the correlation between backtest performance and
-        out-of-sample performance measured +0.087.</p>
-        <div class="wfacts">
-          <div><div class="v">60,480</div><div class="k">Configs tested</div></div>
-          <div><div class="v">+0.087</div><div class="k">Backtest → OOS corr.</div></div>
-          <div><div class="v">300</div><div class="k">Placebo worlds</div></div>
-          <div><div class="v">10,000</div><div class="k">Bootstrap paths</div></div>
-        </div>
-        <span class="wgo">Placebo tests, bootstrap intervals and the sealed vault <span class="arw">→</span></span>
-      </div>
-    </div>
-  </a>
-
   <a class="wcard reveal" href="strategies.html" style="--ac:var(--blue);--op:center top">
     <div class="wgrid">
       <div class="wtext">
-        <div class="wnum">03</div>
+        <div class="wnum">02</div>
         <h2>Systematic strategies</h2>
         <div class="wkind">Pine Script v6 · published open source</div>
         <p>Four trading systems, each targeting a different return source: volatility-targeted trend,
@@ -157,7 +133,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <a class="wcard reveal" href="projects.html" style="--ac:var(--violet);--op:left top">
     <div class="wgrid">
       <div class="wtext">
-        <div class="wnum">04</div>
+        <div class="wnum">03</div>
         <h2>EDGAR institutional flow</h2>
         <div class="wkind">Python · SEC filings · calibration study</div>
         <p>Reads institutional filings from SEC EDGAR and reconstructs position flow: which filers
