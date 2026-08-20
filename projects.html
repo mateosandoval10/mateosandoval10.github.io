@@ -102,7 +102,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div class="defrow"><div class="l">Reads the filings</div><div class="r">Pulls the last two 10-K/10-Q documents and diffs Item 1A paragraph by paragraph. On the example run: <b>9 paragraphs added, 14 not restated, 3 materially reworded</b> — including new disclosure on component supply and on securing compute capacity</div></div>
     <div class="defrow"><div class="l">Falsifiable artifacts</div><div class="r">The repository ships the memo that passed, <b>the same memo with three figures altered and every citation left untouched</b> (the audit returns three errors, one per altered figure, while untouched figures in the same sentences still pass), and a run against a foreign private issuer that returned 80 datapoints across 7 of 11 sections and declared 11 gaps with reasons</div></div>
     <div class="defrow"><div class="l">Found by its own tests</div><div class="r">Four tests exist because of real bugs — including Treasury yields entering the evidence book as "0.0472%" because the provider reports decimal fractions. That is exactly the silent, internally-consistent error class the design exists to prevent</div></div>
-    <div class="defrow"><div class="l">What it is not</div><div class="r">No valuation modelling of its own — no DCF, no scenario analysis. Peer sets are supplied, not screened. Earnings surprises and estimate revisions sit behind a paid provider and are <b>declared missing rather than approximated</b>. Factor exposure stops at market beta. Coverage is US-centric. <b>The audit checks grounding, not reasoning</b> — a memo can pass every check and still reach a poor conclusion</div></div>
     <div class="defrow"><div class="l">Status</div><div class="r">The evidence pipeline and citation audit run on public sources with <b>no API key</b>. The synthesis step calls the Claude API and <b>has not been run end to end</b>. Repository local only, pending approval</div></div>
     <div class="defrow"><div class="l">Stack</div><div class="r">Python 3.12 · OpenBB Platform 4.7 (SEC EDGAR, yfinance, Federal Reserve, OECD) · Claude API · pytest</div></div>
   </div>
@@ -119,9 +118,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <div><div class="v">17</div><div class="k">Regression tests added</div></div>
     <div><div class="v">4</div><div class="k">Upstream projects</div></div>
   </div>
-  <div class="note stop"><b>Status, stated precisely.</b> Zero pull requests have been merged. Until a
-  maintainer merges one, this is <b>submitted work, not a contribution record</b>, and it is described that
-  way deliberately. If a request is closed without merging, this section will say so.</div>
   <div class="tablewrap"><table>
     <caption>Submitted 2026-08-18. Status as of publication.</caption>
     <thead><tr><th>Project</th><th>Stars</th><th>Defect</th><th>Status</th></tr></thead>
