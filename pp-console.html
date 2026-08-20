@@ -35,14 +35,10 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   loop, replay, stress scenarios and post-mortem tooling.</p>
 </div></header>
 
-<section id="live"><div class="wrap reveal">
+<section id="live" class="last"><div class="wrap reveal">
   <div class="kicker">Captured from the deployed instance</div>
-  <h2>Live production surfaces</h2>
-  <p class="sub">These frames are the running system, captured from the deployed console against live market
-  data. <b>Account balances and position values are redacted</b> &mdash; equity, buying power, cash,
-  deployable capital, per-sleeve dollar allocations, order fill prices and quantities, and the per-symbol
-  model internals on the Conviction Board. Everything structural is untouched: percentages, ratios, weights,
-  concentration, drift and counts, which is the part that carries the information.</p>
+  <h2>Operator surfaces</h2>
+  <p class="sub">Every frame below is the running system, captured from the deployed console against live market data. <b>Account balances and position values are redacted</b> — equity, buying power, cash, deployable capital, per-sleeve dollar allocations, order fill prices and quantities, and the per-symbol model internals on the Conviction Board. Everything structural is untouched: percentages, ratios, weights, concentration, drift and counts, which is the part that carries the information.</p>
   <div class="shots">
     <div class="shot wide">
       <img src="assets/pp/charts.webp" width="2600" height="1431" loading="lazy" decoding="async" alt="Charts surface of the Profit Pilot Mission Control console">
@@ -83,40 +79,6 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   </div>
 </div></section>
 
-<section id="demo" class="last"><div class="wrap reveal">
-  <div class="kicker">Rendered without a backend</div>
-  <h2>Demo-mode surfaces</h2>
-  <p class="sub">These surfaces have not yet been captured from the deployed instance, so they are shown in
-  demo mode &mdash; the frontend rendering its bundled sample dataset. <b>The interfaces are real; the numbers
-  in them are not.</b> They are evidence that the surface exists and works, and evidence of nothing else.
-  Live captures of the Risk Spine and Self-Improvement rooms are the next two to replace.</p>
-  <div class="shots">
-    <div class="shot">
-      <img src="assets/pp/stress-scenario-lab.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Stress Scenario Lab surface of the Profit Pilot Mission Control console">
-      <div class="cap"><b>Stress Scenario Lab.</b> Scenario construction and portfolio response. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/sim-replay.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Sim &amp; Replay surface of the Profit Pilot Mission Control console">
-      <div class="cap"><b>Sim &amp; Replay.</b> Deterministic replay of a recorded tape &mdash; the surface that makes golden-replay determinism observable. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/loss-day-analyzer.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Loss-Day Analyzer surface of the Profit Pilot Mission Control console">
-      <div class="cap"><b>Loss-Day Analyzer.</b> Post-mortem fingerprinting of losing sessions. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/calibration-lab.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Calibration Lab surface of the Profit Pilot Mission Control console">
-      <div class="cap"><b>Calibration Lab.</b> Parameter calibration and readiness measurement. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/telemetry.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Telemetry surface of the Profit Pilot Mission Control console">
-      <div class="cap"><b>Telemetry.</b> Observability and the audit trail behind every reason code. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
-    </div>
-    <div class="shot">
-      <img src="assets/pp/liquidity-forecaster.webp" width="1600" height="1000" loading="lazy" decoding="async" alt="Liquidity Forecaster surface of the Profit Pilot Mission Control console">
-      <div class="cap"><b>Liquidity Forecaster.</b> Predictive depth modelling, feeding the risk spine and the fill router. <b>Demo mode.</b> Rendered with the frontend’s bundled sample dataset so the surface works without a backend attached &mdash; the interface is real, the figures shown are illustrative.</div>
-    </div>
-  </div>
-</div></section>
 
 </main>
 <div class="ppstatus"><div class="wrap">

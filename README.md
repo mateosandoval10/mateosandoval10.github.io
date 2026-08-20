@@ -63,20 +63,18 @@ One copy of every figure — do not re-import them, or the numbers will drift be
 
 ## Screenshot provenance — get this right
 
-`assets/pp/*.webp` splits two ways and the captions must match:
+**Every `assets/pp/*.webp` the site currently uses is a live production capture** from the deployed
+console. Account balances and position values are redacted; percentages, ratios, weights, concentration,
+drift and counts are intact. The account is a **paper** account. Caption these as live production —
+never as sample data.
 
-- **Live production captures** (command-deck, allocator, conviction-board, charts, orders-history,
-  catalyst-calendar, news-feed, sleeve-toggles, settings-ai) — captured from the deployed instance.
-  Account balances and position values are redacted; percentages, ratios, weights, concentration, drift
-  and counts are intact. The account is a **paper** account. Caption these as live production, never as
-  sample data.
-- **Demo-mode captures** (risk-spine-console, self-improvement-loop, stress-scenario-lab, sim-replay,
-  calibration-lab, loss-day-analyzer, telemetry, liquidity-forecaster, and the unused catalysts-intel,
-  compliance, execution-afr) — the frontend's bundled sample dataset. Caption these as demo mode, never
-  as live.
+Six files remain in `assets/pp/` but are **no longer referenced by any page**: `stress-scenario-lab`,
+`sim-replay`, `loss-day-analyzer`, `calibration-lab`, `telemetry`, `liquidity-forecaster`. Those are
+demo-mode captures, kept on disk so they can be swapped straight back in once live versions exist. If
+you reintroduce one before it has been recaptured, it **must** be captioned as demo mode.
 
-Captioning either one as the other is the failure mode. `pp-console.html` separates them into two
-sections so it cannot be got backwards by accident.
+Captioning a demo frame as live, or a live frame as sample data, is the failure mode.
+
 
 ## Assets
 
