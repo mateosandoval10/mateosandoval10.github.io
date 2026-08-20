@@ -59,12 +59,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 
 <section style="padding-top:18px"><div class="wrap reveal">
   <h2>Thesis</h2>
-  <p class="sub" style="margin-bottom:10px">Leveraged index ETFs compound spectacularly in calm uptrends and destroy
-  capital in volatile downtrends — volatility decay on a 3x product is quadratic in realized vol. So don't predict
-  anything. Gate the holding to the uptrend regime, and let realized volatility itself set the position size.
-  This is the same architecture as institutional vol-control indices, expressed in ~60 lines of Pine.</p>
-  <p class="sub">There is no entry signal to overfit. The system holds one decision variable: <i>how much exposure
-  does current volatility justify?</i></p>
+  <p class="sub">Leveraged ETFs compound in calm uptrends and destroy capital in volatile downtrends — decay on a 3x product is quadratic in realised volatility. So predict nothing: gate the holding to the uptrend regime and let volatility set the size. The vol-control-index architecture in ~60 lines.</p>
+  <p class="sub">No entry signal to overfit. One decision variable: <b>how much exposure does current volatility justify?</b></p>
 
   <div class="diagram"><svg viewBox="0 0 900 210" xmlns="http://www.w3.org/2000/svg" font-family="var(--mono)">
     <rect x="20" y="30" width="200" height="64" rx="10" fill="var(--card2)" stroke="var(--teal)"/>
@@ -98,10 +94,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <tr><td class="txt">Largest win / loss</td><td>+$35,229 / −$17,251</td><td class="mut">—</td><td class="mut">—</td></tr>
     <tr><td class="txt">Commission paid</td><td>$4,105</td><td class="mut">—</td><td class="mut">—</td></tr>
   </table></div>
-  <p class="sub" style="margin-top:14px">The honest comparison: raw buy-and-hold TQQQ earns more — if the holder
-  survives two &gt;80% drawdowns without capitulating, which essentially nobody does. VTTE keeps most of the
-  compounding at roughly half the worst drawdown, and its exposure drops mechanically before crises mature
-  because volatility clusters. Against SPX, the engine compounds at roughly double the rate.</p>
+  <p class="sub">VTTE keeps most of the compounding at roughly half the worst drawdown, and exposure drops mechanically before crises mature because volatility clusters. Against the S&amp;P it compounds at roughly double the rate.</p>
 
   <h3>Failed experiment (kept in the record)</h3>
   <div class="rejected"><b>REJECTED — fast de-risking variant.</b> Replaced the 20-day vol estimate with

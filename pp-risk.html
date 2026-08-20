@@ -30,14 +30,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="risk" class="last"><div class="wrap reveal">
   <div class="kicker">Risk spine</div>
   <h2>Eight governors, composed</h2>
-  <p class="sub">The risk spine is designed to be <b>correct rather than profitable</b>. Risk controls do not require a
-  forward-looking edge to function; they require that they cannot be bypassed. Each governor independently
-  emits a clamp, and a clamp book aggregates them deterministically.</p>
-  <p class="sub"><b>The aggregation rule is the load-bearing design decision.</b> Multipliers compose via
-  <code>min()</code>, not by averaging, and the book fails closed — the most restrictive clamp wins. Averaging
-  would let a permissive governor dilute a restrictive one, so a system that averages one "halt" against three
-  "fine"s keeps trading. Taking the minimum means <b>any single governor can stop the system on its own</b>,
-  and the console always names which one is binding.</p>
+  <p class="sub">Designed to be <b>correct rather than profitable</b>. Risk controls do not need a forward-looking edge; they need to be impossible to bypass.</p>
+  <p class="sub"><b>The aggregation rule is load-bearing.</b> Multipliers compose via <code>min()</code>, not by averaging, and the book fails closed. Averaging lets one permissive governor dilute a restrictive one — a system averaging one "halt" against three "fine"s keeps trading. Taking the minimum means <b>any single governor can stop the system alone</b>.</p>
   <div class="grid g4">
     <div class="gov" style="--c:var(--accent)"><div class="role">Hazard</div><div class="nm">Shield</div><p>Blocks individual trades on hazard conditions before they can reach sizing. 146 catalogued micros.</p></div>
     <div class="gov" style="--c:var(--accent)"><div class="role">Aggression</div><div class="nm">WRAB</div><p>Regime-adaptive aggression scaling. The largest module in the system at 229 catalogued micros.</p></div>
@@ -71,13 +65,7 @@ Design principles
   only reduce exposure, never increase it. The distinction is between a risk layer that is
   <i>structurally</i> constrained and one that is <i>behaviourally</i> constrained.</p>
 
-  <div class="confirmed"><b>THE EVENT LINEAGE IS THE WHOLE AUDITABILITY ARGUMENT.</b> The console does not
-  merely report that WRAB is clamping exposure to ×0.29 — it lists <b>the 187 individual events that set that
-  value</b>, each reason-coded (<code>catalyst_event_heat</code>, <code>poc_support_lower</code>,
-  <code>poc_prefade_upper</code>) and timestamped to the second. A risk control that can only tell you its
-  output is a number you have to trust. One that can replay the events which produced it is a number you can
-  check — and that is the difference between a system a firm could run and a system a person could only
-  believe in.</div>
+  <div class="confirmed"><b>187 events, each reason-coded and timestamped.</b> The console does not just report that WRAB is clamping to ×0.29 — it lists every event that set it. A risk control that can only state its output is a number you trust. One that can replay what produced it is a number you check.</div>
 
   <div class="shot">
     <img src="assets/pp/risk-spine-console.webp" width="2600" height="1417" loading="lazy" decoding="async" alt="Risk Spine Console showing six status dials, a binding-constraint explainer, a clamp-stack waterfall, and the ladder of eight risk governors with their multipliers and states">

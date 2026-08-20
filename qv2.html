@@ -57,11 +57,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 
 <section style="padding-top:18px"><div class="wrap reveal">
   <h2>Thesis</h2>
-  <p class="sub">A swing-rotation score built from two components: money-flow strength (20-day Chaikin-style CMF,
-  65% weight) and volatility calm (35% weight), each expressed as a 1-year percentile rank so the score is
-  self-normalizing. Buy TQQQ when the composite crosses above 70, sell when it crosses below 30. v1 of this
-  system worked (+464% over 15 years) but carried an ugly left tail — v2 exists because of a trade-by-trade
-  loss autopsy, shown below with the receipts.</p>
+  <p class="sub">A swing score from two components: money-flow strength (20-day CMF, 65%) and volatility calm (35%), each a one-year percentile so the score self-normalises. Buy above 70, sell below 30. v2 exists because of a trade-by-trade loss autopsy, shown below with the receipts.</p>
 </div></section>
 
 <section><div class="wrap reveal">
@@ -89,9 +85,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <tr><td class="txt">Max drawdown ($)</td><td>−$23.6k</td><td class="pos">−$17.9k</td></tr>
     <tr><td class="txt">Big winners (+146%, +130%, +92%)</td><td>intact</td><td>intact</td></tr>
   </table></div>
-  <p class="sub" style="margin-top:10px">The improvement is risk-shaped, not return-shaped — same winners, smaller
-  disasters. That is the correct kind of improvement to trust: it does not depend on the future producing more
-  upside than the past, only on crashes continuing to exist.</p>
+  <p class="sub">The improvement is risk-shaped, not return-shaped — same winners, smaller disasters. That is the kind to trust: it does not depend on the future producing more upside, only on crashes continuing to exist.</p>
 </div></section>
 
 <section><div class="wrap reveal">
@@ -139,9 +133,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <tr><td>21</td><td>Mar 4 2026</td><td>Mar 23 2026</td><td>50.26</td><td>44.57</td><td class="neg">−5,301</td><td class="neg">−11.41%</td></tr>
     <tr><td>22</td><td>Apr 22 2026</td><td>Jun 22 2026</td><td>60.21</td><td>82.58</td><td class="pos">+15,230</td><td class="pos">+37.02%</td></tr>
   </table></div>
-  <p class="sub" style="margin-top:10px">Net +$46,425 on $10,000 (+464%). Ten winners, twelve losers — the system
-  is right less than half the time and profitable anyway, because winners are held ~5x longer than losers.
-  Under v2's filters, trade 15 (the Dec 2022 bear-rally buy) never happens: the 200-SMA gate blocks it.</p>
+  <p class="sub">Net +$46,425 on $10,000 (+464%). Ten winners, twelve losers — right less than half the time and profitable anyway, because winners are held ~5× longer. Under v2, trade 15 never happens.</p>
 </div></section>
 
 <section class="last"><div class="wrap reveal">

@@ -30,51 +30,35 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="testing"><div class="wrap reveal">
   <div class="kicker">Verification</div>
   <h2>Five layers of testing, before anything reaches a broker</h2>
-  <p class="sub">A trading system is only as trustworthy as the machinery built to attack it. Profit Pilot
-  carries five independent verification layers, each designed to catch a failure the others would miss.</p>
+  <p class="sub">Five independent layers, each catching a failure the others miss.</p>
 
   <div class="grid g2">
     <div class="card accent">
       <div class="tag">Layer one</div>
       <h3>Historical backtesting</h3>
-      <p>Every sleeve runs against historical bars through the same event bus the live engine uses — the
-      identical code path, not a parallel research implementation. Commissions and slippage are modelled, and
-      the report ships with its own data-quality header, including an explicit survivorship-bias notice when
-      the dataset contains only currently-listed symbols.</p>
+      <p>Every sleeve runs against historical bars through <b>the same event bus the live engine uses</b> — identical code path, not a parallel research implementation. Costs modeled, with an explicit survivorship-bias notice when the dataset holds only listed symbols.</p>
     </div>
     <div class="card accent">
       <div class="tag">Layer two</div>
       <h3>Deterministic blind replay</h3>
-      <p>Any recorded session can be replayed bar for bar and must reproduce a byte-identical event sequence.
-      This is what makes a bug from three weeks ago reproducible on demand, and it is how a code change is
-      proven to have altered nothing it should not have. Golden-replay determinism runs in CI.</p>
+      <p>Any recorded session replays bar for bar and must reproduce a <b>byte-identical event sequence</b>. A bug from three weeks ago becomes reproducible on demand. Runs in CI.</p>
     </div>
     <div class="card accent">
       <div class="tag">Layer three</div>
       <h3>Out-of-sample gating</h3>
-      <p>Challenger parameter sets are scored on data outside the window they were fitted on, and clearing
-      that gate is a requirement rather than a formality. Only survivors advance — and they advance to a fractional
-      canary, never straight to full size. A significance threshold, a cooldown window and a per-day
-      promotion cap sit behind that.</p>
+      <p>Challengers are scored outside their fitting window. Survivors advance to a <b>fractional canary</b>, never straight to full size, behind a significance threshold, a cooldown and a per-day cap.</p>
     </div>
     <div class="card accent">
       <div class="tag">Layer four</div>
       <h3>Monte Carlo &amp; synthetic scenarios</h3>
-      <p>The Ghost Synthetic Scenario Engine generates market conditions the historical record does not
-      contain, and the Stress Scenario Lab pushes the portfolio through constructed shocks. Resampling turns
-      single-path results into distributions, so a result is judged on its range rather than its one lucky
-      history.</p>
+      <p>The Ghost engine generates conditions the historical record does not contain; the Stress Lab pushes the portfolio through constructed shocks. <b>A result is judged on its range, not its one lucky history.</b></p>
     </div>
   </div>
 
   <div class="card accent" style="margin-top:15px">
     <div class="tag">Layer five</div>
     <h3>Live forward testing</h3>
-    <p>The system runs continuously in paper trading against a live brokerage API with real market data —
-    real quotes, real order routing, real fill reconciliation. Forward testing is the only layer that cannot
-    be overfitted, because the data has not been written yet. Every session is reconciled against the broker,
-    and a fail-closed kill switch halts trading on any mismatch between what the engine believes it holds and
-    what the broker reports.</p>
+    <p>Continuous paper trading against a live brokerage API — real quotes, real routing, real fill reconciliation. <b>Forward testing is the only layer that cannot be overfitted, because the data has not been written yet.</b> A fail-closed kill switch halts on any broker mismatch.</p>
   </div>
 
   <div class="shot">
@@ -91,26 +75,20 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   made</b> is the correct behaviour. An empty readout that states why it is empty is more informative than a
   populated one without a source.</div>
 
-  <p class="sub" style="margin-top:26px">Underneath all five sits an append-only decision ledger recording
-  every cycle's verdict, so the exact parameter state of the system at any past moment can be reconstructed.
-  A self-modifying system without an audit trail is one that can never be debugged after the fact — so the
-  audit trail was built first.</p>
+  <p class="sub">Underneath all five: an append-only decision ledger. The parameter state at any past moment is reconstructible.</p>
 </div></section>
 
 <section id="forward"><div class="wrap reveal">
   <div class="kicker">Where this goes from here</div>
   <h2>The path to live</h2>
-  <p class="sub">Three pieces of work stand between the current forward-testing stage and trading real
-  capital. Each is specified, and each has a clear completion test.</p>
+  <p class="sub">Four stages between forward testing and live capital. Each has a completion test.</p>
   <div class="flow">
     <div class="step"><div class="num">01</div><div class="nm">Walk-forward validation</div><p>Rolling out-of-sample evaluation across historical data. Every component exists; the remaining work is orchestration over them.</p></div>
     <div class="step"><div class="num">02</div><div class="nm">Sim-to-live fidelity</div><p>Quantify and close the gap between modelled and actual fills, so simulated results become informative rather than aspirational.</p></div>
     <div class="step"><div class="num">03</div><div class="nm">Per-sleeve expectancy</div><p>Measure the six sleeves independently rather than in aggregate, so capital concentrates where it is earned.</p></div>
     <div class="step"><div class="num">04</div><div class="nm">Live deployment</div><p>Arming the live-trading ladder behind the same risk spine, at fractional size first.</p></div>
   </div>
-  <div class="confirmed"><b>THE SEQUENCE IS DELIBERATE.</b> Every stage above produces a number that decides
-  the next one. The system is built so that going live is a configuration change behind a risk spine that
-  already governs every order — not a rewrite, and not a leap of faith.</div>
+  <div class="confirmed"><b>Every stage produces the number that decides the next.</b> Going live is a configuration change behind a risk spine that already governs every order — not a rewrite.</div>
 </div></section>
 
 <section id="road" class="last"><div class="wrap reveal">

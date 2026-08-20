@@ -75,12 +75,8 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 </div></div></section>
 <section style="padding-top:18px"><div class="wrap reveal">
   <h2>Thesis</h2>
-  <p class="sub">Volatility is cyclical: compression precedes expansion. The system waits for a statistically quiet
-  base — Bollinger band width in the bottom quartile of its own trailing 6-month distribution — then buys the range
-  break on above-average volume, in trend only, and rides the expansion on a wide chandelier trail. Expansion legs
-  are long-tailed, so the exit is a trail, not a target.</p>
-  <p class="sub">The width filter uses a <b>percentile rank</b>, not an absolute threshold — it self-normalizes
-  across symbols and volatility regimes, which is what makes the frozen-parameter cross-symbol tests below meaningful.</p>
+  <p class="sub">Volatility is cyclical: compression precedes expansion. The system waits for band width in the <b>bottom quartile of its own trailing six-month distribution</b>, buys the range break on above-average volume, in trend only, and trails the exit — expansion legs are long-tailed.</p>
+  <p class="sub">The width filter is a <b>percentile rank</b>, not an absolute threshold. It self-normalises across symbols and regimes, which is what makes the frozen-parameter cross-symbol tests meaningful.</p>
 
   <div class="diagram"><svg viewBox="0 0 900 150" xmlns="http://www.w3.org/2000/svg" font-family="var(--mono)">
     <rect x="10" y="40" width="196" height="70" rx="10" fill="var(--card2)" stroke="var(--amber)"/>
@@ -126,9 +122,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
     <tr><td>AAPL</td><td>2005–2026</td><td class="pos">+899%</td><td>4.33</td><td>59%</td><td class="txt pos">primary</td></tr>
     <tr><td>MSFT</td><td>2005–2026</td><td>+46%</td><td>1.32</td><td>37%</td><td class="txt">carries, but thin</td></tr>
   </table></div>
-  <p class="sub" style="margin-top:10px">The spread is the honest finding: the system feeds on names that actually
-  produce post-squeeze expansion legs. High-beta trending stocks work; a low-vol grinding mega-cap barely clears
-  costs. A production deployment would gate the universe on trend quality rather than trading everything.</p>
+  <p class="sub">The system feeds on names that produce post-squeeze expansion legs. A production deployment would gate the universe on trend quality rather than trading everything.</p>
 
   <h3>Failed experiment (kept in the record)</h3>
   <div class="rejected"><b>REJECTED — 100%-of-equity sizing.</b> The identical signal stack, sized all-in per trade,

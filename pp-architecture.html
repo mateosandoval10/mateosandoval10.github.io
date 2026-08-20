@@ -30,15 +30,12 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="arch"><div class="wrap reveal">
   <div class="kicker">Architecture</div>
   <h2>The event bus is the design decision</h2>
-  <p class="sub">Everything else follows from it. Market data arrives as events, signals are events, risk
-  vetoes are events, orders and fills are events — and every one carries a schema-validated envelope and a
-  reason code. Nothing calls anything else directly.</p>
+  <p class="sub">Market data, signals, risk vetoes, orders and fills are all events — each schema-validated and reason-coded. Nothing calls anything else directly.</p>
   <div class="grid g2">
     <div class="card">
       <div class="tag">Property one</div>
       <h3>Golden-replay determinism</h3>
-      <p>Replaying an identical input tape reproduces an identical event sequence, byte for byte. Most self-built trading systems lack this property, and
-      without it a code change cannot be proven to have altered nothing outside its intent.</p>
+      <p>An identical input tape reproduces an identical event sequence, byte for byte. Most self-built systems lack this, and without it a code change cannot be proven to have altered nothing outside its intent.</p>
     </div>
     <div class="card">
       <div class="tag">Property two</div>
@@ -64,12 +61,7 @@ class EventEnvelope:
     payload: Mapping[str, Any]
     reason_codes: tuple[str, ...] = ()
     payload_hash: str | None = None</code></pre>
-  <p class="sub"><code>frozen=True</code> makes events immutable, so no downstream consumer can rewrite
-  history, and <code>payload_hash</code> makes tampering detectable. The two timestamps are what make replay
-  honest: separating <b>when something happened</b> from <b>when the system saw it</b> lets you reconstruct
-  what the system knew at a moment, rather than what was true at that moment — the distinction that separates
-  a realistic replay from an accidentally clairvoyant one. Reason codes propagate through the whole chain, so
-  any decision can be traced back to the conditions that caused it.</p>
+  <p class="sub"><code>frozen=True</code> makes events immutable; <code>payload_hash</code> makes tampering detectable. The two timestamps separate <b>when something happened</b> from <b>when the system saw it</b> — the difference between a realistic replay and an accidentally clairvoyant one.</p>
 
   <div class="tablewrap"><table>
     <thead><tr><th>Layer</th><th>Implementation</th></tr></thead>
@@ -92,17 +84,14 @@ class EventEnvelope:
 <section id="loop" class="last"><div class="wrap reveal">
   <div class="kicker">Research loop</div>
   <h2>The system tunes itself — under gates</h2>
-  <p class="sub">With 2,128 tunable parameters, the default outcome of an unconstrained search is an overfit,
-  not a discovery. So the interesting engineering here is not the search. It's the gates.</p>
+  <p class="sub">With 2,128 tunable parameters, the default outcome of an unconstrained search is an overfit. <b>The engineering is the gates, not the search.</b></p>
   <div class="flow">
     <div class="step"><div class="num">01</div><div class="nm">Propose</div><p>Shadow search generates challenger parameter sets against the running champion.</p></div>
     <div class="step"><div class="num">02</div><div class="nm">Evaluate out-of-sample</div><p>Challengers are scored on data outside the window they were fitted on. Clearing that gate is a <b>requirement</b>, not a formality — it is the stage designed to reject overfits.</p></div>
     <div class="step"><div class="num">03</div><div class="nm">Canary</div><p>Survivors deploy at fractional allocation first, never straight to full size.</p></div>
     <div class="step"><div class="num">04</div><div class="nm">Gated promotion</div><p>Promotion requires a significance threshold, a cooldown window, and a per-day promotion cap.</p></div>
   </div>
-  <p class="sub">Every cycle's verdict is written to an append-only decision ledger, so the parameter state of
-  the system at any past moment is reconstructible — which matters more than it sounds, because a
-  self-modifying system without an audit trail cannot be debugged after the fact.</p>
+  <p class="sub">Every verdict lands in an append-only ledger. A self-modifying system without an audit trail cannot be debugged after the fact.</p>
   <div class="shot">
     <img src="assets/pp/self-improvement-loop.webp" width="2600" height="1418" loading="lazy" decoding="async" alt="Self-Improvement Control Room showing the propose, evaluate out-of-sample, canary and promote stages of the research loop">
     <div class="cap"><b>Self-Improvement Control Room.</b> The loop end to end — propose, evaluate out-of-sample, canary, promote — with the tunable-knob count and the safety controls that can freeze it. <b>Live production console.</b> Captured from the deployed instance against live market data. Account balances and position values are redacted; percentages, ratios and structure are intact. The account is a <b>paper account</b> — live capital is gated by <code>allow_live_trading: false</code>.</div>
