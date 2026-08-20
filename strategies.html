@@ -34,6 +34,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   and the fact that <b>three are published as open-source code, readable and reproducible by anyone.</b></p>
   <div class="pills">
     <a class="pill live" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">3 open-source strategies on TradingView &#8599;</a>
+    <a class="pill" href="#benchmark">Benchmarks</a>
     <a class="pill" href="#validation">Validation evidence</a>
     <a class="pill" href="#rejected">Rejection log</a>
     <a class="pill warn" href="#method">Scope &amp; limitations</a>
@@ -110,6 +111,31 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       time. That combination is unusual, and it is a capital-efficiency profile rather than a return one.</p>
     </div>
   </div>
+</div></section>
+
+<section id="benchmark"><div class="wrap reveal">
+  <div class="kicker">Against the benchmark</div>
+  <h2>Measured against the thing<br>each system actually trades</h2>
+  <p class="sub">A strategy compared only to a favourable benchmark is being marketed rather than measured.
+  Each system is shown against both the index and against simply holding the instrument it trades. Figures
+  are from the Strategy Tester reports published on each page.</p>
+  <div class="tablewrap"><table>
+    <caption>$10,000 initial capital · 0.05% commission per side · slippage modeled. Backtests, not a trading record.</caption>
+    <thead><tr><th>System</th><th>Market · window</th><th>Strategy net</th><th>Index</th><th>Buy &amp; hold, same instrument</th><th>Max DD</th></tr></thead>
+    <tbody>
+      <tr><td class="txt">Compression Breakout</td><td>AAPL · 2005–26</td><td class="pos">+$89,925</td><td class="txt">S&amp;P 500 ≈ +550%</td><td class="txt neg">+$2,480,400 — far ahead</td><td class="pos">14.4%</td></tr>
+      <tr><td class="txt">Vol-Target Trend Engine</td><td>TQQQ · 2010–26</td><td class="pos">+$386,200</td><td class="txt">S&amp;P 500 ≈ 13% CAGR</td><td class="txt neg">+$2,010,729 — far ahead</td><td>41.9%</td></tr>
+      <tr><td class="txt">Channel Reversion</td><td>QQQ · 1999–26</td><td class="pos">+$10,398</td><td class="mut">—</td><td class="txt neg">Ahead — long ~20% of the time</td><td class="pos">15.2%</td></tr>
+      <tr><td class="txt">QV Signal Pro v2</td><td>TQQQ · 2011–26</td><td class="pos">+$48,889</td><td class="mut">—</td><td class="txt neg">Ahead</td><td class="mut">−20% worst trade</td></tr>
+    </tbody>
+  </table></div>
+  <div class="confirmed"><b>NONE OF THESE BEATS BUY-AND-HOLD ON RAW RETURN.</b> Holding AAPL across the CBS
+  window returned roughly <b>27× the strategy</b>; raw TQQQ out-earns both leveraged systems. That is stated
+  here, on each strategy page, and in every Strategy Tester report, because it is the first thing a
+  practitioner would check. The case for these systems is <b>drawdown and capital efficiency</b>, not raw
+  return: CBS produces its result with a <b>14.4% worst drawdown</b>, while holding AAPL over the same window
+  required surviving 2008 in full, and Channel Reversion sits in cash roughly 80% of the time. A system that
+  is long a fraction of the time cannot outrun a secular bull, and none of these pages claims otherwise.</div>
 </div></section>
 
 <section id="library"><div class="wrap reveal">
