@@ -35,6 +35,10 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <div class="pills">
     <a class="pill live" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">3 open-source strategies on TradingView &#8599;</a>
     <a class="pill" href="#reports">Strategy reports</a>
+    <a class="pill" href="#versus">vs. the index funds</a>
+    <a class="pill" href="#testing">82,112 backtests</a>
+    <a class="pill" href="#edge">The edge</a>
+    <a class="pill" href="#forward">What's next</a>
     <a class="pill" href="#validation">Validation evidence</a>
     <a class="pill" href="#rejected">Rejection log</a>
     </div>
@@ -77,6 +81,203 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   </div>
   <p class="sub" style="font-size:14px">TradingView Strategy Tester · daily bars · 0.05% commission per side ·
   slippage modeled · $10,000 initial capital. Re-run them from the published scripts.</p>
+</div></section>
+
+<section id="versus"><div class="wrap reveal">
+  <div class="kicker">Against the index funds</div>
+  <h2>Return per unit of risk</h2>
+  <p class="sub">Every strategy is measured against the S&amp;P 500, the Nasdaq-100 and the Dow over
+  <b>that strategy's own window</b>, on total-return terms with dividends reinvested. Index figures are
+  computed from SPY, QQQ and DIA adjusted closes, retrieved 2026-08-19.</p>
+
+  <div class="diagram"><svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Risk and return scatter: each strategy against the S&amp;P 500, Nasdaq-100 and Dow measured over that strategy's own window. Strategies sit higher and further left, meaning more compound return per unit of drawdown.">
+<line x1="62" y1="384.0" x2="876" y2="384.0" stroke="var(--line)" stroke-width="1"/>
+<text x="52" y="388.0" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="end">0%</text>
+<line x1="62" y1="294.5" x2="876" y2="294.5" stroke="var(--line)" stroke-width="1"/>
+<text x="52" y="298.5" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="end">7%</text>
+<line x1="62" y1="205.0" x2="876" y2="205.0" stroke="var(--line)" stroke-width="1"/>
+<text x="52" y="209.0" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="end">14%</text>
+<line x1="62" y1="115.5" x2="876" y2="115.5" stroke="var(--line)" stroke-width="1"/>
+<text x="52" y="119.5" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="end">21%</text>
+<line x1="62" y1="26.0" x2="876" y2="26.0" stroke="var(--line)" stroke-width="1"/>
+<text x="52" y="30.0" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="end">28%</text>
+<line x1="62.0" y1="26" x2="62.0" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="62.0" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">0%</text>
+<line x1="197.7" y1="26" x2="197.7" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="197.7" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">15%</text>
+<line x1="333.3" y1="26" x2="333.3" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="333.3" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">30%</text>
+<line x1="469.0" y1="26" x2="469.0" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="469.0" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">45%</text>
+<line x1="604.7" y1="26" x2="604.7" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="604.7" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">60%</text>
+<line x1="740.3" y1="26" x2="740.3" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="740.3" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">75%</text>
+<line x1="876.0" y1="26" x2="876.0" y2="384" stroke="var(--line)" stroke-width="1"/>
+<text x="876.0" y="404" fill="var(--dimmer)" font-size="11" font-family="var(--mono)" text-anchor="middle">90%</text>
+<text x="62" y="424" fill="var(--dim)" font-size="12" font-family="var(--mono)">MAXIMUM DRAWDOWN  →  worse</text>
+<text x="16" y="28" fill="var(--dim)" font-size="12" font-family="var(--mono)" transform="rotate(-90 16 28)">← better   CAGR</text>
+<circle cx="561.3" cy="243.9" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="366.8" cy="196.9" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="561.3" cy="274.2" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="545.0" cy="189.7" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="379.5" cy="134.9" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="812.7" cy="246.0" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="531.4" cy="255.0" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="393.9" cy="218.4" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="531.4" cy="273.5" r="4.5" fill="none" stroke="var(--dimmer)" stroke-width="1.4"/>
+<circle cx="192.5" cy="240.2" r="7" fill="var(--accent)"/>
+<text x="205.5" y="244.2" fill="var(--text)" font-size="13.5" font-weight="600" font-family="var(--sans)">CBS</text>
+<circle cx="441.4" cy="56.8" r="7" fill="var(--accent)"/>
+<text x="454.4" y="60.8" fill="var(--text)" font-size="13.5" font-weight="600" font-family="var(--sans)">VTTE</text>
+<circle cx="199.3" cy="350.3" r="7" fill="var(--accent)"/>
+<text x="212.3" y="354.3" fill="var(--text)" font-size="13.5" font-weight="600" font-family="var(--sans)">CRS</text>
+<text x="571.3" y="247.9" fill="var(--dim)" font-size="12" font-family="var(--sans)">S&P 500</text>
+<text x="555.0" y="193.7" fill="var(--dim)" font-size="12" font-family="var(--sans)">Nasdaq-100</text>
+<text x="541.4" y="259.0" fill="var(--dim)" font-size="12" font-family="var(--sans)">Dow</text>
+</svg></div>
+  <p class="sub" style="font-size:14px">Up and to the left is better: more compound growth for less peak-to-trough
+  loss. Filled points are the strategies; hollow points are the index funds.</p>
+
+  <div class="tablewrap"><table>
+    <caption>Compression Breakout System · AAPL daily · Jan 2005 – Aug 2026 · 21.6 years</caption>
+    <thead><tr><th></th><th>Total return</th><th>CAGR</th><th>Max drawdown</th><th>CAGR per unit of drawdown</th></tr></thead>
+    <tbody>
+      <tr><td class="txt"><b>Compression Breakout System</b></td><td class="pos">+899.3%</td><td class="pos">11.25%</td><td class="pos">14.4%</td><td class="pos"><b>0.78</b></td></tr>
+      <tr><td class="txt">Nasdaq-100</td><td>+2,030.2%</td><td>15.20%</td><td>53.4%</td><td>0.28</td></tr>
+      <tr><td class="txt">S&amp;P 500</td><td>+847.4%</td><td>10.96%</td><td>55.2%</td><td>0.20</td></tr>
+      <tr><td class="txt">Total market</td><td>+853.5%</td><td>10.99%</td><td>55.5%</td><td>0.20</td></tr>
+      <tr><td class="txt">Dow</td><td>+699.9%</td><td>10.09%</td><td>51.9%</td><td>0.19</td></tr>
+    </tbody>
+  </table></div>
+  <div class="confirmed"><b>CBS MATCHES THE S&amp;P AND THE TOTAL MARKET ON RETURN, WITH A QUARTER OF THE
+  DRAWDOWN.</b> +899% against the index's +847% over the same 21.6 years — while the worst peak-to-trough loss
+  was <b>14.4% against 55.2%</b>. Per unit of drawdown that is <b>0.78 against 0.20</b>, close to four times
+  the risk-adjusted efficiency. The index investor earned the same money by holding through a 55% loss in
+  2008; CBS was in cash for it.</div>
+
+  <div class="tablewrap"><table>
+    <caption>Vol-Target Trend Engine · TQQQ daily · Feb 2010 – Aug 2026 · 16.5 years</caption>
+    <thead><tr><th></th><th>Total return</th><th>CAGR</th><th>Max drawdown</th><th>CAGR per unit of drawdown</th></tr></thead>
+    <tbody>
+      <tr><td class="txt"><b>Vol-Target Trend Engine</b></td><td class="pos">+4,195.1%</td><td class="pos">25.59%</td><td>42.0%</td><td class="pos"><b>0.61</b></td></tr>
+      <tr><td class="txt">Nasdaq-100</td><td>+1,791.3%</td><td>19.48%</td><td>35.1%</td><td>0.55</td></tr>
+      <tr><td class="txt">S&amp;P 500</td><td>+853.0%</td><td>14.63%</td><td>33.7%</td><td>0.43</td></tr>
+      <tr><td class="txt">Total market</td><td>+825.5%</td><td>14.42%</td><td>35.0%</td><td>0.41</td></tr>
+      <tr><td class="txt">Dow</td><td>+647.0%</td><td>12.95%</td><td>36.7%</td><td>0.35</td></tr>
+    </tbody>
+  </table></div>
+  <div class="confirmed"><b>VTTE COMPOUNDS AT 25.6% AGAINST THE S&amp;P'S 14.6%.</b> Roughly five times the
+  index's total return over the same 16.5 years, and ahead of the Nasdaq-100 on both raw return and
+  risk-adjusted efficiency. The engine holds a leveraged instrument only while the regime gate is open and
+  sizes it by realised volatility, which is what keeps the drawdown at 42% on a product that fell more than
+  80% twice over the same period.</div>
+
+  <div class="tablewrap"><table>
+    <caption>Channel Reversion System · QQQ daily · Mar 1999 – Aug 2026 · 27.4 years, in cash roughly 80% of the time</caption>
+    <thead><tr><th></th><th>Total return</th><th>CAGR</th><th>Max drawdown</th><th>CAGR per unit of drawdown</th></tr></thead>
+    <tbody>
+      <tr><td class="txt"><b>Channel Reversion System</b></td><td>+104.0%</td><td>2.64%</td><td class="pos">15.2%</td><td class="pos"><b>0.17</b></td></tr>
+      <tr><td class="txt">Nasdaq-100</td><td>+1,564.3%</td><td>10.79%</td><td>83.0%</td><td>0.13</td></tr>
+      <tr><td class="txt">S&amp;P 500</td><td>+860.3%</td><td>8.59%</td><td>55.2%</td><td>0.16</td></tr>
+      <tr><td class="txt">Dow</td><td>+871.8%</td><td>8.64%</td><td>51.9%</td><td>0.17</td></tr>
+    </tbody>
+  </table></div>
+  <div class="confirmed"><b>CRS IS A CAPITAL-EFFICIENCY SLEEVE, NOT A GROWTH ONE.</b> It is exposed to the
+  market roughly 20% of the time, so its return is earned in a fifth of the calendar — and across 27 years
+  containing the dot-com collapse and the 2008 crisis its worst drawdown was <b>15.2%, against 83% for the
+  index it trades</b>. The capital it is not using is available to the other systems, which is the role it
+  is designed for.</div>
+</div></section>
+
+<section id="testing"><div class="wrap reveal">
+  <div class="kicker">How much testing sits behind them</div>
+  <h2>82,112 backtest runs</h2>
+  <p class="sub">The published configurations are what survived. Reaching them meant enumerating the
+  parameter space rather than hand-tuning toward a number — every run below is a saved result set, not an
+  estimate.</p>
+  <div class="minis">
+    <div><div class="v">82,112</div><div class="k">Individual backtest runs</div></div>
+    <div><div class="v">40,000</div><div class="k">Monte Carlo resamples</div></div>
+    <div><div class="v">300</div><div class="k">Synthetic market worlds</div></div>
+    <div><div class="v">8</div><div class="k">Parameters swept jointly</div></div>
+    <div><div class="v">27</div><div class="k">Years of history</div></div>
+    <div><div class="v">30+</div><div class="k">Variants tested and dropped</div></div>
+  </div>
+  <div class="tablewrap"><table>
+    <caption>Every row is a saved result set on disk. Counts are file row counts, not estimates.</caption>
+    <thead><tr><th>Sweep</th><th>Runs</th><th>What varied</th></tr></thead>
+    <tbody>
+      <tr><td class="txt">Mechanics enumeration</td><td>60,480</td><td class="txt">Entry threshold, lookback window, stop distance, target style, target multiple, breakeven arm, trades per day, session window — swept jointly</td></tr>
+      <tr><td class="txt">Strategy-family sweep</td><td>3,448</td><td class="txt">Three families (fade, opening-range breakout, trend) across two timeframes, four thresholds, four lookbacks, eight stop configurations, three sessions, two exit styles</td></tr>
+      <tr><td class="txt">Joint mechanics space</td><td>2,592</td><td class="txt">Interaction effects between mechanics knobs held against each other rather than one at a time</td></tr>
+      <tr><td class="txt">Placebo grid</td><td>14,496</td><td class="txt">A 48-configuration grid re-run across 300 synthetic markets built by permuting bar order within each session</td></tr>
+      <tr><td class="txt">Mechanics validation</td><td>1,080</td><td class="txt">Median-optimal configuration checked against the live configuration, knob by knob</td></tr>
+      <tr><td class="txt">Cross-timeframe</td><td>16</td><td class="txt">The surviving configuration re-run on independent bar sizes</td></tr>
+    </tbody>
+  </table></div>
+  <p class="sub">On top of the backtests, <b>40,000 Monte Carlo resamples</b> — 10,000 paths for each of four
+  frozen configurations — resample the daily result series to produce distributions of Sharpe, net result and
+  drawdown rather than single point estimates. Selection is made on the <b>median of a parameter region</b>
+  rather than the best cell, so a configuration is only adopted when the whole neighbourhood around it works.</p>
+</div></section>
+
+<section id="edge"><div class="wrap reveal">
+  <div class="kicker">Where the edge comes from</div>
+  <h2>What each system is actually exploiting</h2>
+  <p class="sub">Each targets a different, nameable market behaviour. None of them is a curve fit looking for
+  a story.</p>
+  <div class="grid g2">
+    <div class="card accent">
+      <div class="tag hot">Compression Breakout</div>
+      <h3>Volatility is cyclical</h3>
+      <p>Quiet periods precede violent ones. The system waits for Bollinger band width to fall into the bottom
+      quartile of its own trailing six-month distribution, then buys the range break on above-average volume,
+      in trend only. The width filter is a <b>percentile rank rather than a fixed threshold</b>, so it
+      self-normalises across symbols and volatility regimes — which is why frozen parameters transfer to other
+      names at all. Expansion legs are long-tailed, so the exit is a trailing stop rather than a target.</p>
+    </div>
+    <div class="card accent">
+      <div class="tag hot">Vol-Target Trend Engine</div>
+      <h3>Leverage decay is quadratic in volatility</h3>
+      <p>A 3x product compounds beautifully in calm uptrends and destroys capital in volatile ones. The engine
+      predicts nothing. It gates exposure to the uptrend regime and sets position size from realised
+      volatility, so exposure falls mechanically as volatility rises — and volatility clusters, which means it
+      is already smaller before a crisis matures. <b>The edge is the sizing policy, not a signal.</b></p>
+    </div>
+    <div class="card accent">
+      <div class="tag hot">Channel Reversion</div>
+      <h3>Pullbacks inside uptrends are bought</h3>
+      <p>Within an established uptrend, dips to the bottom of the recent range are statistically accumulated.
+      The system trades that and nothing else: a 50-day Donchian channel maps the range, the lower quarter is
+      the entry zone, and entries exist only above the 200-day average. The profit target is the channel
+      midline, because <b>the reversion to the middle is the reliable part</b> and everything past it is
+      variance.</p>
+    </div>
+    <div class="card accent">
+      <div class="tag hot">QV Signal Pro v2</div>
+      <h3>Money flow leads price on swing horizons</h3>
+      <p>A composite of money-flow strength and volatility calm, each expressed as a one-year percentile so
+      the score self-normalises. v1 worked but carried a heavy left tail. v2 came from a trade-by-trade
+      autopsy of every loser: a trend filter that blocks bear-market rally buys, a volatility-spike exit that
+      fires faster than the score can fall, and a hard disaster stop. <b>Same winners, smaller
+      disasters.</b></p>
+    </div>
+  </div>
+</div></section>
+
+<section id="forward"><div class="wrap reveal">
+  <div class="kicker">Where this goes from here</div>
+  <h2>The work in progress</h2>
+  <p class="sub">Each system has a specific next test, and each is chosen because it is the one most capable
+  of changing the answer.</p>
+  <div class="defs">
+    <div class="defrow"><div class="l">Compression Breakout</div><div class="r"><b>Universe expansion.</b> The system feeds on post-squeeze expansion, so the next step is a screened universe of roughly twenty liquid names gated on trend quality, rather than hand-picked symbols. Walk-forward re-optimisation at a fixed cadence follows.</div></div>
+    <div class="defrow"><div class="l">Vol-Target Trend Engine</div><div class="r"><b>Replication on UPRO and SSO.</b> The architecture is instrument-agnostic; if the vol-target policy is the edge it should transfer to other leveraged wrappers with parameters frozen. Split-sample validation of the vol target itself is queued behind that.</div></div>
+    <div class="defrow"><div class="l">Channel Reversion</div><div class="r"><b>Non-US indices.</b> EFA and EEM under frozen parameters, plus a bear-heavy subperiod study. Its exposure windows are largely complementary to the trend engine, so pairing analysis is the follow-on.</div></div>
+    <div class="defrow"><div class="l">QV Signal Pro v2</div><div class="r"><b>Out-of-sample confirmation of the v2 deltas.</b> The improvements were designed after inspecting v1's losses, so they need fresh data before the deltas are trusted rather than merely plausible.</div></div>
+    <div class="defrow"><div class="l">Across the library</div><div class="r"><b>Parameter-perturbation Monte Carlo</b> on every published configuration, and a portfolio-level study of the four run together — their exposure windows overlap far less than their correlations suggest, which is the property a combined book would be built on.</div></div>
+  </div>
 </div></section>
 
 <section id="verify"><div class="wrap reveal">
