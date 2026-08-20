@@ -86,10 +86,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="versus"><div class="wrap reveal">
   <div class="kicker">Against the index funds</div>
   <h2>Return per unit of risk</h2>
-  <p class="sub">Every strategy is measured against the S&amp;P 500, the total market and the Dow over
-  <b>that strategy's own window</b>, on total-return terms with dividends reinvested. Index figures are
-  computed from SPY, VTI and DIA adjusted closes, retrieved 2026-08-19. The per-system tables below
-  also carry the Nasdaq-100.</p>
+  <p class="sub">Each strategy against the S&amp;P 500, total market and Dow, measured over its own window. Total return, dividends reinvested, from adjusted closes retrieved 2026-08-19.</p>
 
   <div class="diagram"><svg viewBox="0 0 900 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Risk and return scatter. Each strategy is plotted against the S&amp;P 500, total market and Dow measured over that strategy's own window. The strategies sit higher and further left, meaning more compound return for less peak-to-trough loss.">
 <line x1="62" y1="384.0" x2="876" y2="384.0" stroke="var(--line)" stroke-width="1"/>
@@ -151,11 +148,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <tr><td class="txt">Dow</td><td>+699.9%</td><td>10.09%</td><td>51.9%</td><td>0.19</td></tr>
     </tbody>
   </table></div>
-  <div class="confirmed"><b>CBS MATCHES THE S&amp;P AND THE TOTAL MARKET ON RETURN, WITH A QUARTER OF THE
-  DRAWDOWN.</b> +899% against the index's +847% over the same 21.6 years — while the worst peak-to-trough loss
-  was <b>14.4% against 55.2%</b>. Per unit of drawdown that is <b>0.78 against 0.20</b>, close to four times
-  the risk-adjusted efficiency. The index investor earned the same money by holding through a 55% loss in
-  2008; CBS was in cash for it.</div>
+  <div class="confirmed"><b>Same return as the S&amp;P. A quarter of the drawdown.</b> 14.4% against 55.2%, over the same 21.6 years. The index investor earned it by holding through 2008.</div>
 
   <div class="tablewrap"><table>
     <caption>Vol-Target Trend Engine · TQQQ daily · Feb 2010 – Aug 2026 · 16.5 years</caption>
@@ -168,11 +161,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <tr><td class="txt">Dow</td><td>+647.0%</td><td>12.95%</td><td>36.7%</td><td>0.35</td></tr>
     </tbody>
   </table></div>
-  <div class="confirmed"><b>VTTE COMPOUNDS AT 25.6% AGAINST THE S&amp;P'S 14.6%.</b> Roughly five times the
-  index's total return over the same 16.5 years, and ahead of the Nasdaq-100 on both raw return and
-  risk-adjusted efficiency. The engine holds a leveraged instrument only while the regime gate is open and
-  sizes it by realised volatility, which is what keeps the drawdown at 42% on a product that fell more than
-  80% twice over the same period.</div>
+  <div class="confirmed"><b>25.6% compound against the index's 14.6%.</b> Ahead of the Nasdaq-100 on both return and risk. Exposure is gated by regime and sized by volatility, on a product that fell 80% twice.</div>
 
   <div class="tablewrap"><table>
     <caption>Channel Reversion System · QQQ daily · Mar 1999 – Aug 2026 · 27.4 years, in cash roughly 80% of the time</caption>
@@ -184,19 +173,13 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <tr><td class="txt">Dow</td><td>+871.8%</td><td>8.64%</td><td>51.9%</td><td>0.17</td></tr>
     </tbody>
   </table></div>
-  <div class="confirmed"><b>CRS IS A CAPITAL-EFFICIENCY SLEEVE, NOT A GROWTH ONE.</b> It is exposed to the
-  market roughly 20% of the time, so its return is earned in a fifth of the calendar — and across 27 years
-  containing the dot-com collapse and the 2008 crisis its worst drawdown was <b>15.2%, against 83% for the
-  index it trades</b>. The capital it is not using is available to the other systems, which is the role it
-  is designed for.</div>
+  <div class="confirmed"><b>Exposed 20% of the time. 15.2% worst drawdown across 27 years</b> — against 83% for the index it trades. The idle capital funds the other systems.</div>
 </div></section>
 
 <section id="testing"><div class="wrap reveal">
   <div class="kicker">How much testing sits behind them</div>
   <h2>82,112 backtest runs</h2>
-  <p class="sub">The published configurations are what survived. Reaching them meant enumerating the
-  parameter space rather than hand-tuning toward a number — every run below is a saved result set, not an
-  estimate.</p>
+  <p class="sub">Every figure below is a saved row count, not an estimate.</p>
   <div class="minis">
     <div><div class="v">82,112</div><div class="k">Individual backtest runs</div></div>
     <div><div class="v">40,000</div><div class="k">Monte Carlo resamples</div></div>
@@ -217,52 +200,33 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
       <tr><td class="txt">Cross-timeframe</td><td>16</td><td class="txt">The surviving configuration re-run on independent bar sizes</td></tr>
     </tbody>
   </table></div>
-  <p class="sub">On top of the backtests, <b>40,000 Monte Carlo resamples</b> — 10,000 paths for each of four
-  frozen configurations — resample the daily result series to produce distributions of Sharpe, net result and
-  drawdown rather than single point estimates. Selection is made on the <b>median of a parameter region</b>
-  rather than the best cell, so a configuration is only adopted when the whole neighbourhood around it works.</p>
+  <p class="sub">Plus <b>40,000 Monte Carlo resamples</b> — 10,000 paths per frozen configuration. Selection is made on the median of a parameter region, never the best cell.</p>
 </div></section>
 
 <section id="edge"><div class="wrap reveal">
   <div class="kicker">Where the edge comes from</div>
   <h2>What each system is actually exploiting</h2>
-  <p class="sub">Each targets a different, nameable market behaviour. None of them is a curve fit looking for
-  a story.</p>
+  <p class="sub">Each targets a different, nameable market behaviour.</p>
   <div class="grid g2">
     <div class="card accent">
       <div class="tag hot">Compression Breakout</div>
       <h3>Volatility is cyclical</h3>
-      <p>Quiet periods precede violent ones. The system waits for Bollinger band width to fall into the bottom
-      quartile of its own trailing six-month distribution, then buys the range break on above-average volume,
-      in trend only. The width filter is a <b>percentile rank rather than a fixed threshold</b>, so it
-      self-normalises across symbols and volatility regimes — which is why frozen parameters transfer to other
-      names at all. Expansion legs are long-tailed, so the exit is a trailing stop rather than a target.</p>
+      <p>Quiet periods precede violent ones. The system waits for band width to reach the bottom quartile of its own six-month distribution, buys the range break on volume, and trails the exit — because expansion legs are long-tailed. The width filter is a percentile, not a fixed threshold, which is why frozen parameters transfer across symbols.</p>
     </div>
     <div class="card accent">
       <div class="tag hot">Vol-Target Trend Engine</div>
       <h3>Leverage decay is quadratic in volatility</h3>
-      <p>A 3x product compounds beautifully in calm uptrends and destroys capital in volatile ones. The engine
-      predicts nothing. It gates exposure to the uptrend regime and sets position size from realised
-      volatility, so exposure falls mechanically as volatility rises — and volatility clusters, which means it
-      is already smaller before a crisis matures. <b>The edge is the sizing policy, not a signal.</b></p>
+      <p>A 3x product compounds in calm uptrends and destroys capital in volatile ones. The engine predicts nothing: it gates exposure to the uptrend regime and sizes from realised volatility, so exposure shrinks before a crisis matures. <b>The edge is the sizing policy, not a signal.</b></p>
     </div>
     <div class="card accent">
       <div class="tag hot">Channel Reversion</div>
       <h3>Pullbacks inside uptrends are bought</h3>
-      <p>Within an established uptrend, dips to the bottom of the recent range are statistically accumulated.
-      The system trades that and nothing else: a 50-day Donchian channel maps the range, the lower quarter is
-      the entry zone, and entries exist only above the 200-day average. The profit target is the channel
-      midline, because <b>the reversion to the middle is the reliable part</b> and everything past it is
-      variance.</p>
+      <p>Dips to the bottom of the recent range are statistically accumulated while the trend holds. A 50-day Donchian channel maps the range, the lower quarter is the entry, and the target is the midline — <b>the reversion to the middle is the reliable part</b>.</p>
     </div>
     <div class="card accent">
       <div class="tag hot">QV Signal Pro v2</div>
       <h3>Money flow leads price on swing horizons</h3>
-      <p>A composite of money-flow strength and volatility calm, each expressed as a one-year percentile so
-      the score self-normalises. v1 worked but carried a heavy left tail. v2 came from a trade-by-trade
-      autopsy of every loser: a trend filter that blocks bear-market rally buys, a volatility-spike exit that
-      fires faster than the score can fall, and a hard disaster stop. <b>Same winners, smaller
-      disasters.</b></p>
+      <p>A composite of money-flow strength and volatility calm, each a one-year percentile so the score self-normalises. v2 came from a trade-by-trade autopsy of every v1 loser: a trend filter, a volatility-spike exit, a hard stop. <b>Same winners, smaller disasters.</b></p>
     </div>
   </div>
 </div></section>
@@ -270,8 +234,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="forward"><div class="wrap reveal">
   <div class="kicker">Where this goes from here</div>
   <h2>The work in progress</h2>
-  <p class="sub">Each system has a specific next test, and each is chosen because it is the one most capable
-  of changing the answer.</p>
+  <p class="sub">The next test for each, chosen for its ability to change the answer.</p>
   <div class="defs">
     <div class="defrow"><div class="l">Compression Breakout</div><div class="r"><b>Universe expansion.</b> The system feeds on post-squeeze expansion, so the next step is a screened universe of roughly twenty liquid names gated on trend quality, rather than hand-picked symbols. Walk-forward re-optimisation at a fixed cadence follows.</div></div>
     <div class="defrow"><div class="l">Vol-Target Trend Engine</div><div class="r"><b>Replication on UPRO and SSO.</b> The architecture is instrument-agnostic; if the vol-target policy is the edge it should transfer to other leveraged wrappers with parameters frozen. Split-sample validation of the vol target itself is queued behind that.</div></div>
@@ -284,17 +247,13 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="verify"><div class="wrap reveal">
   <div class="kicker">Verification chain</div>
   <h2>Published, readable,<br>reproducible.</h2>
-  <p class="sub">Most strategy write-ups end at a screenshot. The code here is public. The chain runs in three steps, and
-  every link is independently verifiable.</p>
+  <p class="sub">The code is public. Every link in the chain is independently checkable.</p>
   <div class="flow">
     <div class="step"><div class="num">01</div><div class="nm">The claim</div><p>A figure stated on this page, with its market, window, cost model and drawdown attached.</p></div>
     <div class="step"><div class="num">02</div><div class="nm">The code</div><p>The strategy published as <b>open-source Pine Script v6</b> on TradingView &mdash; full source readable, full methodology in the description.</p></div>
     <div class="step"><div class="num">03</div><div class="nm">The re-run</div><p>Anyone loads the script, sets the same commission and slippage, and gets the same Strategy Tester output on the same symbol and window.</p></div>
   </div>
-  <div class="confirmed"><b>WHY THIS MATTERS MORE THAN THE RETURNS.</b> A backtest published on its author's own site is an
-  assertion. A backtest whose source is public and whose result reproduces independently is <b>evidence</b>.
-  Publication also fixes the rules: a strategy whose source is already public under a named account cannot
-  be quietly revised after the fact.</div>
+  <div class="confirmed"><b>Published code changes what a backtest is.</b> An unpublished result is an assertion. A reproducible one is evidence — and the rules cannot be revised after the fact.</div>
   <div class="btnrow">
     <a class="btn" href="https://www.tradingview.com/u/mateosandoval1025/#published-scripts" rel="noopener">All published scripts &#8599;</a>
     <a class="btn ghost" href="https://www.tradingview.com/x/bFTYG47k/" rel="noopener">Live labeled-trades chart &#8599;</a>
@@ -305,8 +264,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="validation"><div class="wrap reveal">
   <div class="kicker">Validation evidence</div>
   <h2>Frozen parameters, and what<br>happened when they moved</h2>
-  <p class="sub">Nothing below was re-tuned between cells. Parameters were fixed on the primary market, then run once on
-  everything else.</p>
+  <p class="sub">Nothing re-tuned between cells. Parameters fixed on the primary market, then run once on everything else.</p>
   <div class="tablewrap"><table>
     <caption>Compression Breakout System unless noted. Parameters frozen across every row.</caption>
     <thead><tr><th>Test</th><th>Window / condition</th><th>Net</th><th>PF</th><th>Win</th><th>Max DD</th></tr></thead>
@@ -342,7 +300,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
   <h2>Four return sources</h2>
   <p class="sub">Each system targets something structurally different. Three link to their published
   open-source code.</p>
-  <div class="note"><b>The deep detail is one click away, and it is the best material here.</b> Each system has a full research note &mdash; mechanism, parameters, complete results, the experiments that were tested and rejected with their measured outcomes. QV v2's note carries <b>every one of its 22 trades</b>, unedited. The same notes are also published on the <a href="https://mateosandoval10.github.io/quant-strategies/" rel="noopener">research sub-site</a>.</div>
+  <div class="note"><b>Full research notes.</b> Mechanism, parameters, complete results and the rejected experiments. QV v2 carries all 22 trades, unedited.</div>
   <div class="grid g2">
 
     <div class="card">
@@ -355,9 +313,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         <div class="metric"><div class="v">14.4%</div><div class="k">Max drawdown</div></div>
         <div class="metric"><div class="v">59%</div><div class="k">Win rate</div></div>
       </div>
-      <p class="desc">Bollinger-width percentile squeeze &rarr; range break on volume &rarr; chandelier trail,
-      risk-sized off the stop distance. The width filter is a <b>percentile rank rather than an absolute
-      threshold</b>, which is what makes the frozen-parameter cross-symbol tests meaningful at all.</p>
+      <p class="desc">Bollinger-width percentile squeeze into a volume-confirmed range break, risk-sized off the stop. Positive in both decade halves and at five times the modeled slippage.</p>
       <div class="btnrow" style="margin-top:16px">
         <a class="btn ghost" href="https://www.tradingview.com/script/97gxVA5b-Compression-Breakout-System/" rel="noopener">Open-source script &#8599;</a>
         <a class="btn ghost" href="cbs.html">Full research note &mdash; split-sample and cross-symbol results &rarr;</a>
@@ -374,10 +330,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         <div class="metric"><div class="v">41.9%</div><div class="k">Max drawdown</div></div>
         <div class="metric"><div class="v">~26%</div><div class="k">CAGR vs SPX ~13%</div></div>
       </div>
-      <p class="desc">A 200-day regime gate plus volatility-targeted exposure on a 3x ETF &mdash; the
-      vol-control-index architecture in about 60 lines. <b>There is no predictive signal to overfit</b>; the
-      entire edge is the sizing policy. Raw buy-and-hold TQQQ earns more, if a holder survives two &gt;80%
-      drawdowns &mdash; the note makes that comparison rather than hiding it.</p>
+      <p class="desc">A 200-day regime gate plus volatility-targeted exposure on a 3x ETF — the vol-control architecture in about 60 lines. No predictive signal to overfit.</p>
       <div class="btnrow" style="margin-top:16px">
         <a class="btn ghost" href="https://www.tradingview.com/script/2wyXTTMc-Vol-Target-Trend-Engine/" rel="noopener">Open-source script &#8599;</a>
         <a class="btn ghost" href="vtte.html">Full research note &mdash; full source and parameters &rarr;</a>
@@ -394,10 +347,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         <div class="metric"><div class="v">15.2%</div><div class="k">Max DD over 27 yrs</div></div>
         <div class="metric"><div class="v">~80%</div><div class="k">Time in cash</div></div>
       </div>
-      <p class="desc">Buys weakness at Donchian support inside uptrends only; exits at the channel midline.
-      Mean reversion traded <b>with</b> the prevailing trend, never against it. It does not beat buy-and-hold
-      on raw return &mdash; a system long 20% of the time cannot outrun a secular bull, and the note says so
-      plainly.</p>
+      <p class="desc">Buys weakness at Donchian support inside uptrends only; exits at the channel midline. Survives two bear markets at a mid-teens drawdown, in cash roughly 80% of the time.</p>
       <div class="btnrow" style="margin-top:16px">
         <a class="btn ghost" href="https://www.tradingview.com/script/XRZCjbFr-Channel-Reversion-System/" rel="noopener">Open-source script &#8599;</a>
         <a class="btn ghost" href="crs.html">Full research note &mdash; 27-year results &rarr;</a>
@@ -414,10 +364,7 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
         <div class="metric"><div class="v">&minus;20%</div><div class="k">Worst trade, capped</div></div>
         <div class="metric"><div class="v">22</div><div class="k">Trades, all shown</div></div>
       </div>
-      <p class="desc">Rebuilt after a trade-by-trade autopsy of every v1 loss. The improvement is
-      <b>risk-shaped rather than return-shaped</b>: same winners, smaller disasters &mdash; the kind of
-      improvement that does not depend on the future producing more upside than the past. Not yet published
-      as open source.</p>
+      <p class="desc">Rebuilt after a trade-by-trade autopsy of every v1 loss. Risk-shaped rather than return-shaped: same winners, smaller disasters.</p>
       <div class="btnrow" style="margin-top:16px">
         <a class="btn ghost" href="qv2.html">Full research note &mdash; complete 22-trade log + loss autopsy &rarr;</a>
       </div>
@@ -429,35 +376,27 @@ document.addEventListener('click',function(e){var b=e.target.closest&&e.target.c
 <section id="rejected" class="last"><div class="wrap reveal">
   <div class="kicker">The rejection log</div>
   <h2>Roughly thirty experiments,<br>killed with numbers</h2>
-  <p class="sub">Each research note carries its own rejected experiments with the measured results that
-  killed them. These four shaped everything else.</p>
+  <p class="sub">Four that shaped the rest.</p>
   <div class="grid g2">
     <div class="card">
       <div class="tag">Rejected</div>
       <h3>Reaction speed usually loses</h3>
-      <p>A faster de-risking variant of VTTE more than doubled turnover (155 &rarr; 376 events), sold
-      volatility spikes at their lows, and made maximum drawdown <b>worse</b> (41.9% &rarr; 49.6%) while
-      cutting net return from +3,862% to +2,158%. Slow rebalancing is a feature.</p>
+      <p>A faster de-risking variant doubled turnover, sold volatility spikes at their lows, and made drawdown <b>worse</b> — 41.9% to 49.6% — while halving net return.</p>
     </div>
     <div class="card">
       <div class="tag">Rejected</div>
       <h3>In a reversion system, the target is the edge</h3>
-      <p>Replacing CRS's channel-midline target with a 2.5-ATR trail kept net return identical but dropped the
-      profit factor 2.28 &rarr; 1.79, the win rate 64% &rarr; 47%, and pushed drawdown 15% &rarr; 19%.</p>
+      <p>Swapping the channel-midline target for a trailing stop kept net return identical and dropped profit factor 2.28 → 1.79, win rate 64% → 47%.</p>
     </div>
     <div class="card">
       <div class="tag">Rejected</div>
       <h3>Leverage does not bolt on</h3>
-      <p>Running CRS's identical signals on a 3x ETF collapsed the profit factor to 1.43 and tripled max
-      drawdown to 43%. Triple leverage triples the noise around a structural stop. Leverage belongs in systems
-      designed for it &mdash; which is what VTTE is.</p>
+      <p>The same signals on a 3x ETF collapsed profit factor to 1.43 and tripled drawdown to 43%. Leverage belongs in systems designed for it.</p>
     </div>
     <div class="card">
       <div class="tag">Rejected</div>
       <h3>Sizing turns a signal into a system</h3>
-      <p>CBS's identical signal stack sized all-in produced a bigger headline (+1,040%) and an <b>89%
-      drawdown</b>. Fixed-fractional risk sized off the stop cut the largest loss from $4,720 to $1,366 and
-      raised the profit factor 2.87 &rarr; 3.16 &mdash; on exactly the same signals.</p>
+      <p>All-in sizing produced a bigger headline (+1,040%) and an <b>89% drawdown</b>. Fixed-fractional risk cut the largest loss from $4,720 to $1,366 on identical signals.</p>
     </div>
   </div>
 </div></section>
